@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thầy Lê Hữu Trí — Giảng viên Passion Link</title>
+<meta name="description" content="Thầy Lê Hữu Trí - CEO & sáng lập Passion Link. 14 năm đào tạo, chuyên gia trà, đã đào tạo 3000+ học viên mở quán thành công.">
+<link rel="stylesheet" href="_design-tokens.css">
+<style>
+  .breadcrumb {
+    padding: 16px 24px; color: var(--text-muted); font-size: 13px;
+    max-width: 1280px; margin: 0 auto;
+  }
+  .breadcrumb a { color: var(--text-secondary); }
+
+  .profile-hero {
+    padding: 32px 24px;
+    max-width: 1280px; margin: 0 auto;
+  }
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  @media (max-width: 900px) { .profile-grid { grid-template-columns: 1fr; } }
+
+  .profile-card { padding: 32px; text-align: center; }
+  .profile-avatar {
+    width: 200px; height: 200px; border-radius: 50%;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, var(--brand-green), var(--brand-gold));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 64px; color: #fff; font-weight: 800;
+    border: 4px solid rgba(212,163,115,0.3);
+    box-shadow: 0 10px 32px rgba(0,0,0,0.3);
+  }
+  .profile-card h1 { font-size: 28px; margin-bottom: 6px; }
+  .profile-card .title { color: var(--brand-gold-light); font-size: 16px; margin-bottom: 16px; }
+  .profile-card .badges {
+    display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 20px;
+  }
+  .profile-card .actions { display: flex; flex-direction: column; gap: 10px; }
+
+  .profile-info { padding: 32px; }
+  .profile-info h2 {
+    color: var(--brand-gold-light); margin-bottom: 16px; font-size: 24px;
+  }
+  .profile-info p {
+    color: var(--text-light); line-height: 1.8; margin-bottom: 16px;
+  }
+  .profile-info blockquote {
+    border-left: 4px solid var(--brand-gold);
+    padding: 16px 24px; margin: 24px 0;
+    font-style: italic; color: var(--brand-gold-light);
+    background: rgba(212, 163, 115, 0.1);
+    border-radius: var(--radius-md);
+  }
+
+  /* STATS */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+  }
+  @media (max-width: 700px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+  .stat-card {
+    padding: 24px; text-align: center; transition: var(--transition);
+  }
+  .stat-card:hover { transform: translateY(-4px); }
+  .stat-num {
+    font-size: 36px; font-weight: 800;
+    background: linear-gradient(135deg, var(--brand-gold-light), var(--brand-gold));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    font-family: var(--font-display); margin-bottom: 4px;
+  }
+  .stat-label { color: var(--text-muted); font-size: 13px; }
+
+  /* SECTIONS */
+  .section { padding: 40px 24px; max-width: 1280px; margin: 0 auto; }
+  .section h2 {
+    font-size: clamp(22px, 3vw, 30px);
+    color: var(--brand-gold-light); margin-bottom: 24px;
+  }
+
+  /* COURSES TEACHING */
+  .teaching-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .teaching-card {
+    padding: 24px; transition: var(--transition);
+    text-decoration: none; color: inherit;
+  }
+  .teaching-card:hover { transform: translateY(-3px); }
+  .teaching-card h3 { color: var(--text-primary); margin-bottom: 6px; font-size: 16px; }
+  .teaching-card .meta { color: var(--text-muted); font-size: 12px; margin-bottom: 12px; }
+  .teaching-card .price { color: var(--brand-gold-light); font-weight: 700; font-size: 18px; }
+  .teaching-card .next-cohort {
+    margin-top: 12px; font-size: 12px; color: var(--success);
+  }
+
+  /* STUDENTS SUCCESS */
+  .students-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 900px) { .students-grid { grid-template-columns: 1fr; } }
+  .student-success-card {
+    padding: 20px; text-decoration: none; color: inherit; transition: var(--transition);
+  }
+  .student-success-card:hover { transform: translateY(-3px); }
+  .student-success-card .brand-logo-mini {
+    width: 50px; height: 50px; border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 800; margin-bottom: 12px;
+  }
+  .student-success-card h4 { color: var(--text-primary); margin-bottom: 4px; }
+  .student-success-card .meta { color: var(--text-muted); font-size: 12px; margin-bottom: 8px; }
+  .student-success-card .quote {
+    color: var(--text-light); font-size: 13px; font-style: italic;
+  }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--brand-green), var(--brand-gold));
+  }
+  .timeline-item {
+    position: relative; margin-bottom: 32px; padding-left: 32px;
+  }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -8px; top: 4px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--brand-gold);
+    border: 3px solid var(--brand-green);
+  }
+  .timeline-year {
+    font-family: var(--font-display); font-weight: 800; font-size: 20px;
+    color: var(--brand-gold-light); margin-bottom: 6px;
+  }
+  .timeline-content { color: var(--text-light); }
+
+  .final-cta {
+    padding: 48px 32px; text-align: center;
+    border: 2px solid rgba(212,163,115,0.4);
+    background: linear-gradient(135deg, rgba(212,163,115,0.1), rgba(76,175,80,0.1));
+  }
+  .final-cta h2 { color: var(--brand-gold-light); margin-bottom: 12px; }
+  .final-cta p { color: var(--text-light); margin-bottom: 24px; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-emoji">🍵</span>
+      <div>
+        Passion Link
+        <span class="tagline">Đào tạo bí quyết pha chế ngon tự tin mở quán!</span>
+      </div>
+    </a>
+    <nav class="nav-main">
+      <a href="01-homepage.html">Trang chủ</a>
+      <a href="#">Khoá học</a>
+      <a href="#">Giảng viên</a>
+      <a href="03-testimonial.html">Học viên thành công</a>
+      <a href="05-blog-with-cta.html">Blog</a>
+    </nav>
+    <button class="btn-header">Đăng ký tư vấn</button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="index.html">Trang chủ</a> › <a href="#">Đội ngũ giảng viên</a> › Thầy Lê Hữu Trí
+</div>
+
+<!-- HERO PROFILE -->
+<section class="profile-hero">
+  <div class="profile-grid">
+    <div class="profile-card glass-card">
+      <div class="profile-avatar">T</div>
+      <h1>Thầy Lê Hữu Trí</h1>
+      <div class="title">CEO & Sáng lập Passion Link</div>
+      <div class="badges">
+        <span class="badge badge-gold">🏆 14 năm đào tạo</span>
+        <span class="badge badge-success">⭐ 4.9/5</span>
+      </div>
+      <div class="actions">
+        <a href="02-course-detail.html" class="btn btn-primary">📚 Đăng ký khoá của thầy</a>
+        <a href="#" class="btn btn-secondary">💬 Liên hệ trực tiếp</a>
+      </div>
+    </div>
+
+    <div class="profile-info glass-card">
+      <h2>👋 Giới thiệu</h2>
+      <p>Thầy <strong>Lê Hữu Trí</strong> là CEO và người sáng lập Passion Link — trung tâm đào tạo pha chế hàng đầu Việt Nam. Hành trình của thầy bắt đầu từ những năm 2010 khi du học ngành công nghệ thực phẩm tại Đài Loan và phải lòng văn hoá trà.</p>
+
+      <p>Trở về Việt Nam, thầy <strong>tiên phong mở trung tâm dạy pha chế trà sữa</strong> tại TP.HCM năm 2012. Đến nay, sau 14 năm, thầy đã đào tạo <strong>hơn 3000 học viên</strong> từ khắp các tỉnh thành — từ sinh viên muốn mở quán nhỏ đến doanh nhân xây dựng chuỗi.</p>
+
+      <blockquote>Với tôi, dạy pha chế không chỉ là dạy công thức. Đó là dạy cách kinh doanh — cách tạo ra sản phẩm có giá trị, cách định giá hợp lý, cách scaling. Mục tiêu cuối cùng là học viên mở được quán và đứng vững trên thị trường.</blockquote>
+
+      <p>Thầy là cố vấn cho các thương hiệu lớn xuất phát từ học viên Passion Link như <a href="03-testimonial.html">Royaltea Vietnam</a>, Gutea, Ilacha, M's Jolly. Ngoài giảng dạy, thầy còn nghiên cứu phát triển các công thức trà signature — nhiều công thức trở thành chuẩn ngành.</p>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stat-grid">
+    <div class="stat-card glass-card">
+      <div class="stat-num">14</div>
+      <div class="stat-label">Năm đào tạo</div>
+    </div>
+    <div class="stat-card glass-card">
+      <div class="stat-num">3000+</div>
+      <div class="stat-label">Học viên đã đào tạo</div>
+    </div>
+    <div class="stat-card glass-card">
+      <div class="stat-num">2000+</div>
+      <div class="stat-label">Quán đã mở thành công</div>
+    </div>
+    <div class="stat-card glass-card">
+      <div class="stat-num">4.9⭐</div>
+      <div class="stat-label">Rating từ học viên</div>
+    </div>
+  </div>
+</section>
+
+<!-- KHOÁ ĐANG DẠY -->
+<section class="section">
+  <h2>📚 Khoá học thầy đang phụ trách</h2>
+  <div class="teaching-grid">
+    <a href="02-course-detail.html" class="teaching-card glass-card">
+      <h3>Khoá Tổng Hợp Thương Hiệu</h3>
+      <div class="meta">⏱️ 12 buổi × 3h • Flagship</div>
+      <div class="price">5.500.000₫</div>
+      <div class="next-cohort">📅 Khai giảng 25/05</div>
+    </a>
+    <a href="#" class="teaching-card glass-card">
+      <h3>Trà Sữa Đặc Sản Chuyên Gia</h3>
+      <div class="meta">⏱️ 16 buổi × 3h • Advanced</div>
+      <div class="price">6.900.000₫</div>
+      <div class="next-cohort">📅 Khai giảng 1/06</div>
+    </a>
+    <a href="02-course-detail.html" class="teaching-card glass-card">
+      <h3>Trà Trái Cây Nhiệt Đới</h3>
+      <div class="meta">⏱️ 5 buổi × 3h • Intermediate</div>
+      <div class="price">2.500.000₫</div>
+      <div class="next-cohort">📅 Khai giảng 15/05</div>
+    </a>
+    <a href="#" class="teaching-card glass-card">
+      <h3>Workshop Mở Quán A-Z</h3>
+      <div class="meta">⏱️ 6 buổi × 4h • Bonus cho cựu HV</div>
+      <div class="price">3.000.000₫</div>
+      <div class="next-cohort">📅 Khai giảng 5/06</div>
+    </a>
+  </div>
+</section>
+
+<!-- HỌC VIÊN THÀNH CÔNG -->
+<section class="section">
+  <h2>🏆 Học viên thành công của thầy</h2>
+  <div class="students-grid">
+    <a href="03-testimonial.html" class="student-success-card glass-card">
+      <div class="brand-logo-mini" style="background: linear-gradient(135deg, #d4145c, #8b1947);">RT</div>
+      <h4>Royaltea Vietnam</h4>
+      <div class="meta">25 chi nhánh • Anh Nguyễn Hoàng Long</div>
+      <p class="quote">"Thầy Trí dạy em không chỉ pha chế mà cả tư duy kinh doanh"</p>
+    </a>
+    <a href="#" class="student-success-card glass-card">
+      <div class="brand-logo-mini" style="background: linear-gradient(135deg, #2c5282, #4299e1);">GT</div>
+      <h4>Gutea</h4>
+      <div class="meta">12 chi nhánh • Chị Trần Thuỳ Linh</div>
+      <p class="quote">"Cố vấn của thầy giúp em mở chi nhánh thứ 5 trong 18 tháng"</p>
+    </a>
+    <a href="#" class="student-success-card glass-card">
+      <div class="brand-logo-mini" style="background: linear-gradient(135deg, #d97706, #fbbf24);">IL</div>
+      <h4>Chuỗi Ilacha</h4>
+      <div class="meta">15+ chi nhánh • Anh Lê Đức Phát</div>
+      <p class="quote">"Công thức trà hoa quả tươi của thầy là signature của Ilacha"</p>
+    </a>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="section">
+  <h2>📅 Hành trình 14 năm với pha chế</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">2010-2012</div>
+      <div class="timeline-content">Du học công nghệ thực phẩm Đài Loan, phải lòng văn hoá trà — bắt đầu nghiên cứu công thức trà sữa Việt Nam.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2012</div>
+      <div class="timeline-content">Mở trung tâm Passion Link đầu tiên tại Q.10, TP.HCM — là một trong những trung tâm dạy pha chế trà sữa đầu tiên ở Việt Nam.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2017</div>
+      <div class="timeline-content">Đạt mốc 1000 học viên đầu tiên. Nhiều học viên mở chuỗi: Royaltea, Gutea — trở thành brand lớn.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2020</div>
+      <div class="timeline-content">Mở thêm cơ sở Hà Nội + Cần Thơ. Tổng học viên 2000+. Hợp tác cố vấn cho 50+ thương hiệu F&B.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2026</div>
+      <div class="timeline-content">3000+ học viên, 2000+ quán đã mở thành công, 4 cơ sở đào tạo (HCM, Hà Nội, Cần Thơ, Đà Nẵng) + đào tạo online.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section">
+  <div class="final-cta glass-card">
+    <h2>Học trực tiếp từ thầy Trí — chuyên gia 14 năm</h2>
+    <p>Khoá Tổng Hợp Thương Hiệu khai giảng 25/05 — chỉ còn 8/12 chỗ. Đặt cọc 500k giữ chỗ ngay.</p>
+    <a href="02-course-detail.html" class="btn btn-primary btn-lg">Đăng ký khoá của thầy →</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>© 2026 Passion Link — Đào tạo bí quyết pha chế ngon tự tin mở quán!</p>
+  <p class="footer-tagline"><a href="index.html">← Xem mockup khác</a></p>
+</footer>
+
+</body>
+</html>

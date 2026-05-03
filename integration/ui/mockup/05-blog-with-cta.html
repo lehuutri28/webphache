@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>13 mẹo mở quán cà phê thành công 2026 — Passion Link Blog</title>
+<meta name="description" content="13 bí quyết mở quán cà phê thành công cho người mới — từ chọn vị trí, vốn, menu, marketing đến scaling. Tránh 5 sai lầm phổ biến nhất.">
+<link rel="stylesheet" href="_design-tokens.css">
+<style>
+  .breadcrumb {
+    padding: 16px 24px; color: var(--text-muted); font-size: 13px;
+    max-width: 920px; margin: 0 auto;
+  }
+  .breadcrumb a { color: var(--text-secondary); }
+
+  /* ARTICLE */
+  .article {
+    max-width: 920px; margin: 0 auto; padding: 24px;
+  }
+  .article-header {
+    text-align: center; padding: 24px 0 32px;
+  }
+  .article-header h1 {
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.2; margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--brand-gold-light), #fff);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .article-meta {
+    display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+    color: var(--text-muted); font-size: 14px;
+  }
+  .article-meta span { display: inline-flex; align-items: center; gap: 4px; }
+
+  .article-hero-image {
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(76,175,80,0.3), rgba(212,163,115,0.3));
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted);
+    border: 1px solid rgba(255,255,255,0.15);
+    margin-bottom: 32px;
+  }
+
+  /* BYLINE BOX with CTA */
+  .byline-box {
+    padding: 24px;
+    margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: center;
+  }
+  @media (max-width: 700px) { .byline-box { grid-template-columns: 1fr; } }
+  .byline-box .summary { color: var(--text-light); }
+  .byline-box .summary strong { color: var(--brand-gold-light); }
+
+  /* ARTICLE BODY */
+  .article-body {
+    color: var(--text-light); font-size: 17px; line-height: 1.85;
+  }
+  .article-body h2 {
+    font-size: 24px; color: var(--brand-gold-light);
+    margin: 32px 0 16px;
+  }
+  .article-body h3 {
+    font-size: 20px; color: var(--text-primary);
+    margin: 24px 0 12px;
+  }
+  .article-body p { margin-bottom: 16px; }
+  .article-body ul, .article-body ol {
+    margin: 0 0 16px 24px; color: var(--text-light);
+  }
+  .article-body li { margin-bottom: 8px; }
+  .article-body a {
+    color: var(--brand-gold-light); border-bottom: 1px dashed rgba(212,163,115,0.5);
+  }
+  .article-body a:hover { border-bottom-style: solid; }
+
+  /* IN-CONTENT CTA — fix "đảo cô đơn" */
+  .in-content-cta {
+    margin: 32px 0;
+    padding: 24px;
+    background: linear-gradient(135deg, rgba(58,143,0,0.15), rgba(212,163,115,0.15));
+    border: 2px solid rgba(212,163,115,0.4);
+    border-radius: var(--radius-lg);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 20px;
+    align-items: center;
+  }
+  @media (max-width: 700px) { .in-content-cta { grid-template-columns: 1fr; text-align: center; } }
+  .in-content-cta .icon { font-size: 56px; }
+  .in-content-cta h3 {
+    color: var(--brand-gold-light); margin-bottom: 6px; font-size: 19px;
+  }
+  .in-content-cta p {
+    color: var(--text-light); font-size: 14px; margin: 0;
+  }
+  .in-content-cta strong { color: var(--brand-gold-light); }
+
+  /* RELATED COURSES (end of article) */
+  .related-courses {
+    margin: 48px 0;
+    padding: 32px;
+  }
+  .related-courses h2 {
+    color: var(--brand-gold-light); margin-bottom: 20px; text-align: center;
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .related-card {
+    padding: 20px; transition: var(--transition);
+    text-decoration: none; color: inherit;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-md);
+    background: rgba(255,255,255,0.04);
+  }
+  .related-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--brand-gold);
+    background: rgba(255,255,255,0.08);
+  }
+  .related-card h4 { color: var(--text-primary); margin-bottom: 6px; font-size: 15px; }
+  .related-card .meta { color: var(--text-muted); font-size: 12px; margin-bottom: 8px; }
+  .related-card .price { color: var(--brand-gold-light); font-weight: 700; font-size: 16px; }
+
+  /* RELATED ARTICLES */
+  .related-articles {
+    margin: 48px 0;
+  }
+  .related-articles h2 {
+    color: var(--brand-gold-light); margin-bottom: 20px;
+  }
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .article-card {
+    padding: 20px; transition: var(--transition);
+    text-decoration: none; color: inherit;
+  }
+  .article-card:hover { transform: translateY(-3px); }
+  .article-card .meta { color: var(--text-muted); font-size: 11px; margin-bottom: 8px; }
+  .article-card h4 { color: var(--text-primary); font-size: 16px; margin-bottom: 8px; line-height: 1.3; }
+  .article-card p { color: var(--text-secondary); font-size: 13px; }
+
+  /* STICKY MOBILE CTA */
+  .sticky-cta {
+    display: none;
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(20,12,8,0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(212,163,115,0.3);
+    padding: 12px 16px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+  }
+  @media (max-width: 768px) {
+    .sticky-cta { display: flex; align-items: center; gap: 12px; }
+    .sticky-cta span { font-size: 13px; flex: 1; color: var(--text-light); }
+    .sticky-cta .btn { padding: 10px 16px; font-size: 13px; }
+  }
+
+  /* SHARE buttons */
+  .share-row {
+    display: flex; gap: 8px; margin: 24px 0; flex-wrap: wrap;
+  }
+  .share-btn {
+    padding: 8px 14px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    color: var(--text-light); font-size: 13px; cursor: pointer;
+    transition: var(--transition);
+  }
+  .share-btn:hover {
+    background: rgba(212,163,115,0.15);
+    border-color: var(--brand-gold);
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-emoji">🍵</span>
+      <div>
+        Passion Link
+        <span class="tagline">Đào tạo bí quyết pha chế ngon tự tin mở quán!</span>
+      </div>
+    </a>
+    <nav class="nav-main">
+      <a href="01-homepage.html">Trang chủ</a>
+      <a href="#">Khoá học</a>
+      <a href="#">Giảng viên</a>
+      <a href="03-testimonial.html">Học viên thành công</a>
+      <a href="#">Blog</a>
+    </nav>
+    <button class="btn-header">Đăng ký tư vấn</button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="index.html">Trang chủ</a> › <a href="#">Blog</a> › <a href="#">Mở quán</a> › 13 mẹo mở quán cà phê thành công
+</div>
+
+<article class="article">
+  <header class="article-header">
+    <h1>13 Mẹo Mở Quán Cà Phê Thành Công 2026</h1>
+    <div class="article-meta">
+      <span>📝 8 phút đọc</span>
+      <span>👤 Thầy Lê Hữu Trí — CEO Passion Link</span>
+      <span>📅 03/05/2026</span>
+      <span>🏷️ Mở quán • Cà phê • Kinh doanh</span>
+    </div>
+  </header>
+
+  <div class="article-hero-image">📷 Ảnh hero — Quán cà phê đẹp với khách đông</div>
+
+  <!-- BYLINE BOX với CTA -->
+  <div class="byline-box glass-card">
+    <div class="summary">
+      <strong>Tóm tắt</strong>: 13 bí quyết từ kinh nghiệm 14 năm tư vấn 2000+ quán mở thành công. Tránh 5 sai lầm phổ biến nhất khiến 70% quán mới đóng cửa trong năm đầu.
+    </div>
+    <a href="02-course-detail.html" class="btn btn-primary">Đăng ký khoá Mở Quán</a>
+  </div>
+
+  <!-- BODY -->
+  <div class="article-body">
+    <p>Mở quán cà phê là ước mơ của rất nhiều người — nhưng theo thống kê F&B Việt Nam 2025, <strong>70% quán cà phê mới đóng cửa trong năm đầu tiên</strong>. Lý do chính: thiếu kế hoạch kinh doanh + chọn sai vị trí + định giá không hợp lý.</p>
+
+    <p>Trong bài này, tôi (Thầy Lê Hữu Trí, CEO <a href="01-homepage.html">Passion Link</a>) sẽ chia sẻ 13 mẹo tổng hợp từ 14 năm tư vấn cho học viên — đặc biệt từ những thương hiệu thành công như <a href="03-testimonial.html">Royaltea, Gutea, Ilacha, M's Jolly</a>.</p>
+
+    <h2>1. Nghiên cứu thị trường & xác định khách hàng mục tiêu</h2>
+    <p>Trước khi mở quán, hãy trả lời 3 câu hỏi: <strong>(1) Khách của bạn là ai?</strong> Sinh viên, dân văn phòng, gia đình, hay khách check-in? <strong>(2) Họ uống cà phê khi nào?</strong> Sáng take-away, trưa nghỉ trưa, tối hẹn hò? <strong>(3) Họ trả bao nhiêu/ly?</strong> 25k, 45k, hay 80k?</p>
+
+    <h2>2. Chọn vị trí — nguyên tắc 30-30-30</h2>
+    <p>Mặt bằng tốt: <strong>30% khách qua đường + 30% khách văn phòng/khu dân cư xung quanh + 30% khách quay lại</strong>. Tránh mặt bằng chỉ phụ thuộc 1 nguồn (vd 100% sinh viên trường XYZ — hè vắng tanh).</p>
+
+    <h2>3. Vốn tối thiểu — sự thật trần trụi</h2>
+    <p>Nhiều người nghĩ mở quán cần 50-100 triệu. Thực tế con số an toàn:</p>
+    <ul>
+      <li><strong>Quán take-away/xe đẩy</strong>: 50-80 triệu</li>
+      <li><strong>Quán nhỏ 30-50m²</strong>: 150-250 triệu</li>
+      <li><strong>Quán lớn 80-120m²</strong>: 400-700 triệu</li>
+    </ul>
+    <p>Quan trọng: <strong>luôn dự trù thêm 30% cho 2-3 tháng đầu chưa hoà vốn</strong>.</p>
+
+    <!-- IN-CONTENT CTA — break "đảo cô đơn" -->
+    <div class="in-content-cta">
+      <div class="icon">🎓</div>
+      <div>
+        <h3>Muốn vào sâu chiến lược mở quán?</h3>
+        <p>Khoá <strong>Workshop Mở Quán A-Z</strong> 6 buổi × 4h — học từ chọn mặt bằng, costing menu, đến marketing khai trương. <strong>Chỉ 3.000.000₫</strong>, cam kết hoàn cọc 500k nếu không hài lòng.</p>
+      </div>
+      <a href="02-course-detail.html" class="btn btn-primary">Xem khoá →</a>
+    </div>
+
+    <h2>4. Menu — tối thiểu hoá nguyên liệu, tối đa hoá lợi nhuận</h2>
+    <p>Quán mới nên giới hạn 15-20 món. Bí quyết: <strong>1 nguyên liệu chính làm được 5+ món</strong>. Vd: cà phê espresso → 8 món (đen đá, sữa đá, cappuccino, latte, mocha, americano, macchiato, affogato).</p>
+
+    <h2>5. Định giá — công thức 30/40/30</h2>
+    <p>Giá bán = (Cost nguyên liệu × 3) + biên lợi nhuận. Tỷ trọng:</p>
+    <ul>
+      <li><strong>30% cost nguyên liệu + topping</strong></li>
+      <li><strong>40% chi phí vận hành</strong> (mặt bằng, lương, điện nước, marketing)</li>
+      <li><strong>30% lợi nhuận biên</strong></li>
+    </ul>
+
+    <h2>6-13. Các mẹo còn lại (rút gọn)</h2>
+    <p><strong>6. Setup quầy bar khoa học</strong> — nguyên liệu trong tầm tay, máy móc theo workflow. <strong>7. Đào tạo nhân viên</strong> — chuẩn hoá từng thao tác pha chế. <strong>8. Marketing khai trương</strong> — Facebook + Zalo OA + KOL local. <strong>9. Loyalty program</strong> — thẻ tích điểm hoặc app. <strong>10. Phân tích doanh thu hàng tuần</strong> — biết món nào bán chạy, món nào dead. <strong>11. Tối ưu menu sau 3 tháng</strong> — cắt 20% món bán ít. <strong>12. Mở rộng từ chi nhánh thứ 2</strong> sau khi chi nhánh 1 ổn định 12 tháng. <strong>13. Học liên tục</strong> — xu hướng F&B đổi mỗi năm.</p>
+
+    <h2>5 Sai lầm phổ biến nhất khiến quán đóng cửa</h2>
+    <ol>
+      <li><strong>Mở quán theo cảm hứng</strong>, không nghiên cứu thị trường</li>
+      <li><strong>Chọn mặt bằng "đẹp" nhưng giá thuê quá cao</strong> — không đủ doanh thu trả</li>
+      <li><strong>Menu quá nhiều món</strong> → tồn kho cao + đào tạo NV khó</li>
+      <li><strong>Không có công thức chuẩn</strong> → mỗi NV pha 1 kiểu → mất khách</li>
+      <li><strong>Không track số liệu hàng ngày</strong> → mất 2-3 tháng mới biết quán đang lỗ</li>
+    </ol>
+
+    <h2>Kết luận</h2>
+    <p>Mở quán cà phê thành công không phải may rủi — mà là <strong>kỹ năng + kế hoạch + thực thi nhất quán</strong>. Nếu bạn muốn rút ngắn 6-12 tháng tự học bằng cách học từ chuyên gia có 14 năm kinh nghiệm, đây là 3 khoá Passion Link đề xuất:</p>
+
+    <!-- SHARE -->
+    <div class="share-row">
+      <span style="color: var(--text-muted); font-size: 13px;">Chia sẻ:</span>
+      <button class="share-btn">📘 Facebook</button>
+      <button class="share-btn">💬 Zalo</button>
+      <button class="share-btn">📋 Copy link</button>
+    </div>
+  </div>
+
+  <!-- ⭐ RELATED COURSES — end of article -->
+  <div class="related-courses glass-card">
+    <h2>📚 3 khoá học liên quan bài này</h2>
+    <div class="related-grid">
+      <a href="02-course-detail.html" class="related-card">
+        <h4>Workshop Mở Quán A-Z</h4>
+        <div class="meta">⏱️ 6 buổi × 4h • 🎓 Chứng chỉ</div>
+        <div class="price">3.000.000₫</div>
+      </a>
+      <a href="#" class="related-card">
+        <h4>Khoá Cà Phê Barista Chuyên Nghiệp</h4>
+        <div class="meta">⏱️ 8 buổi × 3h</div>
+        <div class="price">3.800.000₫</div>
+      </a>
+      <a href="#" class="related-card">
+        <h4>Khoá Tổng Hợp Thương Hiệu</h4>
+        <div class="meta">⏱️ 12 buổi × 3h • Flagship</div>
+        <div class="price">5.500.000₫</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- RELATED ARTICLES -->
+  <div class="related-articles">
+    <h2>📖 Có thể bạn quan tâm</h2>
+    <div class="articles-grid">
+      <a href="#" class="article-card glass-card">
+        <div class="meta">5 phút đọc • 02/05/2026</div>
+        <h4>6 bước đặt tên cho quán cà phê hấp dẫn</h4>
+        <p>Tên quán quyết định 30% ấn tượng đầu tiên. Áp dụng 6 bước này...</p>
+      </a>
+      <a href="#" class="article-card glass-card">
+        <div class="meta">7 phút đọc • 28/04/2026</div>
+        <h4>5 bước chọn máy pha cà phê chuyên nghiệp</h4>
+        <p>Đầu tư máy pha là quyết định lớn nhất. So sánh 5 loại máy phổ biến...</p>
+      </a>
+      <a href="#" class="article-card glass-card">
+        <div class="meta">10 phút đọc • 25/04/2026</div>
+        <h4>Công nghệ pha trà 4.0 — xu hướng 2026</h4>
+        <p>Tự động hoá pha chế thay đổi ngành F&B như thế nào?</p>
+      </a>
+    </div>
+  </div>
+</article>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-cta">
+  <span>Muốn mở quán thành công? Học chuyên sâu 6 buổi.</span>
+  <a href="02-course-detail.html" class="btn btn-primary">Xem khoá →</a>
+</div>
+
+<footer class="site-footer">
+  <p>© 2026 Passion Link — Đào tạo bí quyết pha chế ngon tự tin mở quán!</p>
+  <p class="footer-tagline"><a href="index.html">← Xem mockup khác</a></p>
+</footer>
+
+</body>
+</html>

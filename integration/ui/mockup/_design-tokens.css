@@ -1,0 +1,216 @@
+/* DESIGN TOKENS — Passion Link 2026 (theo wiki/DESIGN-SPEC-PASSION-LINK-v2.md) */
+/* Letri 3/5/2026 chốt: Passion Link + tagline "Đào tạo bí quyết pha chế ngon tự tin mở quán!" */
+
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Lexend:wght@500;600;700;800&display=swap');
+
+:root {
+  /* PRIMARY — Moss Green (matcha) */
+  --primary: #4CAF50;
+  --primary-light: #6FCF74;
+  --primary-dark: #3A8F00;
+  --brand-green: #3A8F00;
+
+  /* SECONDARY — Coffee/Earthy */
+  --brand-brown: #8B5E3C;
+  --brand-brown-light: #A67C52;
+  --brand-brown-dark: #6B4226;
+
+  /* ACCENT — Tea/Gold */
+  --brand-gold: #D4A373;
+  --brand-gold-light: #FFC107;
+  --accent: #D4A373;
+
+  /* GLASS effect — Water Droplet */
+  --glass-bg: rgba(255, 255, 255, 0.10);
+  --glass-effect: blur(28px) saturate(180%) brightness(1.08);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.22);
+
+  /* TEXT on dark glass */
+  --text-primary: rgba(255, 255, 255, 0.92);
+  --text-secondary: rgba(255, 255, 255, 0.70);
+  --text-light: rgba(255, 255, 255, 0.82);
+  --text-muted: rgba(255, 255, 255, 0.52);
+
+  /* SEMANTIC */
+  --success: rgba(74, 222, 128, 0.9);
+  --warning: rgba(251, 191, 36, 0.9);
+  --danger: rgba(248, 113, 113, 0.9);
+  --info: rgba(96, 165, 250, 0.9);
+
+  /* SHADOW */
+  --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.20);
+
+  /* RADIUS */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  --transition: all 0.3s ease;
+
+  --font-main: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Lexend', 'Be Vietnam Pro', sans-serif;
+}
+
+/* RESET */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  font-family: var(--font-main);
+  color: var(--text-light);
+  line-height: 1.6;
+  background:
+    url('https://phache.com.vn/upload/gallery/file-2026-04-01t153432-171.jpg')
+    center / cover no-repeat fixed,
+    linear-gradient(135deg, #1a3318 0%, #2c1810 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.32);
+  z-index: 0; pointer-events: none;
+}
+body > * { position: relative; z-index: 1; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+a { color: var(--brand-gold-light); text-decoration: none; transition: var(--transition); }
+a:hover { color: var(--brand-gold); }
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* GLASS CARD pattern */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-effect);
+  -webkit-backdrop-filter: var(--glass-effect);
+  border: var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 24px;
+  transition: var(--transition);
+}
+.glass-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+  border-color: rgba(212, 163, 115, 0.45);
+}
+
+/* HEADER */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(20, 12, 8, 0.55);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid rgba(212, 163, 115, 0.25);
+  padding: 14px 32px;
+}
+.header-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+}
+.logo {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 22px; color: var(--brand-gold-light);
+  display: flex; align-items: center; gap: 10px;
+}
+.logo-emoji { font-size: 28px; }
+.tagline {
+  font-size: 11px; color: var(--text-muted); font-weight: 400;
+  display: block; margin-top: -2px;
+}
+.nav-main { display: flex; gap: 24px; }
+.nav-main a {
+  color: var(--text-primary); font-weight: 500; font-size: 14px;
+}
+.nav-main a:hover { color: var(--brand-gold); }
+.btn-header {
+  background: linear-gradient(135deg, var(--brand-green) 0%, var(--primary) 100%);
+  color: #fff !important; padding: 10px 20px;
+  border-radius: var(--radius-md); font-weight: 600; font-size: 14px;
+  border: none; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(58, 143, 0, 0.35);
+}
+.btn-header:hover { transform: translateY(-1px); filter: brightness(1.08); }
+
+/* BUTTON system */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 24px; border-radius: var(--radius-md);
+  font-family: var(--font-main); font-weight: 600; font-size: 15px;
+  cursor: pointer; transition: var(--transition);
+  border: none; text-decoration: none;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand-green) 0%, var(--primary) 100%);
+  color: #fff !important;
+  box-shadow: 0 4px 14px rgba(58, 143, 0, 0.35);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(58, 143, 0, 0.5); filter: brightness(1.05); }
+.btn-secondary {
+  background: linear-gradient(135deg, var(--brand-brown) 0%, var(--brand-brown-light) 100%);
+  color: #fff !important;
+  box-shadow: 0 4px 14px rgba(139, 94, 60, 0.35);
+}
+.btn-secondary:hover { transform: translateY(-2px); filter: brightness(1.08); }
+.btn-lg { padding: 16px 32px; font-size: 17px; }
+.btn-block { width: 100%; }
+
+/* BADGE */
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: 20px;
+  font-size: 12px; font-weight: 600;
+}
+.badge-success { background: rgba(74, 222, 128, 0.15); color: var(--success); }
+.badge-warning { background: rgba(251, 191, 36, 0.15); color: var(--warning); }
+.badge-danger { background: rgba(248, 113, 113, 0.15); color: var(--danger); }
+.badge-gold { background: rgba(212, 163, 115, 0.18); color: var(--brand-gold-light); }
+
+/* CONTAINER */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* AMBIENT ORBS decoration */
+body::after {
+  content: '';
+  position: fixed; top: 10%; right: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(76, 175, 80, 0.15) 0%, transparent 70%);
+  filter: blur(40px); z-index: 0; pointer-events: none;
+  animation: orbDrift 20s ease-in-out infinite alternate;
+}
+@keyframes orbDrift {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-60px, 80px) scale(1.15); }
+}
+
+/* MOBILE responsive */
+@media (max-width: 768px) {
+  .nav-main { display: none; }
+  .glass-card {
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    padding: 16px;
+  }
+  body::after { display: none; }
+  .container { padding: 0 16px; }
+}
+
+/* Site footer */
+.site-footer {
+  background: linear-gradient(180deg, rgba(107, 66, 38, 0.55) 0%, rgba(60, 40, 30, 0.85) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(212, 163, 115, 0.25);
+  padding: 40px 24px 24px; margin-top: 60px;
+  text-align: center; color: var(--text-light);
+}
+.site-footer a { color: var(--brand-gold-light); }
+.site-footer .footer-tagline { color: var(--text-muted); font-size: 13px; margin-top: 8px; }

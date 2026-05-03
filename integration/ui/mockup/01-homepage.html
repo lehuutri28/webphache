@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passion Link — Đào tạo bí quyết pha chế ngon tự tin mở quán!</title>
+<meta name="description" content="Trung tâm dạy pha chế trà sữa, cà phê, kem hàng đầu Việt Nam. 14 năm đào tạo, 3000+ học viên đã mở quán thành công. 45 khoá học, học phí từ 1.9M.">
+<link rel="stylesheet" href="_design-tokens.css">
+<style>
+  /* HERO */
+  .hero {
+    min-height: 92vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 60px 24px;
+    position: relative;
+  }
+  .hero-content { max-width: 920px; }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 72px);
+    line-height: 1.05; margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--brand-gold-light), #fff, var(--brand-gold));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero-tagline {
+    font-size: clamp(18px, 2.5vw, 26px);
+    color: var(--text-light); margin-bottom: 12px;
+    font-family: var(--font-display); font-weight: 500;
+  }
+  .hero-subtitle {
+    color: var(--text-secondary); font-size: 16px; max-width: 720px; margin: 0 auto 32px;
+  }
+  .hero-stats {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 32px;
+    margin-bottom: 32px;
+  }
+  .hero-stat-num {
+    font-size: 36px; font-weight: 800; color: var(--brand-gold-light);
+    font-family: var(--font-display);
+  }
+  .hero-stat-label { font-size: 13px; color: var(--text-muted); }
+
+  .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* AI quick advisor */
+  .ai-advisor {
+    margin: 60px auto;
+    max-width: 720px; text-align: center;
+    padding: 32px;
+  }
+  .ai-advisor h2 { color: var(--brand-gold-light); margin-bottom: 12px; font-size: 26px; }
+  .ai-advisor p { color: var(--text-secondary); margin-bottom: 20px; }
+  .ai-advisor-buttons {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  }
+  @media (max-width: 600px) { .ai-advisor-buttons { grid-template-columns: 1fr; } }
+  .ai-advisor-buttons .btn { padding: 14px; }
+
+  /* SECTION shared */
+  .section { padding: 60px 24px; }
+  .section-title {
+    text-align: center; margin-bottom: 40px;
+  }
+  .section-title h2 {
+    font-size: clamp(26px, 3.5vw, 36px);
+    color: var(--brand-gold-light); margin-bottom: 8px;
+  }
+  .section-title p { color: var(--text-secondary); font-size: 16px; }
+
+  /* BENTO khoá hot */
+  .bento-courses {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: minmax(140px, auto);
+    gap: 16px;
+  }
+  @media (max-width: 1024px) { .bento-courses { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .bento-courses { grid-template-columns: repeat(2, 1fr); } }
+
+  .bento-item {
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    cursor: pointer; transition: var(--transition);
+    background-size: cover; background-position: center;
+    position: relative; overflow: hidden;
+    color: #fff; text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    min-height: 200px;
+  }
+  .bento-item::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.85) 100%);
+  }
+  .bento-item > * { position: relative; z-index: 1; }
+  .bento-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .bento-item h3 { color: #fff; font-size: 18px; margin-bottom: 6px; }
+  .bento-item .meta {
+    display: flex; gap: 10px; font-size: 13px; color: rgba(255,255,255,0.85);
+  }
+  .bento-item .price {
+    color: var(--brand-gold-light); font-weight: 700; font-size: 18px;
+    margin-top: 8px;
+  }
+  .bento-item.featured {
+    grid-column: span 3; grid-row: span 2; min-height: 320px;
+  }
+  .bento-item.large {
+    grid-column: span 2;
+  }
+  @media (max-width: 1024px) {
+    .bento-item.featured { grid-column: span 3; grid-row: span 2; }
+    .bento-item.large { grid-column: span 1; }
+  }
+  @media (max-width: 600px) {
+    .bento-item.featured { grid-column: span 2; grid-row: span 1; }
+  }
+
+  /* 4 lý do */
+  .reasons-bento {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 900px) { .reasons-bento { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .reasons-bento { grid-template-columns: 1fr; } }
+  .reason-pill { padding: 32px 24px; text-align: center; }
+  .reason-pill .icon {
+    font-size: 48px; margin-bottom: 16px;
+  }
+  .reason-pill h3 { color: var(--text-primary); font-size: 18px; margin-bottom: 8px; }
+  .reason-pill p { color: var(--text-secondary); font-size: 14px; }
+
+  /* GIẢNG VIÊN */
+  .instructors-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 900px) { .instructors-grid { grid-template-columns: repeat(2, 1fr); } }
+  .instructor-card {
+    text-align: center; padding: 24px; transition: var(--transition);
+  }
+  .instructor-avatar {
+    width: 120px; height: 120px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--brand-gold));
+    margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 42px; color: #fff; font-weight: 700;
+    border: 3px solid rgba(212,163,115,0.3);
+  }
+  .instructor-card h3 { color: var(--text-primary); font-size: 18px; margin-bottom: 4px; }
+  .instructor-card .title { color: var(--brand-gold-light); font-size: 13px; margin-bottom: 12px; }
+  .instructor-card .stats { color: var(--text-muted); font-size: 12px; }
+
+  /* SUCCESS STORIES */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 900px) { .stories-grid { grid-template-columns: repeat(2, 1fr); } }
+  .story-card {
+    padding: 24px; text-align: center; transition: var(--transition);
+  }
+  .story-logo {
+    width: 80px; height: 80px; border-radius: var(--radius-md);
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    margin: 0 auto 16px; display: flex; align-items: center; justify-content: center;
+    font-size: 32px; font-weight: 800; color: var(--brand-gold-light);
+    border: 1px solid rgba(212,163,115,0.3);
+  }
+  .story-card h3 { color: var(--text-primary); font-size: 17px; margin-bottom: 4px; }
+  .story-card .meta { color: var(--text-muted); font-size: 12px; margin-bottom: 12px; }
+  .story-card .quote {
+    color: var(--text-light); font-size: 13px; font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* CALENDAR */
+  .calendar-tabs {
+    display: flex; justify-content: center; gap: 8px; margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .calendar-tabs button {
+    padding: 8px 18px; border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05); color: var(--text-secondary);
+    border-radius: 20px; cursor: pointer; font-size: 13px; transition: var(--transition);
+  }
+  .calendar-tabs button.active {
+    background: var(--brand-green); color: #fff; border-color: var(--brand-green);
+  }
+  .calendar-list {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;
+  }
+  .calendar-item {
+    padding: 16px; display: flex; align-items: center; gap: 16px;
+  }
+  .calendar-date {
+    background: linear-gradient(135deg, var(--brand-green), var(--primary));
+    color: #fff; padding: 12px; border-radius: var(--radius-md);
+    text-align: center; min-width: 64px;
+  }
+  .calendar-date .day { font-size: 24px; font-weight: 800; }
+  .calendar-date .month { font-size: 11px; opacity: 0.9; }
+  .calendar-info { flex: 1; }
+  .calendar-info h4 { color: var(--text-primary); font-size: 15px; margin-bottom: 4px; }
+  .calendar-info .meta { color: var(--text-muted); font-size: 12px; }
+  .calendar-slots { font-size: 11px; color: var(--success); margin-top: 4px; }
+
+  /* CTA section */
+  .final-cta {
+    margin: 60px auto; max-width: 920px; padding: 48px 32px; text-align: center;
+    border: 2px solid rgba(212,163,115,0.4);
+    background: linear-gradient(135deg, rgba(212,163,115,0.1), rgba(76,175,80,0.1));
+  }
+  .final-cta h2 { font-size: 32px; color: var(--brand-gold-light); margin-bottom: 12px; }
+  .final-cta p { color: var(--text-light); margin-bottom: 24px; font-size: 17px; }
+
+  /* FAB chatbot */
+  .fab-chatbot {
+    position: fixed; bottom: 24px; right: 24px; z-index: 90;
+    background: linear-gradient(135deg, var(--brand-green), var(--primary));
+    color: #fff; padding: 16px 24px; border-radius: 32px;
+    box-shadow: 0 8px 32px rgba(58,143,0,0.4);
+    cursor: pointer; font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+    border: none; animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 8px 32px rgba(58,143,0,0.4); }
+    50% { box-shadow: 0 8px 48px rgba(58,143,0,0.7); }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-emoji">🍵</span>
+      <div>
+        Passion Link
+        <span class="tagline">Đào tạo bí quyết pha chế ngon tự tin mở quán!</span>
+      </div>
+    </a>
+    <nav class="nav-main">
+      <a href="#khoa-hoc">Khoá học</a>
+      <a href="#lich">Lịch khai giảng</a>
+      <a href="04-instructor.html">Giảng viên</a>
+      <a href="03-testimonial.html">Học viên thành công</a>
+      <a href="05-blog-with-cta.html">Blog</a>
+    </nav>
+    <button class="btn-header">Đăng ký tư vấn</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Học 1 lần — Mở quán cả đời</h1>
+    <p class="hero-tagline">Đào tạo bí quyết pha chế ngon tự tin mở quán!</p>
+    <p class="hero-subtitle">14 năm đào tạo, 3000+ học viên đã mở quán thành công. 45 khoá học từ trà sữa, cà phê, kem đến kinh doanh F&B chuyên sâu.</p>
+
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">14</div>
+        <div class="hero-stat-label">năm đào tạo</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">3000+</div>
+        <div class="hero-stat-label">quán đã mở</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">45</div>
+        <div class="hero-stat-label">khoá học</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">4.9⭐</div>
+        <div class="hero-stat-label">rating học viên</div>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="02-course-detail.html" class="btn btn-primary btn-lg">Xem khoá phù hợp với bạn</a>
+      <a href="#tu-van" class="btn btn-secondary">💬 Tư vấn miễn phí</a>
+    </div>
+  </div>
+</section>
+
+<!-- AI advisor -->
+<div class="ai-advisor glass-card" id="tu-van">
+  <h2>🤖 Tư vấn nhanh — bạn muốn mở quán loại nào?</h2>
+  <p>Click nhóm phù hợp → AI gợi ý 2-3 khoá phù hợp + lịch khai giảng gần nhất</p>
+  <div class="ai-advisor-buttons">
+    <button class="btn btn-primary">🧋 Trà sữa</button>
+    <button class="btn btn-secondary">☕ Cà phê</button>
+    <button class="btn btn-primary">🍦 Kem & Bánh</button>
+  </div>
+</div>
+
+<!-- BENTO khoá hot -->
+<section class="section" id="khoa-hoc">
+  <div class="container">
+    <div class="section-title">
+      <h2>🔥 Khoá học HOT đang tuyển sinh</h2>
+      <p>Pull realtime từ ERP — cập nhật mỗi 15 phút</p>
+    </div>
+
+    <div class="bento-courses">
+      <a href="02-course-detail.html" class="bento-item featured" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7)), url('https://phache.com.vn/upload/news/khoa-tra-hoa-qua-nhiet-doi.jpg');">
+        <span class="badge badge-warning" style="align-self: flex-start; margin-bottom: 8px;">🔥 HOT — Còn 3 chỗ</span>
+        <h3 style="font-size: 24px;">Trà Trái Cây Nhiệt Đới — 10 món HOT</h3>
+        <div class="meta">
+          <span>⏱️ 5 buổi × 3h</span>
+          <span>📅 15/05</span>
+          <span>⭐ 4.9 (124)</span>
+        </div>
+        <div class="price">2.500.000₫</div>
+      </a>
+
+      <a href="#" class="bento-item large" style="background: linear-gradient(135deg, #5a3a1a, #8B5E3C);">
+        <h3>Cà Phê Barista Chuyên Nghiệp</h3>
+        <div class="meta">
+          <span>⏱️ 8 buổi</span>
+          <span>📅 25/05</span>
+        </div>
+        <div class="price">3.800.000₫</div>
+      </a>
+
+      <a href="#" class="bento-item" style="background: linear-gradient(135deg, #2c5530, #3A8F00);">
+        <h3>Trà Sữa Trân Châu Đường Đen</h3>
+        <div class="price">1.800.000₫</div>
+      </a>
+
+      <a href="#" class="bento-item large" style="background: linear-gradient(135deg, #b8870a, #D4A373);">
+        <h3>Kinh Doanh Mở Quán A-Z</h3>
+        <div class="meta">
+          <span>📅 5/06</span>
+          <span>👥 Vốn 50-200tr</span>
+        </div>
+        <div class="price">5.500.000₫</div>
+      </a>
+
+      <a href="#" class="bento-item" style="background: linear-gradient(135deg, #4a2e1a, #6B4226);">
+        <h3>Làm Kem Tươi Thủ Công</h3>
+        <div class="price">2.200.000₫</div>
+      </a>
+
+      <a href="#" class="bento-item" style="background: linear-gradient(135deg, #1a4a2e, #2F6F00);">
+        <h3>Trà Chanh Sả 8 Vị</h3>
+        <div class="price">1.200.000₫</div>
+      </a>
+
+      <a href="#" class="bento-item" style="background: linear-gradient(135deg, #5a2a1a, #8B3E3C);">
+        <h3>Bánh Kem & Bingsu</h3>
+        <div class="price">2.500.000₫</div>
+      </a>
+
+      <a href="#" class="bento-item" style="background: linear-gradient(135deg, #3a4a1a, #6B8E3C);">
+        <h3>Sinh Tố & Nước Ép</h3>
+        <div class="price">1.500.000₫</div>
+      </a>
+
+      <a href="#" class="bento-item" style="background: linear-gradient(135deg, #4a3a1a, #8B6E3C);">
+        <h3>Tổng Hợp 7 Menu</h3>
+        <div class="price">3.500.000₫</div>
+      </a>
+    </div>
+
+    <div style="text-align: center; margin-top: 32px;">
+      <a href="#" class="btn btn-secondary">Xem tất cả 45 khoá →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 4 LÝ DO -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2>4 lý do chọn Passion Link</h2>
+    </div>
+    <div class="reasons-bento">
+      <div class="reason-pill glass-card">
+        <div class="icon">🎓</div>
+        <h3>Chứng chỉ điện tử</h3>
+        <p>QR code verify online tại verify.passionlink.vn — minh chứng nghề thật</p>
+      </div>
+      <div class="reason-pill glass-card">
+        <div class="icon">💰</div>
+        <h3>Cam kết hoàn cọc 500k</h3>
+        <p>Sau buổi 1 không hài lòng → hoàn ngay trong 3-5 ngày</p>
+      </div>
+      <div class="reason-pill glass-card">
+        <div class="icon">🏆</div>
+        <h3>3000+ quán đã mở</h3>
+        <p>Royaltea, Gutea, Ilacha, M's Jolly — học viên thành công thật</p>
+      </div>
+      <div class="reason-pill glass-card">
+        <div class="icon">👨‍🏫</div>
+        <h3>Giảng viên 10+ năm</h3>
+        <p>Đội ngũ chuyên gia đào tạo chuyên sâu, không lý thuyết suông</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GIẢNG VIÊN -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2>👨‍🏫 Đội ngũ giảng viên</h2>
+      <p>Chuyên gia thật, kinh nghiệm thật, học viên thành công thật</p>
+    </div>
+    <div class="instructors-grid">
+      <a href="04-instructor.html" class="instructor-card glass-card">
+        <div class="instructor-avatar">T</div>
+        <h3>Thầy Lê Hữu Trí</h3>
+        <div class="title">CEO Passion Link — Chuyên gia trà</div>
+        <div class="stats">14 năm • 3000+ quán</div>
+      </a>
+      <a href="#" class="instructor-card glass-card">
+        <div class="instructor-avatar">C</div>
+        <h3>Thầy Cường Barista</h3>
+        <div class="title">Vô địch Latte Art HCM 2018</div>
+        <div class="stats">10 năm • 800+ học viên</div>
+      </a>
+      <a href="#" class="instructor-card glass-card">
+        <div class="instructor-avatar">V</div>
+        <h3>Cô Thoại Vy</h3>
+        <div class="title">Chuyên gia trà sữa Đài Loan</div>
+        <div class="stats">10 năm • 1200+ học viên</div>
+      </a>
+      <a href="#" class="instructor-card glass-card">
+        <div class="instructor-avatar">Đ</div>
+        <h3>Thầy Đức Anh</h3>
+        <div class="title">Chuyên gia thương hiệu F&B</div>
+        <div class="stats">8 năm • Hà Nội</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SUCCESS STORIES -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2>🏆 Quán học viên thành công</h2>
+      <p>4 brand lớn xuất phát từ học viên Passion Link</p>
+    </div>
+    <div class="stories-grid">
+      <a href="03-testimonial.html" class="story-card glass-card">
+        <div class="story-logo">RT</div>
+        <h3>Royaltea Vietnam</h3>
+        <div class="meta">25 chi nhánh • Trà sữa</div>
+        <p class="quote">"Học khoá Tổng Hợp 2017 → mở quán đầu tiên 2018 → 25 chi nhánh hôm nay"</p>
+      </a>
+      <a href="03-testimonial.html" class="story-card glass-card">
+        <div class="story-logo">GT</div>
+        <h3>Gutea</h3>
+        <div class="meta">12 chi nhánh • Trà sữa cao cấp</div>
+        <p class="quote">"Passion Link giúp em chuẩn hoá menu + cost — biên lợi nhuận 45%"</p>
+      </a>
+      <a href="03-testimonial.html" class="story-card glass-card">
+        <div class="story-logo">IL</div>
+        <h3>Chuỗi Ilacha</h3>
+        <div class="meta">15+ chi nhánh • Miền Nam</div>
+        <p class="quote">"Trà sữa hoa quả tươi — topping nhà làm — sức khoẻ"</p>
+      </a>
+      <a href="03-testimonial.html" class="story-card glass-card">
+        <div class="story-logo">MJ</div>
+        <h3>M's Jolly</h3>
+        <div class="meta">8 chi nhánh • Bánh + trà sữa</div>
+        <p class="quote">"Học khoá bánh kem + trà sữa — kết hợp 2 hệ trong 1 quán"</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- LICH KHAI GIẢNG -->
+<section class="section" id="lich">
+  <div class="container">
+    <div class="section-title">
+      <h2>📅 Lịch khai giảng 30 ngày tới</h2>
+    </div>
+
+    <div class="calendar-tabs">
+      <button class="active">Tất cả</button>
+      <button>HCM</button>
+      <button>Hà Nội</button>
+      <button>Cần Thơ</button>
+      <button>Đà Nẵng</button>
+      <button>Online</button>
+    </div>
+
+    <div class="calendar-list">
+      <div class="calendar-item glass-card">
+        <div class="calendar-date">
+          <div class="day">15</div>
+          <div class="month">Tháng 5</div>
+        </div>
+        <div class="calendar-info">
+          <h4>Trà Trái Cây Nhiệt Đới</h4>
+          <div class="meta">📍 HCM • 5 buổi T2-T6 18-21h</div>
+          <div class="calendar-slots">⚠️ Còn 3/12 chỗ — đăng ký gấp!</div>
+        </div>
+        <a href="02-course-detail.html" class="btn btn-primary">Xem</a>
+      </div>
+
+      <div class="calendar-item glass-card">
+        <div class="calendar-date">
+          <div class="day">20</div>
+          <div class="month">Tháng 5</div>
+        </div>
+        <div class="calendar-info">
+          <h4>Cà Phê Barista Chuyên Nghiệp</h4>
+          <div class="meta">📍 Hà Nội • 8 buổi cuối tuần</div>
+          <div class="calendar-slots">Còn 5/12 chỗ</div>
+        </div>
+        <a href="#" class="btn btn-primary">Xem</a>
+      </div>
+
+      <div class="calendar-item glass-card">
+        <div class="calendar-date">
+          <div class="day">25</div>
+          <div class="month">Tháng 5</div>
+        </div>
+        <div class="calendar-info">
+          <h4>Trà Sữa Trân Châu Đường Đen</h4>
+          <div class="meta">📍 HCM • 4 buổi T2-T5</div>
+          <div class="calendar-slots">Còn 8/12 chỗ</div>
+        </div>
+        <a href="#" class="btn btn-primary">Xem</a>
+      </div>
+
+      <div class="calendar-item glass-card">
+        <div class="calendar-date">
+          <div class="day">5</div>
+          <div class="month">Tháng 6</div>
+        </div>
+        <div class="calendar-info">
+          <h4>Kinh Doanh Mở Quán A-Z</h4>
+          <div class="meta">📍 Cần Thơ • 6 buổi cuối tuần</div>
+          <div class="calendar-slots">Còn 10/12 chỗ</div>
+        </div>
+        <a href="#" class="btn btn-primary">Xem</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="container">
+  <div class="final-cta glass-card">
+    <h2>Sẵn sàng mở quán riêng?</h2>
+    <p>Đăng ký tư vấn miễn phí — chuyên gia liên hệ trong 30 phút</p>
+    <a href="02-course-detail.html" class="btn btn-primary btn-lg">Đăng ký giữ chỗ — Cọc 500k</a>
+  </div>
+</section>
+
+<!-- FAB Chatbot -->
+<button class="fab-chatbot" onclick="alert('AI Chatbot Passion Link sẽ tích hợp với C11 N8N (Gemini Flash-Lite)')">
+  💬 Hỏi AI tư vấn
+</button>
+
+<footer class="site-footer">
+  <p>© 2026 Passion Link — Đào tạo bí quyết pha chế ngon tự tin mở quán!</p>
+  <p class="footer-tagline"><a href="index.html">← Xem mockup khác</a></p>
+</footer>
+
+</body>
+</html>

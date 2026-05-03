@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passion Link — Mockup UI 2026 (Letri review)</title>
+<link rel="stylesheet" href="_design-tokens.css">
+<style>
+  .menu-hero {
+    text-align: center; padding: 80px 24px 40px;
+  }
+  .menu-hero h1 {
+    font-size: clamp(32px, 5vw, 56px);
+    background: linear-gradient(135deg, var(--brand-gold-light), var(--brand-gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 16px;
+  }
+  .menu-hero p { font-size: 18px; color: var(--text-secondary); max-width: 720px; margin: 0 auto; }
+  .menu-hero .meta { margin-top: 16px; color: var(--text-muted); font-size: 14px; }
+
+  .mockup-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    padding: 24px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .mockup-card {
+    text-decoration: none; color: inherit;
+    overflow: hidden;
+  }
+  .mockup-card .preview {
+    height: 200px; border-radius: var(--radius-md);
+    background: linear-gradient(135deg, rgba(76,175,80,0.15), rgba(212,163,115,0.15));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 64px; margin-bottom: 16px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .mockup-card h3 {
+    color: var(--brand-gold-light); font-size: 18px; margin-bottom: 8px;
+  }
+  .mockup-card p { color: var(--text-secondary); font-size: 14px; }
+  .mockup-card .priority {
+    display: inline-block; margin-top: 12px;
+    padding: 4px 10px; border-radius: 12px;
+    font-size: 11px; font-weight: 600;
+  }
+  .mockup-card .priority-1 { background: rgba(248,113,113,0.18); color: var(--danger); }
+  .mockup-card .priority-2 { background: rgba(251,191,36,0.18); color: var(--warning); }
+  .mockup-card .priority-3 { background: rgba(74,222,128,0.18); color: var(--success); }
+
+  .info-box {
+    max-width: 920px; margin: 40px auto;
+  }
+  .info-box ul { list-style: none; padding: 0; }
+  .info-box li {
+    padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .info-box li::before {
+    content: '✓';
+    background: var(--success);
+    color: #000;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 14px;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-emoji">🍵</span>
+      <div>
+        Passion Link
+        <span class="tagline">Đào tạo bí quyết pha chế ngon tự tin mở quán!</span>
+      </div>
+    </div>
+    <nav class="nav-main">
+      <a href="#">Khoá học</a>
+      <a href="#">Lịch khai giảng</a>
+      <a href="#">Giảng viên</a>
+      <a href="#">Học viên thành công</a>
+      <a href="#">Blog</a>
+    </nav>
+    <button class="btn-header">Đăng ký tư vấn</button>
+  </div>
+</header>
+
+<section class="menu-hero">
+  <h1>🎨 Mockup UI Passion Link 2026</h1>
+  <p>5 mockup HTML chất lượng cao — Letri click vào từng card xem giao diện đề xuất, click CTA thử trải nghiệm khách hàng. Mở trên cả desktop + mobile.</p>
+  <div class="meta">CEO Phache (c12-webphache) | 2026-05-03 | Brand chốt 3/5: Passion Link + tagline mới</div>
+</section>
+
+<div class="mockup-grid">
+
+  <a href="01-homepage.html" class="glass-card mockup-card">
+    <div class="preview">🏠</div>
+    <h3>1. Homepage redesign</h3>
+    <p>Hero video full-screen + AI tư vấn quick + Bento khoá hot + 4 quán thành công + lịch khai giảng live + cảm nhận học viên</p>
+    <span class="priority priority-1">⭐ Entry chính</span>
+  </a>
+
+  <a href="02-course-detail.html" class="glass-card mockup-card">
+    <div class="preview">🎓</div>
+    <h3>2. Chi tiết khoá học</h3>
+    <p>Hero conversion-first: GIÁ + LỊCH + SLOT visible ngay đầu. Form 3 field 2 bước. Cọc 500k cam kết hoàn tiền. Tab nội dung/giảng viên/review.</p>
+    <span class="priority priority-1">⭐ CHỐT KHÁCH</span>
+  </a>
+
+  <a href="03-testimonial.html" class="glass-card mockup-card">
+    <div class="preview">⭐</div>
+    <h3>3. Quán học viên thành công</h3>
+    <p>Layout testimonial cứu 4/5 trang đang vỡ HTTP 500. Câu chuyện 200 từ + bảng trước/sau học (vốn, doanh thu). Royaltea / Gutea / Ilacha / M's Jolly.</p>
+    <span class="priority priority-1">🚨 Wave C ưu tiên</span>
+  </a>
+
+  <a href="04-instructor.html" class="glass-card mockup-card">
+    <div class="preview">👨‍🏫</div>
+    <h3>4. Giảng viên profile</h3>
+    <p>Card thầy Lê Hữu Trí (CEO) + 3000+ quán thành công. Bio đầy đủ, stat box, học viên cụ thể, CTA "Đăng ký khoá của thầy".</p>
+    <span class="priority priority-2">🟡 HIGH</span>
+  </a>
+
+  <a href="05-blog-with-cta.html" class="glass-card mockup-card">
+    <div class="preview">📝</div>
+    <h3>5. Blog + Internal CTA</h3>
+    <p>Fix "đảo cô đơn" — In-content CTA box giữa bài, related courses cuối, sticky footer mobile "Đăng ký khoá". Conversion blog→buy 2% → 8-12%.</p>
+    <span class="priority priority-2">🟡 HIGH</span>
+  </a>
+
+</div>
+
+<div class="glass-card info-box">
+  <h2 style="margin-bottom: 20px; color: var(--brand-gold-light);">🎯 Letri review checklist</h2>
+  <ul>
+    <li>Brand "Passion Link" + tagline "Đào tạo bí quyết pha chế ngon tự tin mở quán!" hiển thị OK?</li>
+    <li>Màu matcha green #4CAF50 + nâu #8B5E3C + tea gold #D4A373 đẹp không?</li>
+    <li>Hiệu ứng kính trong suốt (Crystal Glass) chuẩn brand Wecha?</li>
+    <li>Giá hiển thị rõ trên trang khoá — số tiền cụ thể visible?</li>
+    <li>Cọc 500k + cam kết hoàn tiền hiển thị nổi bật?</li>
+    <li>Form 3 field bước 1 (Tên + SĐT + Khoá) — OK ngắn gọn?</li>
+    <li>4 testimonial Royaltea/Gutea/Ilacha/M's Jolly có sức thuyết phục?</li>
+    <li>Mobile responsive — mở iPhone scroll OK không?</li>
+    <li>CTA "Đăng ký ngay - Cọc 500k" có thu hút?</li>
+    <li>Có gì cần chỉnh thêm trước khi triển khai thật?</li>
+  </ul>
+</div>
+
+<footer class="site-footer">
+  <p>© 2026 Passion Link — Đào tạo bí quyết pha chế ngon tự tin mở quán!</p>
+  <p class="footer-tagline">Mockup UI by CEO Phache (c12-webphache) | <a href="https://github.com/lehuutri28/webphache">GitHub repo</a></p>
+</footer>
+
+</body>
+</html>

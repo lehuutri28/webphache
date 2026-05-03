@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royaltea Vietnam — Học viên thành công Passion Link</title>
+<meta name="description" content="Royaltea Vietnam: chuỗi 25 chi nhánh trà sữa hoa quả tươi, xuất phát từ học viên Passion Link 2017. Câu chuyện thật, doanh thu thật.">
+<link rel="stylesheet" href="_design-tokens.css">
+<style>
+  .breadcrumb {
+    padding: 16px 24px; color: var(--text-muted); font-size: 13px;
+    max-width: 1280px; margin: 0 auto;
+  }
+  .breadcrumb a { color: var(--text-secondary); }
+
+  /* HERO */
+  .testimonial-hero {
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .brand-logo {
+    width: 140px; height: 140px; border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, #d4145c, #8b1947);
+    color: #fff; font-size: 56px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+    box-shadow: var(--shadow-soft);
+    border: 3px solid rgba(255,255,255,0.2);
+  }
+  .testimonial-hero h1 {
+    font-size: clamp(32px, 5vw, 48px);
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--brand-gold-light), #fff);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .brand-tagline {
+    font-size: 18px; color: var(--text-secondary); margin-bottom: 24px;
+  }
+  .brand-meta {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 24px;
+    color: var(--text-light); font-size: 15px;
+  }
+  .brand-meta span {
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+
+  /* HERO IMAGE */
+  .hero-image {
+    max-width: 1280px; margin: 24px auto;
+    aspect-ratio: 21 / 9;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(212,20,92,0.3), rgba(76,175,80,0.3));
+    position: relative; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-image::before {
+    content: '🏪 Ảnh quán Royaltea Vietnam (1200×600)';
+    color: var(--text-muted); font-size: 16px;
+  }
+
+  /* SECTIONS */
+  .section { padding: 40px 24px; max-width: 1280px; margin: 0 auto; }
+  .section h2 {
+    font-size: clamp(24px, 3vw, 32px);
+    color: var(--brand-gold-light); margin-bottom: 24px;
+    text-align: center;
+  }
+
+  /* STORY */
+  .story-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  @media (max-width: 900px) { .story-grid { grid-template-columns: 1fr; } }
+
+  .story-content { padding: 32px; }
+  .story-content p {
+    font-size: 16px; line-height: 1.8; color: var(--text-light);
+    margin-bottom: 16px;
+  }
+  .story-content blockquote {
+    border-left: 4px solid var(--brand-gold);
+    padding: 16px 24px; margin: 24px 0;
+    font-style: italic; color: var(--brand-gold-light);
+    background: rgba(212, 163, 115, 0.1);
+    border-radius: var(--radius-md);
+  }
+  .story-content blockquote::before {
+    content: '"'; font-size: 48px; color: var(--brand-gold);
+    line-height: 0; vertical-align: -20px; margin-right: 8px;
+  }
+
+  /* INFO SIDE */
+  .info-sidebar { padding: 24px; position: sticky; top: 80px; }
+  .info-sidebar h3 {
+    color: var(--brand-gold-light); margin-bottom: 16px; font-size: 18px;
+  }
+  .info-sidebar ul { list-style: none; }
+  .info-sidebar li {
+    padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--text-light); font-size: 14px;
+  }
+  .info-sidebar li strong { color: var(--text-primary); }
+
+  /* TRƯỚC/SAU table */
+  .before-after {
+    margin: 40px 0;
+  }
+  .before-after-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  @media (max-width: 768px) { .before-after-grid { grid-template-columns: 1fr; } }
+  .ba-card {
+    padding: 24px; text-align: center;
+  }
+  .ba-card.before {
+    border: 1px solid rgba(248,113,113,0.3);
+    background: rgba(248,113,113,0.05);
+  }
+  .ba-card.after {
+    border: 1px solid rgba(74,222,128,0.4);
+    background: rgba(74,222,128,0.05);
+  }
+  .ba-card h3 {
+    font-size: 16px; margin-bottom: 16px; color: var(--text-secondary);
+  }
+  .ba-card.after h3 { color: var(--success); }
+  .ba-stats { display: flex; flex-direction: column; gap: 8px; }
+  .ba-stat-num {
+    font-size: 28px; font-weight: 800; color: var(--text-primary);
+    font-family: var(--font-display);
+  }
+  .ba-card.after .ba-stat-num { color: var(--brand-gold-light); }
+  .ba-stat-label { color: var(--text-muted); font-size: 12px; }
+
+  /* GALLERY */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 768px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+  .gallery-item {
+    aspect-ratio: 1;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, rgba(212,20,92,0.2), rgba(76,175,80,0.2));
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted); font-size: 14px;
+    cursor: pointer; transition: var(--transition);
+  }
+  .gallery-item:hover { transform: scale(1.03); border-color: var(--brand-gold); }
+
+  /* COURSES TAKEN */
+  .courses-taken {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .course-link-card {
+    padding: 20px; transition: var(--transition);
+    text-decoration: none; color: inherit;
+  }
+  .course-link-card:hover { transform: translateY(-3px); }
+  .course-link-card h4 { color: var(--text-primary); margin-bottom: 4px; }
+  .course-link-card .meta { color: var(--text-muted); font-size: 12px; margin-bottom: 12px; }
+  .course-link-card .price {
+    color: var(--brand-gold-light); font-weight: 700; font-size: 18px;
+  }
+
+  /* FINAL CTA */
+  .final-cta {
+    margin: 60px auto; padding: 48px 32px; text-align: center;
+    border: 2px solid rgba(212,163,115,0.4);
+    background: linear-gradient(135deg, rgba(212,163,115,0.1), rgba(76,175,80,0.1));
+  }
+  .final-cta h2 { color: var(--brand-gold-light); margin-bottom: 12px; }
+  .final-cta p { color: var(--text-light); margin-bottom: 24px; }
+
+  /* TESTIMONIAL CAROUSEL — other brands */
+  .other-brands {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 900px) { .other-brands { grid-template-columns: 1fr; } }
+  .other-brand-card {
+    padding: 20px; text-align: center; transition: var(--transition);
+    text-decoration: none; color: inherit;
+  }
+  .other-brand-card:hover { transform: translateY(-3px); }
+  .other-brand-logo {
+    width: 60px; height: 60px; border-radius: var(--radius-md);
+    margin: 0 auto 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; font-weight: 800; color: #fff;
+  }
+  .other-brand-card h4 { color: var(--text-primary); font-size: 15px; }
+  .other-brand-card .meta { color: var(--text-muted); font-size: 12px; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-emoji">🍵</span>
+      <div>
+        Passion Link
+        <span class="tagline">Đào tạo bí quyết pha chế ngon tự tin mở quán!</span>
+      </div>
+    </a>
+    <nav class="nav-main">
+      <a href="01-homepage.html">Trang chủ</a>
+      <a href="#">Khoá học</a>
+      <a href="#">Giảng viên</a>
+      <a href="#">Học viên thành công</a>
+      <a href="05-blog-with-cta.html">Blog</a>
+    </nav>
+    <button class="btn-header">Đăng ký tư vấn</button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="index.html">Trang chủ</a> › <a href="#">Học viên thành công</a> › Royaltea Vietnam
+</div>
+
+<!-- HERO -->
+<section class="testimonial-hero">
+  <div class="brand-logo">RT</div>
+  <h1>Royaltea Vietnam</h1>
+  <p class="brand-tagline">"Trà sữa hoa quả tươi — topping nhà làm — sức khoẻ"</p>
+  <div class="brand-meta">
+    <span>📅 Khai trương: 2018</span>
+    <span>🏪 25 chi nhánh</span>
+    <span>📍 Toàn quốc</span>
+    <span>⭐ Học khoá: <a href="02-course-detail.html">Tổng Hợp Thương Hiệu</a></span>
+  </div>
+</section>
+
+<!-- HERO IMAGE -->
+<div class="hero-image"></div>
+
+<!-- STORY -->
+<section class="section">
+  <h2>📖 Câu chuyện thành công</h2>
+
+  <div class="story-grid">
+    <div class="story-content glass-card">
+      <p><strong>Anh Nguyễn Hoàng Long</strong> — chủ chuỗi Royaltea Vietnam — bắt đầu từ một lớp học pha chế ở Passion Link tháng 8/2017. Lúc đó anh là sinh viên năm 4 ngành kinh tế, có niềm đam mê với trà sữa nhưng không có kinh nghiệm pha chế chuyên nghiệp.</p>
+
+      <blockquote>Em tìm Passion Link qua Google. Học khoá Tổng Hợp Thương Hiệu 5.5 triệu — 12 buổi. Sau khoá em không chỉ biết pha 30 món mà còn biết costing menu, định giá, setup quầy, marketing. Tất cả gói trong 1 khoá.</blockquote>
+
+      <p>Tháng 1/2018 anh Long mở cửa hàng đầu tiên ở Quận 7 với vốn 250 triệu — bao gồm mặt bằng, thiết bị, nguyên liệu 2 tháng đầu. Tháng đầu doanh thu 85 triệu, tháng thứ 3 đạt điểm hoà vốn.</p>
+
+      <p>Đến 2020, Royaltea có 5 chi nhánh. Đến 2023 mở rộng lên 15 chi nhánh trải dài HCM, Bình Dương, Đồng Nai. Năm 2025-2026, Royaltea phát triển thành <strong>25 chi nhánh toàn quốc</strong>, với menu signature là trà sữa hoa quả tươi và topping handmade.</p>
+
+      <blockquote>Bí quyết là chuẩn hoá menu + cost — Passion Link dạy em điều này từ buổi đầu. Mỗi món có công thức rõ ràng, biên lợi nhuận tính chính xác. Quán mở mới thì copy paste menu chuẩn ngay.</blockquote>
+
+      <p>Hiện tại anh Long quay lại Passion Link làm cố vấn cho học viên mới — chia sẻ kinh nghiệm mở quán, scaling chuỗi, quản lý nhân sự.</p>
+    </div>
+
+    <aside class="info-sidebar glass-card">
+      <h3>📊 Thông tin nhanh</h3>
+      <ul>
+        <li><span>Brand:</span><strong>Royaltea Vietnam</strong></li>
+        <li><span>Chủ:</span><strong>Anh Nguyễn Hoàng Long</strong></li>
+        <li><span>Khai trương:</span><strong>1/2018</strong></li>
+        <li><span>Vốn ban đầu:</span><strong>250 triệu</strong></li>
+        <li><span>Hoà vốn:</span><strong>3 tháng</strong></li>
+        <li><span>Số chi nhánh:</span><strong>25</strong></li>
+        <li><span>Doanh thu/tháng:</span><strong>~150-200 triệu/quán</strong></li>
+        <li><span>Khoá đã học:</span><strong><a href="02-course-detail.html">Tổng Hợp Thương Hiệu</a></strong></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- TRƯỚC / SAU -->
+  <div class="before-after">
+    <h2>📈 Trước / Sau khi học Passion Link</h2>
+    <div class="before-after-grid">
+      <div class="ba-card before glass-card">
+        <h3>Trước (8/2017)</h3>
+        <div class="ba-stats">
+          <div>
+            <div class="ba-stat-num">0</div>
+            <div class="ba-stat-label">Kinh nghiệm pha chế</div>
+          </div>
+          <div>
+            <div class="ba-stat-num">0</div>
+            <div class="ba-stat-label">Chi nhánh</div>
+          </div>
+          <div>
+            <div class="ba-stat-num">0₫</div>
+            <div class="ba-stat-label">Doanh thu/tháng</div>
+          </div>
+          <div>
+            <div class="ba-stat-num">SV</div>
+            <div class="ba-stat-label">Sinh viên năm 4</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ba-card after glass-card">
+        <h3>Sau (2026)</h3>
+        <div class="ba-stats">
+          <div>
+            <div class="ba-stat-num">9 năm</div>
+            <div class="ba-stat-label">Kinh nghiệm + cố vấn</div>
+          </div>
+          <div>
+            <div class="ba-stat-num">25</div>
+            <div class="ba-stat-label">Chi nhánh toàn quốc</div>
+          </div>
+          <div>
+            <div class="ba-stat-num">~4 tỷ</div>
+            <div class="ba-stat-label">Doanh thu/tháng tổng chuỗi</div>
+          </div>
+          <div>
+            <div class="ba-stat-num">CEO</div>
+            <div class="ba-stat-label">Royaltea Vietnam</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section">
+  <h2>📸 Gallery quán Royaltea</h2>
+  <div class="gallery-grid">
+    <div class="gallery-item">🏪 Chi nhánh Q.7</div>
+    <div class="gallery-item">🥤 Menu signature</div>
+    <div class="gallery-item">👥 Đội ngũ nhân viên</div>
+    <div class="gallery-item">🎉 Khai trương CN15</div>
+    <div class="gallery-item">📦 Topping handmade</div>
+    <div class="gallery-item">🍓 Trà dâu tươi</div>
+    <div class="gallery-item">🥭 Trà xoài hi-bis</div>
+    <div class="gallery-item">🏆 Giải thưởng 2023</div>
+  </div>
+</section>
+
+<!-- KHOÁ ĐÃ HỌC -->
+<section class="section">
+  <h2>🎓 Khoá học anh Long đã tham gia</h2>
+  <div class="courses-taken">
+    <a href="02-course-detail.html" class="course-link-card glass-card">
+      <h4>Khoá Tổng Hợp Thương Hiệu</h4>
+      <div class="meta">12 buổi × 3h • Đã học 8/2017</div>
+      <div class="price">5.500.000₫</div>
+    </a>
+    <a href="#" class="course-link-card glass-card">
+      <h4>Workshop Định Giá Menu</h4>
+      <div class="meta">2 buổi × 4h • Đã học 9/2017</div>
+      <div class="price">1.200.000₫</div>
+    </a>
+    <a href="#" class="course-link-card glass-card">
+      <h4>Khoá Chiến Lược Mở Chuỗi</h4>
+      <div class="meta">1 buổi × 6h • Đã học 2020</div>
+      <div class="price">3.000.000₫</div>
+    </a>
+  </div>
+</section>
+
+<!-- OTHER BRANDS -->
+<section class="section">
+  <h2>🏆 3 brand học viên thành công khác</h2>
+  <div class="other-brands">
+    <a href="#" class="other-brand-card glass-card">
+      <div class="other-brand-logo" style="background: linear-gradient(135deg, #2c5282, #4299e1);">GT</div>
+      <h4>Gutea</h4>
+      <div class="meta">12 chi nhánh • Trà sữa cao cấp</div>
+    </a>
+    <a href="#" class="other-brand-card glass-card">
+      <div class="other-brand-logo" style="background: linear-gradient(135deg, #d97706, #fbbf24);">IL</div>
+      <h4>Chuỗi Ilacha</h4>
+      <div class="meta">15+ chi nhánh • Hoa quả tươi</div>
+    </a>
+    <a href="#" class="other-brand-card glass-card">
+      <div class="other-brand-logo" style="background: linear-gradient(135deg, #c026d3, #f472b6);">MJ</div>
+      <h4>M's Jolly</h4>
+      <div class="meta">8 chi nhánh • Bánh + Trà sữa</div>
+    </a>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="container">
+  <div class="final-cta glass-card">
+    <h2>Bạn cũng muốn mở quán như Royaltea?</h2>
+    <p>Đăng ký khoá Tổng Hợp Thương Hiệu — đặt cọc 500k giữ chỗ — cam kết hoàn nếu không hài lòng buổi 1</p>
+    <a href="02-course-detail.html" class="btn btn-primary btn-lg">Xem khoá Tổng Hợp Thương Hiệu →</a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>© 2026 Passion Link — Đào tạo bí quyết pha chế ngon tự tin mở quán!</p>
+  <p class="footer-tagline"><a href="index.html">← Xem mockup khác</a></p>
+</footer>
+
+</body>
+</html>
