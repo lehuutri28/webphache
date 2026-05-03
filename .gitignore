@@ -1,0 +1,42 @@
+# Phache web — gitignore
+
+# Legacy extracted (đã có trong tar.gz, không cần track 1690 file)
+legacy/_extracted/
+legacy/source/
+
+# Tar archives ngoại trừ bundle restore chính
+legacy/_phache_*.tar.gz
+legacy/test_config.tar.gz
+
+# DB dumps lớn (đã trong tar bundle)
+legacy/pha5bd2c_*.sql
+legacy/pha5bd2c_*.sql.gz
+legacy/db_tables.txt
+legacy/tonghop_tables.txt
+legacy/wc_tables.txt
+
+# Logs runtime + queue + cache
+logs/
+cache/
+
+# Env file (KHÔNG commit JWT/secret)
+config/.env
+config/.env.local
+*.env
+
+# Macro
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*~
+
+# Sub-project docs archive (đã migrate sang erp-project main)
+docs/_archive/
+
+# PHP runtime
+*.cache
+*.log
