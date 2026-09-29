@@ -1,0 +1,21 @@
+# Backups & Archives
+backups*/
+BACKUPS/
+*.tar.gz
+*.zip
+*.bak*
+*.backup*
+
+
+# Environment & Sensitive configs
+.env*
+*ftp*.rtf
+*ftp*.txt
+*password*
+
+# OS & Logs
+.DS_Store
+Thumbs.db
+*.log
+error_log
+node_modules/
