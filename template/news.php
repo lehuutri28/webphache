@@ -1514,10 +1514,14 @@ position: absolute;
             <?php include dirname(__FILE__) . '/widget_drink_calculator.php'; ?>
   
     <?php 
-     if (!empty($news['news_videos'])) {
-         echo pl_render_video_facade($news['news_videos'], $article_seo_h1);
+     $req_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+     $is_core_course = ($news['page_id'] == 22) || (strpos($req_uri, '/cac-khoa-hoc-day-pha-che') !== false);
+     if (!empty($news['news_videos']) || $is_core_course) {
+         $vid_target = !empty($news['news_videos']) ? $news['news_videos'] : 'https://www.youtube.com/watch?v=07pucUJVXP4';
+         echo pl_render_video_facade($vid_target, $article_seo_h1);
      }
     ?>
+
 
             <div id="news_share">
                 <span class='st_facebook_hcount' displayText='Facebook'></span>
