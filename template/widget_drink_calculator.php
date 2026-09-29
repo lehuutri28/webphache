@@ -28,9 +28,9 @@
       <div class="pl-calc-row">
         <label class="pl-calc-label">Chọn loại đồ uống:</label>
         <div class="pl-calc-pills" id="pl-drink-types">
-          <button type="button" class="pl-pill-btn active" data-type="tra_sua">🧋 Trà Sữa</button>
-          <button type="button" class="pl-pill-btn" data-type="tra_trai_cay">🍋 Trà Trái Cây</button>
-          <button type="button" class="pl-pill-btn" data-type="ca_phe">☕ Cà Phê</button>
+          <button type="button" class="pl-pill-btn active" id="pl-btn-drink-tra_sua" onclick="plSelectDrinkType('tra_sua', this)">🧋 Trà Sữa</button>
+          <button type="button" class="pl-pill-btn" id="pl-btn-drink-tra_trai_cay" onclick="plSelectDrinkType('tra_trai_cay', this)">🍋 Trà Trái Cây</button>
+          <button type="button" class="pl-pill-btn" id="pl-btn-drink-ca_phe" onclick="plSelectDrinkType('ca_phe', this)">☕ Cà Phê</button>
         </div>
       </div>
 
@@ -38,8 +38,8 @@
       <div class="pl-calc-row">
         <label class="pl-calc-label">Chọn dung tích ly (Size):</label>
         <div class="pl-calc-sizes" id="pl-drink-sizes">
-          <button type="button" class="pl-size-btn active" data-size="M">Size M (500ml)</button>
-          <button type="button" class="pl-size-btn" data-size="L">Size L (700ml)</button>
+          <button type="button" class="pl-size-btn active" id="pl-btn-size-M" onclick="plSelectDrinkSize('M', this)">Size M (500ml)</button>
+          <button type="button" class="pl-size-btn" id="pl-btn-size-L" onclick="plSelectDrinkSize('L', this)">Size L (700ml)</button>
         </div>
       </div>
 
@@ -48,7 +48,7 @@
         <div class="pl-calc-input-group">
           <label for="pl-cost-tea" id="pl-label-tea">Cốt trà / Cafe (đ):</label>
           <div class="pl-input-addon">
-            <input type="number" id="pl-cost-tea" value="1800" min="0" step="100" class="pl-calc-input">
+            <input type="number" id="pl-cost-tea" value="1800" min="0" step="100" class="pl-calc-input" oninput="plCalculateDrink()" onchange="plCalculateDrink()">
             <span>đ</span>
           </div>
         </div>
@@ -56,7 +56,7 @@
         <div class="pl-calc-input-group">
           <label for="pl-cost-milk" id="pl-label-milk">Sữa tươi / Sữa đặc / Bột béo (đ):</label>
           <div class="pl-input-addon">
-            <input type="number" id="pl-cost-milk" value="2500" min="0" step="100" class="pl-calc-input">
+            <input type="number" id="pl-cost-milk" value="2500" min="0" step="100" class="pl-calc-input" oninput="plCalculateDrink()" onchange="plCalculateDrink()">
             <span>đ</span>
           </div>
         </div>
@@ -64,7 +64,7 @@
         <div class="pl-calc-input-group">
           <label for="pl-cost-sugar">Nước đường / Syrup / Sốt (đ):</label>
           <div class="pl-input-addon">
-            <input type="number" id="pl-cost-sugar" value="1000" min="0" step="100" class="pl-calc-input">
+            <input type="number" id="pl-cost-sugar" value="1000" min="0" step="100" class="pl-calc-input" oninput="plCalculateDrink()" onchange="plCalculateDrink()">
             <span>đ</span>
           </div>
         </div>
@@ -72,7 +72,7 @@
         <div class="pl-calc-input-group">
           <label for="pl-cost-topping">Topping (Trân châu, thạch, foam...) (đ):</label>
           <div class="pl-input-addon">
-            <input type="number" id="pl-cost-topping" value="3500" min="0" step="100" class="pl-calc-input">
+            <input type="number" id="pl-cost-topping" value="3500" min="0" step="100" class="pl-calc-input" oninput="plCalculateDrink()" onchange="plCalculateDrink()">
             <span>đ</span>
           </div>
         </div>
@@ -80,7 +80,7 @@
         <div class="pl-calc-input-group pl-col-full">
           <label for="pl-cost-pack">Bao bì (Ly, nắp, ống hút, túi, màng ép) (đ):</label>
           <div class="pl-input-addon">
-            <input type="number" id="pl-cost-pack" value="1800" min="0" step="100" class="pl-calc-input">
+            <input type="number" id="pl-cost-pack" value="1800" min="0" step="100" class="pl-calc-input" oninput="plCalculateDrink()" onchange="plCalculateDrink()">
             <span>đ</span>
           </div>
         </div>
@@ -127,9 +127,9 @@
       <div class="pl-calc-row">
         <label class="pl-calc-label">Chọn mô hình quán tham khảo:</label>
         <div class="pl-calc-pills" id="pl-biz-presets">
-          <button type="button" class="pl-pill-btn active" data-preset="kiot">🛵 Kiot / Takeaway (150tr)</button>
-          <button type="button" class="pl-pill-btn" data-preset="vua">🪑 Quán vừa 40-60m² (300tr)</button>
-          <button type="button" class="pl-pill-btn" data-preset="lon">🏢 Quán lớn / Chuỗi (550tr)</button>
+          <button type="button" class="pl-pill-btn active" id="pl-btn-biz-kiot" onclick="plSelectBizPreset('kiot', this)">🛵 Kiot / Takeaway (150tr)</button>
+          <button type="button" class="pl-pill-btn" id="pl-btn-biz-vua" onclick="plSelectBizPreset('vua', this)">🪑 Quán vừa 40-60m² (300tr)</button>
+          <button type="button" class="pl-pill-btn" id="pl-btn-biz-lon" onclick="plSelectBizPreset('lon', this)">🏢 Quán lớn / Chuỗi (550tr)</button>
         </div>
       </div>
 
@@ -138,7 +138,7 @@
         <div class="pl-calc-input-group">
           <label for="pl-biz-capital">Tổng vốn đầu tư ban đầu (đ):</label>
           <div class="pl-input-addon">
-            <input type="number" id="pl-biz-capital" value="150000000" min="20000000" step="5000000" class="pl-calc-input pl-biz-input">
+            <input type="number" id="pl-biz-capital" value="150000000" min="20000000" step="5000000" class="pl-calc-input pl-biz-input" oninput="plCalculateBiz()" onchange="plCalculateBiz()">
             <span>đ</span>
           </div>
         </div>
@@ -146,7 +146,7 @@
         <div class="pl-calc-input-group">
           <label for="pl-biz-cups">Lượng bán dự kiến (ly / ngày):</label>
           <div class="pl-input-addon">
-            <input type="number" id="pl-biz-cups" value="120" min="10" step="10" class="pl-calc-input pl-biz-input">
+            <input type="number" id="pl-biz-cups" value="120" min="10" step="10" class="pl-calc-input pl-biz-input" oninput="plCalculateBiz()" onchange="plCalculateBiz()">
             <span>ly</span>
           </div>
         </div>
@@ -154,7 +154,7 @@
         <div class="pl-calc-input-group">
           <label for="pl-biz-price">Giá bán bình quân (đ / ly):</label>
           <div class="pl-input-addon">
-            <input type="number" id="pl-biz-price" value="28000" min="10000" step="1000" class="pl-calc-input pl-biz-input">
+            <input type="number" id="pl-biz-price" value="28000" min="10000" step="1000" class="pl-calc-input pl-biz-input" oninput="plCalculateBiz()" onchange="plCalculateBiz()">
             <span>đ</span>
           </div>
         </div>
@@ -162,7 +162,7 @@
         <div class="pl-calc-input-group">
           <label for="pl-biz-rent">Tiền thuê mặt bằng (đ / tháng):</label>
           <div class="pl-input-addon">
-            <input type="number" id="pl-biz-rent" value="9000000" min="0" step="1000000" class="pl-calc-input pl-biz-input">
+            <input type="number" id="pl-biz-rent" value="9000000" min="0" step="1000000" class="pl-calc-input pl-biz-input" oninput="plCalculateBiz()" onchange="plCalculateBiz()">
             <span>đ</span>
           </div>
         </div>
@@ -170,7 +170,7 @@
         <div class="pl-calc-input-group">
           <label for="pl-biz-staff">Chi phí nhân sự / barista (đ / tháng):</label>
           <div class="pl-input-addon">
-            <input type="number" id="pl-biz-staff" value="12000000" min="0" step="1000000" class="pl-calc-input pl-biz-input">
+            <input type="number" id="pl-biz-staff" value="12000000" min="0" step="1000000" class="pl-calc-input pl-biz-input" oninput="plCalculateBiz()" onchange="plCalculateBiz()">
             <span>đ</span>
           </div>
         </div>
@@ -178,7 +178,7 @@
         <div class="pl-calc-input-group">
           <label for="pl-biz-utilities">Điện, nước, internet, rác (đ / tháng):</label>
           <div class="pl-input-addon">
-            <input type="number" id="pl-biz-utilities" value="3500000" min="0" step="500000" class="pl-calc-input pl-biz-input">
+            <input type="number" id="pl-biz-utilities" value="3500000" min="0" step="500000" class="pl-calc-input pl-biz-input" oninput="plCalculateBiz()" onchange="plCalculateBiz()">
             <span>đ</span>
           </div>
         </div>
@@ -562,13 +562,13 @@ function plSwitchTab(tab) {
   var panelBiz = document.getElementById('pl-panel-business');
 
   if (tab === 'drink') {
-    if (btnDrink) btnDrink.classList.add('active');
-    if (btnBiz) btnBiz.classList.remove('active');
+    if (btnDrink) { btnDrink.classList.add('active'); btnDrink.setAttribute('aria-selected', 'true'); }
+    if (btnBiz) { btnBiz.classList.remove('active'); btnBiz.setAttribute('aria-selected', 'false'); }
     if (panelDrink) panelDrink.style.display = 'block';
     if (panelBiz) panelBiz.style.display = 'none';
   } else {
-    if (btnDrink) btnDrink.classList.remove('active');
-    if (btnBiz) btnBiz.classList.add('active');
+    if (btnDrink) { btnDrink.classList.remove('active'); btnDrink.setAttribute('aria-selected', 'false'); }
+    if (btnBiz) { btnBiz.classList.add('active'); btnBiz.setAttribute('aria-selected', 'true'); }
     if (panelDrink) panelDrink.style.display = 'none';
     if (panelBiz) panelBiz.style.display = 'block';
     plCalculateBiz();
@@ -599,11 +599,17 @@ var plDrinkPresets = {
 };
 
 function plCalculateDrink() {
-  var tea = parseFloat(document.getElementById('pl-cost-tea').value) || 0;
-  var milk = parseFloat(document.getElementById('pl-cost-milk').value) || 0;
-  var sugar = parseFloat(document.getElementById('pl-cost-sugar').value) || 0;
-  var topping = parseFloat(document.getElementById('pl-cost-topping').value) || 0;
-  var pack = parseFloat(document.getElementById('pl-cost-pack').value) || 0;
+  var elTea = document.getElementById('pl-cost-tea');
+  var elMilk = document.getElementById('pl-cost-milk');
+  var elSugar = document.getElementById('pl-cost-sugar');
+  var elTopping = document.getElementById('pl-cost-topping');
+  var elPack = document.getElementById('pl-cost-pack');
+
+  var tea = elTea ? (parseFloat(elTea.value) || 0) : 0;
+  var milk = elMilk ? (parseFloat(elMilk.value) || 0) : 0;
+  var sugar = elSugar ? (parseFloat(elSugar.value) || 0) : 0;
+  var topping = elTopping ? (parseFloat(elTopping.value) || 0) : 0;
+  var pack = elPack ? (parseFloat(elPack.value) || 0) : 0;
 
   var totalCost = tea + milk + sugar + topping + pack;
   var rawPrice = totalCost > 0 ? (totalCost / 0.30) : 0;
@@ -613,10 +619,15 @@ function plCalculateDrink() {
   var grossProfit = suggestedPrice - totalCost;
   var marginPercent = suggestedPrice > 0 ? Math.round((grossProfit / suggestedPrice) * 1000) / 10 : 0;
 
-  document.getElementById('pl-res-cost').textContent = plFormatMoney(totalCost);
-  document.getElementById('pl-res-price').textContent = plFormatMoney(suggestedPrice);
-  document.getElementById('pl-res-profit').textContent = "Lãi gộp: " + plFormatMoney(grossProfit) + "/ly";
-  document.getElementById('pl-res-margin').textContent = "Tỷ suất lợi nhuận: " + marginPercent + "%";
+  var resCost = document.getElementById('pl-res-cost');
+  var resPrice = document.getElementById('pl-res-price');
+  var resProfit = document.getElementById('pl-res-profit');
+  var resMargin = document.getElementById('pl-res-margin');
+
+  if (resCost) resCost.textContent = plFormatMoney(totalCost);
+  if (resPrice) resPrice.textContent = plFormatMoney(suggestedPrice);
+  if (resProfit) resProfit.textContent = "Lãi gộp: " + plFormatMoney(grossProfit) + "/ly";
+  if (resMargin) resMargin.textContent = "Tỷ suất lợi nhuận: " + marginPercent + "%";
 
   // Debounce GA4 event
   if (plCalcState.gaTimer) clearTimeout(plCalcState.gaTimer);
@@ -632,20 +643,64 @@ function plCalculateDrink() {
   }, 1500);
 }
 
+function plSelectDrinkType(type, btn) {
+  plCalcState.drinkType = type;
+  var container = document.getElementById('pl-drink-types');
+  if (container) {
+    var btns = container.querySelectorAll('.pl-pill-btn');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].classList.remove('active');
+    }
+  }
+  if (btn) {
+    btn.classList.add('active');
+  } else {
+    var b = document.getElementById('pl-btn-drink-' + type);
+    if (b) b.classList.add('active');
+  }
+  plApplyDrinkPreset(type, plCalcState.drinkSize);
+}
+
+function plSelectDrinkSize(size, btn) {
+  plCalcState.drinkSize = size;
+  var container = document.getElementById('pl-drink-sizes');
+  if (container) {
+    var btns = container.querySelectorAll('.pl-size-btn');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].classList.remove('active');
+    }
+  }
+  if (btn) {
+    btn.classList.add('active');
+  } else {
+    var b = document.getElementById('pl-btn-size-' + size);
+    if (b) b.classList.add('active');
+  }
+  plApplyDrinkPreset(plCalcState.drinkType, size);
+}
+
 function plApplyDrinkPreset(type, size) {
   plCalcState.drinkType = type;
   plCalcState.drinkSize = size;
   var p = plDrinkPresets[type] || plDrinkPresets.tra_sua;
   var mult = (size === 'L') ? 1.3 : 1.0;
 
-  document.getElementById('pl-label-tea').textContent = p.labelTea;
-  document.getElementById('pl-label-milk').textContent = p.labelMilk;
+  var elLabelTea = document.getElementById('pl-label-tea');
+  var elLabelMilk = document.getElementById('pl-label-milk');
+  if (elLabelTea) elLabelTea.textContent = p.labelTea;
+  if (elLabelMilk) elLabelMilk.textContent = p.labelMilk;
 
-  document.getElementById('pl-cost-tea').value = Math.round(p.tea * mult);
-  document.getElementById('pl-cost-milk').value = Math.round(p.milk * mult);
-  document.getElementById('pl-cost-sugar').value = Math.round(p.sugar * mult);
-  document.getElementById('pl-cost-topping').value = Math.round(p.topping * (size === 'L' ? 1.2 : 1.0));
-  document.getElementById('pl-cost-pack').value = Math.round(p.pack * (size === 'L' ? 1.15 : 1.0));
+  var elTea = document.getElementById('pl-cost-tea');
+  var elMilk = document.getElementById('pl-cost-milk');
+  var elSugar = document.getElementById('pl-cost-sugar');
+  var elTopping = document.getElementById('pl-cost-topping');
+  var elPack = document.getElementById('pl-cost-pack');
+
+  if (elTea) elTea.value = Math.round(p.tea * mult);
+  if (elMilk) elMilk.value = Math.round(p.milk * mult);
+  if (elSugar) elSugar.value = Math.round(p.sugar * mult);
+  if (elTopping) elTopping.value = Math.round(p.topping * (size === 'L' ? 1.2 : 1.0));
+  if (elPack) elPack.value = Math.round(p.pack * (size === 'L' ? 1.15 : 1.0));
 
   plCalculateDrink();
 }
@@ -659,13 +714,54 @@ var plBizPresets = {
 
 var plLastBizCalcResult = {};
 
+function plSelectBizPreset(name, btn) {
+  plCalcState.bizPreset = name;
+  var container = document.getElementById('pl-biz-presets');
+  if (container) {
+    var btns = container.querySelectorAll('.pl-pill-btn');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].classList.remove('active');
+    }
+  }
+  if (btn) {
+    btn.classList.add('active');
+  } else {
+    var b = document.getElementById('pl-btn-biz-' + name);
+    if (b) b.classList.add('active');
+  }
+
+  var p = plBizPresets[name] || plBizPresets.kiot;
+  var elCap = document.getElementById('pl-biz-capital');
+  var elCups = document.getElementById('pl-biz-cups');
+  var elPrice = document.getElementById('pl-biz-price');
+  var elRent = document.getElementById('pl-biz-rent');
+  var elStaff = document.getElementById('pl-biz-staff');
+  var elUtil = document.getElementById('pl-biz-utilities');
+
+  if (elCap) elCap.value = p.capital;
+  if (elCups) elCups.value = p.cups;
+  if (elPrice) elPrice.value = p.price;
+  if (elRent) elRent.value = p.rent;
+  if (elStaff) elStaff.value = p.staff;
+  if (elUtil) elUtil.value = p.utilities;
+
+  plCalculateBiz();
+}
+
 function plCalculateBiz() {
-  var capital = parseFloat(document.getElementById('pl-biz-capital').value) || 0;
-  var cups = parseFloat(document.getElementById('pl-biz-cups').value) || 0;
-  var price = parseFloat(document.getElementById('pl-biz-price').value) || 0;
-  var rent = parseFloat(document.getElementById('pl-biz-rent').value) || 0;
-  var staff = parseFloat(document.getElementById('pl-biz-staff').value) || 0;
-  var utilities = parseFloat(document.getElementById('pl-biz-utilities').value) || 0;
+  var elCap = document.getElementById('pl-biz-capital');
+  var elCups = document.getElementById('pl-biz-cups');
+  var elPrice = document.getElementById('pl-biz-price');
+  var elRent = document.getElementById('pl-biz-rent');
+  var elStaff = document.getElementById('pl-biz-staff');
+  var elUtil = document.getElementById('pl-biz-utilities');
+
+  var capital = elCap ? (parseFloat(elCap.value) || 0) : 0;
+  var cups = elCups ? (parseFloat(elCups.value) || 0) : 0;
+  var price = elPrice ? (parseFloat(elPrice.value) || 0) : 0;
+  var rent = elRent ? (parseFloat(elRent.value) || 0) : 0;
+  var staff = elStaff ? (parseFloat(elStaff.value) || 0) : 0;
+  var utilities = elUtil ? (parseFloat(elUtil.value) || 0) : 0;
 
   var monthlyRevenue = cups * price * 30;
   // Chuẩn COGS ngành F&B đồ uống Passion Link: ~32% doanh thu
@@ -686,22 +782,31 @@ function plCalculateBiz() {
   // Thời gian hoàn vốn: Số tháng
   var paybackMonths = (monthlyNetProfit > 0 && capital > 0) ? (capital / monthlyNetProfit).toFixed(1) : 'Chưa hòa vốn';
 
-  document.getElementById('pl-res-biz-revenue').textContent = plFormatMoney(monthlyRevenue);
-  document.getElementById('pl-res-biz-cogs').textContent = plFormatMoney(cogs);
-  document.getElementById('pl-res-biz-costs').textContent = plFormatMoney(totalMonthlyCosts);
+  var resRev = document.getElementById('pl-res-biz-revenue');
+  var resCogs = document.getElementById('pl-res-biz-cogs');
+  var resCosts = document.getElementById('pl-res-biz-costs');
+  var resProfit = document.getElementById('pl-res-biz-profit');
+  var resMargin = document.getElementById('pl-res-biz-margin');
+  var resBreakeven = document.getElementById('pl-res-biz-breakeven');
+  var resPayback = document.getElementById('pl-res-biz-payback');
 
-  var profitElem = document.getElementById('pl-res-biz-profit');
-  if (monthlyNetProfit > 0) {
-    profitElem.textContent = plFormatMoney(monthlyNetProfit) + " / tháng";
-    profitElem.style.color = "#FFEB3B";
-  } else {
-    profitElem.textContent = "Chưa có lãi (" + plFormatMoney(monthlyNetProfit) + ")";
-    profitElem.style.color = "#FF8A80";
+  if (resRev) resRev.textContent = plFormatMoney(monthlyRevenue);
+  if (resCogs) resCogs.textContent = plFormatMoney(cogs);
+  if (resCosts) resCosts.textContent = plFormatMoney(totalMonthlyCosts);
+
+  if (resProfit) {
+    if (monthlyNetProfit > 0) {
+      resProfit.textContent = plFormatMoney(monthlyNetProfit) + " / tháng";
+      resProfit.style.color = "#FFEB3B";
+    } else {
+      resProfit.textContent = "Chưa có lãi (" + plFormatMoney(monthlyNetProfit) + ")";
+      resProfit.style.color = "#FF8A80";
+    }
   }
 
-  document.getElementById('pl-res-biz-margin').textContent = "Tỷ suất lãi ròng: " + marginPercent.toFixed(1) + "%";
-  document.getElementById('pl-res-biz-breakeven').textContent = "Hòa vốn: " + breakevenCupsPerDay + " ly/ngày";
-  document.getElementById('pl-res-biz-payback').textContent = (paybackMonths !== 'Chưa hòa vốn') ? ("Hoàn vốn sau: ~" + paybackMonths + " tháng") : "Cần tăng số ly bán";
+  if (resMargin) resMargin.textContent = "Tỷ suất lãi ròng: " + marginPercent.toFixed(1) + "%";
+  if (resBreakeven) resBreakeven.textContent = "Hòa vốn: " + breakevenCupsPerDay + " ly/ngày";
+  if (resPayback) resPayback.textContent = (paybackMonths !== 'Chưa hòa vốn') ? ("Hoàn vốn sau: ~" + paybackMonths + " tháng") : "Cần tăng số ly bán";
 
   plLastBizCalcResult = {
     capital: capital,
@@ -718,7 +823,7 @@ function plCalculateBiz() {
   // Lưu cache 24h vào localStorage
   try {
     localStorage.setItem('pl_moquan_calc_v2', JSON.stringify({
-      data: { capital: capital, cups: cups, price: price, rent: rent, staff: staff, utilities: utilities },
+      data: { capital: capital, cups: cups, price: price, rent: rent, staff: staff, utilities: utilities, preset: plCalcState.bizPreset },
       timestamp: Date.now()
     }));
   } catch(e) {}
@@ -741,18 +846,6 @@ function plCalculateBiz() {
       });
     }
   }, 1500);
-}
-
-function plApplyBizPreset(name) {
-  plCalcState.bizPreset = name;
-  var p = plBizPresets[name] || plBizPresets.kiot;
-  document.getElementById('pl-biz-capital').value = p.capital;
-  document.getElementById('pl-biz-cups').value = p.cups;
-  document.getElementById('pl-biz-price').value = p.price;
-  document.getElementById('pl-biz-rent').value = p.rent;
-  document.getElementById('pl-biz-staff').value = p.staff;
-  document.getElementById('pl-biz-utilities').value = p.utilities;
-  plCalculateBiz();
 }
 
 function plSendCalcViaZalo() {
@@ -792,49 +885,7 @@ function plTrackExcelDownload() {
 }
 
 // KHỞI TẠO BẢNG TÍNH & PHỤC HỒI CACHE 24H
-document.addEventListener('DOMContentLoaded', function(){
-  // Tab 1 Drink Pills
-  var pills = document.querySelectorAll('#pl-drink-types .pl-pill-btn');
-  pills.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      pills.forEach(function(b){ b.classList.remove('active'); });
-      this.classList.add('active');
-      plApplyDrinkPreset(this.getAttribute('data-type'), plCalcState.drinkSize);
-    });
-  });
-
-  // Tab 1 Sizes
-  var sizes = document.querySelectorAll('#pl-drink-sizes .pl-size-btn');
-  sizes.forEach(function(btn){
-    sizes.addEventListener('click', function(){
-      sizes.forEach(function(b){ b.classList.remove('active'); });
-      this.classList.add('active');
-      plApplyDrinkPreset(plCalcState.drinkType, this.getAttribute('data-size'));
-    });
-  });
-
-  // Tab 1 Inputs
-  var drinkInputs = document.querySelectorAll('.pl-calc-input:not(.pl-biz-input)');
-  drinkInputs.forEach(function(inp){
-    inp.addEventListener('input', plCalculateDrink);
-  });
-
-  // Tab 2 Presets
-  var bizPills = document.querySelectorAll('#pl-biz-presets .pl-pill-btn');
-  bizPills.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      bizPills.forEach(function(b){ b.classList.remove('active'); });
-      this.classList.add('active');
-      plApplyBizPreset(this.getAttribute('data-preset'));
-    });
-  });
-
-  // Tab 2 Inputs
-  var bizInputs = document.querySelectorAll('.pl-biz-input');
-  bizInputs.forEach(function(inp){
-    inp.addEventListener('input', plCalculateBiz);
-  });
-
+function plInitCalculator() {
   // Khôi phục dữ liệu từ localStorage (nếu chưa quá 24h)
   try {
     var rawCache = localStorage.getItem('pl_moquan_calc_v2');
@@ -843,12 +894,24 @@ document.addEventListener('DOMContentLoaded', function(){
       var now = Date.now();
       // TTL 24 giờ = 86.400.000 ms
       if (now - parsed.timestamp < 86400000 && parsed.data) {
-        if (parsed.data.capital) document.getElementById('pl-biz-capital').value = parsed.data.capital;
-        if (parsed.data.cups) document.getElementById('pl-biz-cups').value = parsed.data.cups;
-        if (parsed.data.price) document.getElementById('pl-biz-price').value = parsed.data.price;
-        if (parsed.data.rent) document.getElementById('pl-biz-rent').value = parsed.data.rent;
-        if (parsed.data.staff) document.getElementById('pl-biz-staff').value = parsed.data.staff;
-        if (parsed.data.utilities) document.getElementById('pl-biz-utilities').value = parsed.data.utilities;
+        if (parsed.data.capital && document.getElementById('pl-biz-capital')) document.getElementById('pl-biz-capital').value = parsed.data.capital;
+        if (parsed.data.cups && document.getElementById('pl-biz-cups')) document.getElementById('pl-biz-cups').value = parsed.data.cups;
+        if (parsed.data.price && document.getElementById('pl-biz-price')) document.getElementById('pl-biz-price').value = parsed.data.price;
+        if (parsed.data.rent && document.getElementById('pl-biz-rent')) document.getElementById('pl-biz-rent').value = parsed.data.rent;
+        if (parsed.data.staff && document.getElementById('pl-biz-staff')) document.getElementById('pl-biz-staff').value = parsed.data.staff;
+        if (parsed.data.utilities && document.getElementById('pl-biz-utilities')) document.getElementById('pl-biz-utilities').value = parsed.data.utilities;
+        if (parsed.data.preset) {
+          plCalcState.bizPreset = parsed.data.preset;
+          var container = document.getElementById('pl-biz-presets');
+          if (container) {
+            var btns = container.querySelectorAll('.pl-pill-btn');
+            for (var i = 0; i < btns.length; i++) {
+              btns[i].classList.remove('active');
+            }
+            var activeB = document.getElementById('pl-btn-biz-' + parsed.data.preset);
+            if (activeB) activeB.classList.add('active');
+          }
+        }
       } else {
         localStorage.removeItem('pl_moquan_calc_v2');
       }
@@ -862,5 +925,12 @@ document.addEventListener('DOMContentLoaded', function(){
   if (window.location.pathname.indexOf('/mo-quan') !== -1) {
     plSwitchTab('business');
   }
-});
+}
+
+// Chạy khởi tạo ngay lập tức nếu DOM đã sẵn sàng, hoặc gắn lắng nghe DOMContentLoaded
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', plInitCalculator);
+} else {
+  plInitCalculator();
+}
 </script>
