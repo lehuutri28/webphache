@@ -431,9 +431,34 @@ Khi bắt đầu phiên làm việc tiếp theo, kỹ thuật viên hoặc agent
   - Schema **FAQPage (JSON-LD)** động: Tự động phân tích ngữ cảnh bài viết (Khóa học / Công thức / Mở quán kinh doanh) để xuất bản các câu hỏi & câu trả lời chuẩn cấu trúc Rich Results cho Google và AI Search Engines (Perplexity, SearchGPT, Google AI Overviews).
 - [x] **Triển khai Production an toàn & Kiểm định Live (100% PASS):**
   - Đã upload và xác thực an toàn qua FTP các tệp cập nhật:
-    - `template/widget_drink_calculator.php` (31.701 bytes)
+    - `template/widget_drink_calculator.php` (35.319 bytes)
     - `template/news.php` (87.513 bytes)
     - `template/index.php` (144.890 bytes)
     - `upload/tai-lieu/ke-hoach-dong-tien-mo-quan-passion-link.xlsx` (70.672 bytes)
   - Kiểm tra live curl: HTTP 200 OK trên file Excel download, chuyên mục Mở quán và các trang Khóa học đại diện.
+
+---
+
+### [2026-09-29 12:00] FIX HOÀN TẤT & KIỂM THỬ TRÌNH DUYỆT THỰC TẾ: WIDGET DỰ TOÁN KINH DOANH MỞ QUÁN (TAB 2)
+- **Tác vụ bàn giao:** Khắc phục lỗi tương tác các nút bấm chọn mô hình quán và tính năng tăng giảm số liệu dòng tiền không tự nhảy kết quả trong Widget `template/widget_drink_calculator.php`.
+- **Nguyên nhân gốc rễ (Root Cause):**
+  - Widget được nhúng động qua PHP include ở giữa bài viết (`template/news.php`). Khi sự kiện `DOMContentLoaded` của trình duyệt kích hoạt trước đó hoặc bị trì hoãn do tài nguyên bên ngoài, các event listener được gắn qua `addEventListener` bị bỏ lỡ, khiến các nút bấm và ô nhập số không nhận diện được tương tác người dùng.
+- **Giải pháp xử lý triệt để:**
+  1. Chuyển đổi toàn bộ bộ chọn preset sang cơ chế hàm trực tiếp trên DOM:
+     - Nút "🛵 Kiot / Takeaway (150tr)": `onclick="plSelectBizPreset('kiot', this)"`.
+     - Nút "🪑 Quán vừa 40-60m² (300tr)": `onclick="plSelectBizPreset('vua', this)"`.
+     - Nút "🏢 Quán lớn / Chuỗi (550tr)": `onclick="plSelectBizPreset('lon', this)"`.
+  2. Bổ sung đồng thời 2 sự kiện `oninput="plCalculateBiz()"` và `onchange="plCalculateBiz()"` cho toàn bộ 6 ô nhập liệu tài chính (Vốn đầu tư, Số ly/ngày, Giá bán, Mặt bằng, Nhân sự, Điện nước) và các nút tăng/giảm số (number stepper spinner).
+  3. Hàm khởi tạo `plInitCalculator()` kiểm tra `document.readyState !== 'loading'` để tự động nạp dữ liệu và chạy tính toán ngay lập tức mà không phụ thuộc vào vòng đời DOM của trang cha.
+- **Quy trình triển khai & Bảo mật tuyệt đối:**
+  - Backup trước khi chỉnh sửa: Lưu tại `BACKUPS/backup_phache_20260929_111536/`.
+  - Đồng bộ Git & push GitHub: Commit `540bae2` (`fix(calculator): bind direct inline onclick, oninput and onchange for presets and real-time calculation`).
+  - Deploy lên FTP Production: Thực hiện qua script Python ngầm trong bộ nhớ, tuân thủ nghiêm ngặt quy định bảo mật `gemini.md` (không bao giờ hiển thị thông tin đăng nhập/mật khẩu ra chat hay log).
+- **Kết quả kiểm thử tự động trên trình duyệt Chrome thực tế (Desktop & Mobile):**
+  - [x] **Test 1 - Preset Kiot (150tr):** Doanh thu 100.800.000 đ, Lãi ròng 41.020.000 đ/tháng, Hòa vốn 45 ly/ngày, Hoàn vốn ~3.7 tháng -> **PASS**.
+  - [x] **Test 2 - Preset Quán vừa (300tr):** Nhấp nút `#pl-btn-biz-vua` -> Tự động điền 300tr vốn, 200 ly/ngày, 32k/ly, 18tr mặt bằng, 22tr nhân sự, 6tr điện nước -> Doanh thu 192.000.000 đ, Lãi ròng 78.800.000 đ/tháng, Tỷ suất lãi 41.0%, Hoàn vốn ~3.8 tháng -> **PASS**.
+  - [x] **Test 3 - Preset Quán lớn (550tr):** Nhấp nút `#pl-btn-biz-lon` -> Tự động điền 550tr vốn, 350 ly/ngày, 38k/ly, 35tr mặt bằng, 42tr nhân sự, 12tr điện nước -> Doanh thu 399.000.000 đ, Lãi ròng 170.350.000 đ/tháng, Tỷ suất lãi 42.7%, Hoàn vốn ~3.2 tháng -> **PASS**.
+  - [x] **Test 4 - Tăng giảm số tùy chỉnh (Custom Input Stepper):** Thay đổi số ly bán lên 500 ly -> Toàn bộ bảng tự động tính lại ngay lập tức: Doanh thu 570.000.000 đ, Lợi nhuận ròng 281.500.000 đ/tháng, Hoàn vốn sau ~2.0 tháng -> **PASS**.
+  - [x] **Test 5 - Trải nghiệm di động (Mobile Viewport 390x844 - iPhone):** Giao diện responsive 100%, thao tác chạm mượt mà, định dạng tiền tệ chuẩn xác -> **PASS**.
+
 
