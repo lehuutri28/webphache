@@ -1,3 +1,5 @@
+# Phache web — gitignore
+
 # Backups & Archives
 backups*/
 BACKUPS/
@@ -5,17 +7,42 @@ BACKUPS/
 *.zip
 *.bak*
 *.backup*
+legacy/_extracted/
+legacy/source/
+legacy/_phache_*.tar.gz
+legacy/test_config.tar.gz
 
+# DB dumps
+legacy/pha5bd2c_*.sql
+legacy/pha5bd2c_*.sql.gz
+legacy/db_tables.txt
+legacy/tonghop_tables.txt
+legacy/wc_tables.txt
 
 # Environment & Sensitive configs
 .env*
+config/.env
+config/.env.local
+*.env
 *ftp*.rtf
 *ftp*.txt
 *password*
 
-# OS & Logs
-.DS_Store
-Thumbs.db
+# Logs runtime + queue + cache
+logs/
+cache/
+*.cache
 *.log
 error_log
 node_modules/
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
+
+# Sub-project docs archive
+docs/_archive/
