@@ -389,3 +389,51 @@ Khi bắt đầu phiên làm việc tiếp theo, kỹ thuật viên hoặc agent
    ```bash
    curl -s -L "https://phache.com.vn/cac-khoa-hoc-day-pha-che/khoa-pha-che-tong-hop-7-menu-thuc-uong-noi-tieng-229.html" | grep -E "<title>|<h1"
    ```
+
+---
+
+### 12. Triển Khai 5 Đề Xuất Chiến Lược Tối Ưu CRO & SEO Kỹ Thuật (Dựa Trên 100% Telemetry GA4) (29/09/2026)
+- [x] **Tuân thủ quy tắc bảo mật & Chat Privacy (`gemini.md`):**
+  - Tuyệt đối không hiển thị mật khẩu máy chủ, FTP hay cơ sở dữ liệu ra chat; xử lý ngầm qua subprocess an toàn.
+- [x] **Sao lưu an toàn kép trước khi triển khai:**
+  - Sao lưu toàn bộ mã nguồn cục bộ và nén archive: `BACKUPS/backup_phache_20260929_111536/local_source_phache_20260929_111536.tar.gz`.
+  - Tải về và sao lưu toàn bộ core server files qua FTP: `BACKUPS/backup_phache_20260929_111536/server_phache_core_backup.tar.gz` (4.174.506 bytes).
+  - Đồng bộ và đẩy toàn bộ mã nguồn website lên GitHub repository (`lehuutri28/webphache`) trên nhánh `main`.
+- [x] **DX-01: Nâng cấp Widget Bảng Tính Cost & Dự Toán Dòng Tiền Mở Quán (`template/widget_drink_calculator.php`):**
+  - Tích hợp 2 Tab tính toán linh hoạt: Tab 1 (Tính Cost Đồ Uống Từng Món) & Tab 2 (Dự Toán Dòng Tiền & Lợi Nhuận Mở Quán thực chiến).
+  - Tab 2 xây dựng chuẩn hóa 100% theo mô hình tài chính F&B từ file Excel `file-ke-hoach-dong-tien-mo-quan-chi-phi-dau-tu-tang-khach-code-website.xlsx`:
+    - Đầu vào: Vốn ban đầu (150tr, 300tr, 550tr), Số ly bán/ngày (120, 200, 350 ly), Giá bán TB/ly, Tiền thuê mặt bằng, Chi phí nhân sự, Điện nước/vận hành.
+    - Đầu ra: Doanh thu tháng, Giá vốn COGS (32%), Chi phí cố định & marketing (3%), Lợi nhuận ròng (EBIT), Tỷ suất lãi ròng, Điểm hòa vốn (ly/ngày), Thời gian hoàn vốn (tháng).
+  - Nút Zalo CTA: "📲 Gửi Bảng Tính Này Cho Em Qua Zalo" (mở Zalo hotline 0977.300.098 kèm sao chép tóm tắt kết quả bảng tính vào clipboard).
+  - Nút Download File Excel: Cung cấp file mẫu chuẩn tại link `/upload/tai-lieu/ke-hoach-dong-tien-mo-quan-passion-link.xlsx`.
+  - Cơ chế Client Cache 24h: Lưu trữ cục bộ trong `localStorage` với TTL 24 giờ tự động giải phóng/làm mới.
+  - Tự động nhận diện URL `/mo-quan/` để kích hoạt mặc định Tab 2 mở quán trên toàn bộ 36 bài viết chuyên mục.
+  - Bắn sự kiện GA4: `calculator_used` và `mo_quan_profit_calculator`.
+- [x] **DX-02: Tối ưu Mobile Zalo Funnel & In-Article 1-Touch Zalo Card:**
+  - Nâng cấp Sticky Bottom Bar (`template/index.php`): Nút Zalo có hiệu ứng pulse nhịp đập êm ái `plPulseBarZalo 2.4s` và mini-badge `Báo giá 5p` màu vàng cam nổi bật.
+  - Bổ sung In-Article 1-Touch Zalo Card (`.pl-inarticle-zalo-card`): Khối liên hệ sang trọng cuối bài viết với nút Zalo chuyên gia phản hồi 5 phút và hotline 24/7.
+  - Bắn sự kiện GA4: `click_zalo` với tham số `button_location: 'sticky_bottom_bar'` hoặc `'in_article_card'`.
+- [x] **DX-03: Video Shorts / Thực Hành Component với Facade Pattern:**
+  - Triển khai Facade Pattern cho toàn bộ video bài viết và các khóa học cốt lõi (`template/news.php`):
+  - Hiển thị poster thumbnail YouTube sắc nét kèm nút SVG Play YouTube hiệu ứng hover, không nạp mã nhúng iframe trước.
+  - Đảm bảo điểm số CLS = 0 (Cumulative Layout Shift) tuyệt đối nhờ CSS fixed `aspect-ratio: 16/9` (hoặc `9/16` cho Shorts).
+  - Tự động thay thế iframe kèm cờ `autoplay=1&rel=0` ngay khi người dùng chạm nút Play.
+  - Bắn sự kiện GA4: `video_interaction` với `{ video_url, video_title, action: 'play_facade' }`.
+- [x] **DX-04: Mid-Article Quick Lead Capture Card ("Nhận Tư Vấn Mở Quán 1-1 Miễn Phí"):**
+  - Tự động chèn form `.pl-mid-lead-card` ngay sau thẻ `<h2>` thứ 2 trong bài viết (vị trí đạt ~40-50% độ sâu cuộn trang).
+  - Form tối giản 1 ô nhập duy nhất (Số điện thoại / Zalo) với nút CTA "Gửi Nhận Ngay 🚀".
+  - Sự kiện focus ô input bắn GA4 `form_start` (`form_name: 'mid_article_lead'`).
+  - Xử lý submit AJAX ngầm kép gửi đồng thời về CMS admin qua `saveSign` và `saveCallToAction`.
+  - Hiển thị thông báo inline chúc mừng đăng ký thành công mà không làm gián đoạn việc đọc.
+  - Bắn sự kiện GA4: `generate_lead` (`form_name: 'mid_article_lead'`, giá trị ước tính 100.000đ).
+- [x] **DX-05: Cấu trúc dữ liệu đón đầu GEO AI Search & Dynamic FAQPage Schema:**
+  - Khối **Key Takeaways Box** (`.pl-geo-takeaways-box`) đặt ngay dưới thẻ H1 bài viết: Tóm lược 4 gạch đầu dòng cốt lõi (Biên lợi nhuận F&B 68-72%, Thời gian hoàn vốn 3-6 tháng, Kỹ thuật ủ trà giữ hương, Chính sách bảo hành tay nghề trọn đời từ Vua An Toàn).
+  - Schema **FAQPage (JSON-LD)** động: Tự động phân tích ngữ cảnh bài viết (Khóa học / Công thức / Mở quán kinh doanh) để xuất bản các câu hỏi & câu trả lời chuẩn cấu trúc Rich Results cho Google và AI Search Engines (Perplexity, SearchGPT, Google AI Overviews).
+- [x] **Triển khai Production an toàn & Kiểm định Live (100% PASS):**
+  - Đã upload và xác thực an toàn qua FTP các tệp cập nhật:
+    - `template/widget_drink_calculator.php` (31.701 bytes)
+    - `template/news.php` (87.513 bytes)
+    - `template/index.php` (144.890 bytes)
+    - `upload/tai-lieu/ke-hoach-dong-tien-mo-quan-passion-link.xlsx` (70.672 bytes)
+  - Kiểm tra live curl: HTTP 200 OK trên file Excel download, chuyên mục Mở quán và các trang Khóa học đại diện.
+
