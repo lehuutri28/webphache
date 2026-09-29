@@ -395,7 +395,355 @@ position: absolute;
 .pl-silo-card.highlight .pl-silo-link-btn:hover {
     background: #BF360C;
 }
+
+/* ==================== DX-05: GEO AI SEARCH KEY TAKEAWAYS BOX ==================== */
+.pl-geo-takeaways-box {
+    background: linear-gradient(135deg, rgba(240, 249, 245, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
+    border: 1.5px solid #2E7D32;
+    border-left: 6px solid #2E7D32;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin: 20px 0 25px 0;
+    box-shadow: 0 4px 16px rgba(46, 125, 50, 0.08);
+    font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+.pl-geo-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(46, 125, 50, 0.3);
+}
+.pl-geo-icon {
+    font-size: 20px;
+    line-height: 1;
+}
+.pl-geo-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #1F3F1F;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.pl-geo-list {
+    margin: 0;
+    padding-left: 20px;
+    color: #2D3748;
+    font-size: 14.5px;
+    line-height: 1.65;
+}
+.pl-geo-list li {
+    margin-bottom: 8px;
+}
+.pl-geo-list li:last-child {
+    margin-bottom: 0;
+}
+.pl-geo-list strong {
+    color: #1F3F1F;
+}
+
+/* ==================== DX-04: MID-ARTICLE LEAD CAPTURE CARD ==================== */
+.pl-mid-lead-card {
+    background: linear-gradient(135deg, #FFFDF7 0%, #FFF9E6 100%);
+    border: 2px solid #FFB300;
+    border-radius: 16px;
+    padding: 24px 22px;
+    margin: 32px auto;
+    max-width: 780px;
+    box-shadow: 0 8px 24px rgba(255, 179, 0, 0.16);
+    text-align: center;
+    font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    box-sizing: border-box;
+}
+.pl-mid-lead-badge {
+    display: inline-block;
+    background: #FFB300;
+    color: #1F3F1F;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+.pl-mid-lead-title {
+    font-size: clamp(18px, 2.8vw, 22px);
+    font-weight: 800;
+    color: #B78103;
+    margin: 0 0 8px 0;
+    line-height: 1.35;
+}
+.pl-mid-lead-desc {
+    font-size: 14px;
+    color: #5D4037;
+    margin: 0 auto 16px auto;
+    max-width: 620px;
+    line-height: 1.55;
+}
+.pl-mid-lead-form {
+    max-width: 540px;
+    margin: 0 auto;
+}
+.pl-mid-input-wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+}
+.pl-mid-input {
+    flex: 1 1 65%;
+    padding: 12px 14px;
+    border: 1.5px solid #FFB300;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #1F3F1F;
+    background: #ffffff;
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.2s ease;
+}
+.pl-mid-input:focus {
+    border-color: #E65100;
+    box-shadow: 0 0 0 3px rgba(230, 81, 0, 0.15);
+}
+.pl-mid-btn {
+    flex: 1 1 35%;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #FF6F00 0%, #E65100 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(230, 81, 0, 0.35);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+.pl-mid-btn:hover {
+    background: linear-gradient(135deg, #E65100 0%, #BF360C 100%);
+    transform: translateY(-1px);
+}
+.pl-mid-success {
+    background: #E8F5E9;
+    color: #1B5E20;
+    border: 1.5px solid #81C784;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 14px;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.pl-mid-footer {
+    font-size: 12px;
+    color: #8D6E63;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+@media (max-width: 600px) {
+    .pl-mid-input-wrapper {
+        flex-direction: column;
+    }
+    .pl-mid-btn {
+        width: 100%;
+    }
+}
+
+/* ==================== DX-02: IN-ARTICLE 1-TOUCH ZALO CARD ==================== */
+.pl-inarticle-zalo-card {
+    background: linear-gradient(135deg, #F0F7FF 0%, #E3F2FD 100%);
+    border: 1.5px solid #90CAF9;
+    border-radius: 16px;
+    padding: 22px 24px;
+    margin: 30px auto;
+    max-width: 820px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    box-shadow: 0 6px 20px rgba(0, 104, 255, 0.08);
+    font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    box-sizing: border-box;
+}
+.pl-izalo-left {
+    flex: 1 1 340px;
+}
+.pl-izalo-badge {
+    display: inline-block;
+    background: rgba(0, 104, 255, 0.12);
+    color: #0068FF;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 3px 12px;
+    border-radius: 16px;
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+}
+.pl-izalo-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #0D47A1;
+    margin: 0 0 6px 0;
+    line-height: 1.35;
+}
+.pl-izalo-desc {
+    font-size: 13.5px;
+    color: #37474F;
+    margin: 0;
+    line-height: 1.5;
+}
+.pl-izalo-right {
+    flex: 0 0 auto;
+    text-align: center;
+}
+.pl-izalo-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #0068FF 0%, #0052cc 100%);
+    color: #ffffff !important;
+    text-decoration: none !important;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 14.5px;
+    font-weight: 800;
+    box-shadow: 0 4px 14px rgba(0, 104, 255, 0.35);
+    transition: all 0.2s ease;
+    animation: plPulseBarZalo 2.6s infinite ease-in-out;
+}
+.pl-izalo-btn:hover {
+    background: linear-gradient(135deg, #0052cc 0%, #003da6 100%);
+    transform: translateY(-1px);
+}
+.pl-izalo-ico {
+    font-size: 18px;
+    line-height: 1;
+}
+.pl-izalo-hotline {
+    font-size: 12px;
+    color: #546E7A;
+    margin-top: 6px;
+    font-weight: 600;
+}
+.pl-izalo-hotline a {
+    color: #D32F2F;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .pl-inarticle-zalo-card {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 18px 16px;
+        gap: 14px;
+    }
+    .pl-izalo-right {
+        text-align: stretch;
+    }
+    .pl-izalo-btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* ==================== DX-03: VIDEO SHORTS & PRACTICE FACADE ==================== */
+.pl-video-wrapper {
+    margin: 30px auto;
+    max-width: 820px;
+}
+.pl-video-facade-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #000000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.22);
+}
+.pl-video-facade-16-9 {
+    max-width: 760px;
+    aspect-ratio: 16 / 9;
+}
+.pl-video-facade-shorts {
+    max-width: 360px;
+    aspect-ratio: 9 / 16;
+}
+.pl-video-facade {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pl-video-poster {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+.pl-video-facade:hover .pl-video-poster {
+    transform: scale(1.03);
+}
+.pl-video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.28);
+    transition: background 0.2s ease;
+}
+.pl-video-facade:hover .pl-video-overlay {
+    background: rgba(0, 0, 0, 0.15);
+}
+.pl-video-play-btn {
+    position: relative;
+    z-index: 2;
+    transition: transform 0.2s ease;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+}
+.pl-video-facade:hover .pl-video-play-btn {
+    transform: scale(1.12);
+}
+.pl-video-caption {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.72);
+    color: #ffffff;
+    font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-align: center;
+    backdrop-filter: blur(4px);
+}
+.pl-video-responsive iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
 </style>
+
 <div class="news_page">
 
     <?php 
@@ -486,10 +834,60 @@ position: absolute;
         return implode( '', $paragraphs );
     }
 
+    if (!function_exists('geo_generate_key_takeaways_box')) {
+        function geo_generate_key_takeaways_box($title, $news = array()) {
+            $uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+            $page_id = isset($news['page_id']) ? (int)$news['page_id'] : 0;
+            $is_business = (strpos($uri, '/mo-quan') !== false) || ($page_id == 24);
+            $is_course = (strpos($uri, '/cac-khoa-hoc-day-pha-che') !== false) || ($page_id == 22);
+
+            if ($is_business) {
+                $takeaways = array(
+                    '<strong>Kế hoạch dòng tiền:</strong> Quản trị chi phí cốt lõi gồm COGS (30-32%), mặt bằng (10-15%) và nhân sự (15-20%) để đảm bảo an toàn tài chính.',
+                    '<strong>Thời gian hoàn vốn:</strong> Các mô hình quán F&B tinh gọn thường đạt điểm hòa vốn sau <strong>3 - 6 tháng</strong> vận hành bài bản.',
+                    '<strong>Khác biệt menu:</strong> Định hình 2-3 món chủ lực (Signature drinks) độc bản giúp tăng tỷ lệ khách quen quay lại trên 65%.',
+                    '<strong>Hỗ trợ trọn gói:</strong> Tải miễn phí file Excel kế hoạch dòng tiền và nhận tư vấn mặt bằng 1-1 từ giảng viên Passion Link.'
+                );
+            } elseif ($is_course) {
+                $takeaways = array(
+                    '<strong>Phương pháp đào tạo:</strong> <strong>90% thời lượng thực hành</strong> quầy bar thực tế, cầm tay chỉ việc 1 kèm 1 đến khi thành thạo.',
+                    '<strong>Bảo hành tay nghề:</strong> Học viên được quyền quay lại ôn tập, cập nhật công thức món mới <strong>trọn đời hoàn toàn miễn phí</strong>.',
+                    '<strong>Chuyển giao mở quán:</strong> Hướng dẫn trọn gói thiết kế quầy bar, chọn mua máy móc chính hãng và tối ưu chi phí nguyên vật liệu (Cost < 32%).',
+                    '<strong>Đặc quyền hệ sinh thái:</strong> Hưởng chính sách giá sỉ nguyên liệu chuẩn ATVSTP độc quyền từ CÔNG TY TNHH VUA AN TOÀN.'
+                );
+            } else {
+                $takeaways = array(
+                    '<strong>Định lượng chuẩn vị:</strong> Công thức được chuẩn hóa theo tiêu chuẩn quầy bar Passion Link, đảm bảo đồng nhất chất lượng 100 ly như 1.',
+                    '<strong>Kiểm soát chi phí (Cost):</strong> Giá vốn nguyên vật liệu tối ưu ở mức <strong>6.800đ - 7.500đ/ly</strong>, giúp đạt biên lợi nhuận gộp <strong>68% - 72%</strong>.',
+                    '<strong>Kỹ thuật chuyên sâu:</strong> Hướng dẫn chi tiết nhiệt độ ủ trà, thời gian hãm và kỹ thuật phối vị để giữ trọn tầng hương tự nhiên.',
+                    '<strong>Tư vấn mở quán:</strong> Học viên có thể liên hệ trực tiếp đội ngũ chuyên gia để nhận tư vấn menu và danh mục trang thiết bị chuyên dụng.'
+                );
+            }
+
+            $html = '<div class="pl-geo-takeaways-box">
+                <div class="pl-geo-head">
+                    <span class="pl-geo-icon">📌</span>
+                    <span class="pl-geo-title">TÓM TẮT NHANH CHO CHỦ QUÁN (KEY TAKEAWAYS)</span>
+                </div>
+                <ul class="pl-geo-list">';
+            foreach ($takeaways as $t) {
+                $html .= '<li>' . $t . '</li>';
+            }
+            $html .= '</ul>
+            </div>';
+
+            return $html;
+        }
+    }
+
     if (!function_exists('seo_normalize_article_headings')) {
-        function seo_normalize_article_headings($content, $title) {
+        function seo_normalize_article_headings($content, $title, $news = array()) {
             if (empty($content)) {
-                return '<h1 class="h1-title course-main-title">' . htmlspecialchars($title) . '</h1>';
+                $res = '<h1 class="h1-title course-main-title">' . htmlspecialchars($title) . '</h1>';
+                if (function_exists('geo_generate_key_takeaways_box')) {
+                    $res .= "\n" . geo_generate_key_takeaways_box($title, $news);
+                }
+                return $res;
             }
             
             // Check if content already contains an <h1> tag
@@ -503,26 +901,35 @@ position: absolute;
                         $count++;
                         if ($count === 1) {
                             $attrs = $match[1];
-                            // Remove d-none, hidden, display:none
                             $attrs = preg_replace('/\bclass=(["\'])(.*?)\b(d-none|hidden)\b(.*?)\1/i', 'class=$1$2$4$1', $attrs);
                             $attrs = preg_replace('/style=(["\'])(.*?)\bdisplay\s*:\s*none\b;?(.*?)\1/i', 'style=$1$2$3$1', $attrs);
                             $h1_val = !empty($title) ? htmlspecialchars($title) : $match[2];
                             return '<h1' . $attrs . '>' . $h1_val . '</h1>';
                         } else {
-                            // Demote subsequent H1s to H2 to ensure single H1 hierarchy
                             return '<h2 class="sub-h2"' . $match[1] . '>' . $match[2] . '</h2>';
                         }
                     }, $content);
                 }
             } else {
-                // Content does not have an H1 tag. Prepend a visible, beautifully styled H1 matching the title!
                 $h1_tag = '<h1 class="h1-title course-main-title">' . htmlspecialchars($title) . '</h1>' . "\n";
                 $content = $h1_tag . $content;
+            }
+
+            // Inject Key Takeaways box right below H1 (DX-05)
+            if (strpos($content, 'class="pl-geo-takeaways-box"') === false && function_exists('geo_generate_key_takeaways_box')) {
+                $takeaways = geo_generate_key_takeaways_box($title, $news);
+                if (preg_match('/<\/h1>/i', $content, $m_h1, PREG_OFFSET_CAPTURE)) {
+                    $pos = $m_h1[0][1] + strlen($m_h1[0][0]);
+                    $content = substr_replace($content, "\n" . $takeaways . "\n", $pos, 0);
+                } else {
+                    $content = $takeaways . "\n" . $content;
+                }
             }
             
             return $content;
         }
     }
+
 
     if (!function_exists('seo_enrich_recipe_article_content')) {
         function seo_enrich_recipe_article_content($content, $title, $news) {
@@ -875,6 +1282,205 @@ position: absolute;
         }
     }
 
+    if (!function_exists('seo_inject_mid_article_lead_card')) {
+        function seo_inject_mid_article_lead_card($content, $title, $news) {
+            if (strpos($content, 'class="pl-mid-lead-card"') !== false) {
+                return $content;
+            }
+
+            $lead_card = '
+            <div class="pl-mid-lead-card">
+                <div class="pl-mid-lead-badge">🎁 ĐĂNG KÝ TƯ VẤN 1-1 TỪ CHUYÊN GIA PASSION LINK</div>
+                <h4 class="pl-mid-lead-title">Nhận Trọn Bộ Bảng Tính Cost 50+ Món & Lộ Trình Mở Quán Thực Chiến</h4>
+                <p class="pl-mid-lead-desc">Để lại số điện thoại hoặc Zalo, chuyên viên Passion Link sẽ liên hệ tư vấn mô hình quán phù hợp và gửi tặng file Excel kế hoạch dòng tiền mở quán miễn phí.</p>
+                <form class="pl-mid-lead-form" onsubmit="return plSubmitMidLead(event, this);">
+                    <div class="pl-mid-input-wrapper">
+                        <input type="tel" name="phone" required pattern="[0-9]{10,11}" placeholder="Nhập số điện thoại / Zalo của bạn..." class="pl-mid-input" onfocus="plTrackMidFormStart()">
+                        <button type="submit" class="pl-mid-btn">Gửi Nhận Ngay 🚀</button>
+                    </div>
+                </form>
+                <div class="pl-mid-success" style="display:none;">
+                    🎉 <strong>Đã tiếp nhận thông tin!</strong> Chuyên viên Passion Link sẽ phản hồi hỗ trợ bạn qua Zalo trong ít phút.
+                </div>
+                <div class="pl-mid-footer">🔒 Cam kết bảo mật thông tin · Miễn phí tư vấn 100%</div>
+            </div>';
+
+            if (preg_match_all('/<\/h2>/i', $content, $matches, PREG_OFFSET_CAPTURE)) {
+                if (isset($matches[0][1])) {
+                    $pos = $matches[0][1][1] + strlen($matches[0][1][0]);
+                    return substr_replace($content, "\n" . $lead_card . "\n", $pos, 0);
+                }
+            }
+
+            $paragraphs = explode('</p>', $content);
+            if (count($paragraphs) >= 4) {
+                $mid_index = (int)(count($paragraphs) / 2);
+                $paragraphs[$mid_index] .= "\n" . $lead_card . "\n";
+                return implode('</p>', $paragraphs);
+            }
+
+            return $content . "\n" . $lead_card;
+        }
+    }
+
+    if (!function_exists('seo_inject_inarticle_zalo_card')) {
+        function seo_inject_inarticle_zalo_card($content, $title, $news) {
+            if (strpos($content, 'class="pl-inarticle-zalo-card"') !== false) {
+                return $content;
+            }
+
+            $zalo_card = '
+            <div class="pl-inarticle-zalo-card">
+                <div class="pl-izalo-left">
+                    <div class="pl-izalo-badge">💬 HỖ TRỢ TRỰC TIẾP 1-1 QUA ZALO</div>
+                    <h4 class="pl-izalo-title">Cần Tư Vấn Menu Mở Quán & Báo Giá Học Phí?</h4>
+                    <p class="pl-izalo-desc">Đội ngũ giảng viên Passion Link trực tuyến từ 8h00 - 21h30 sẵn sàng hỗ trợ bạn khảo sát mặt bằng, gợi ý danh mục thiết bị và gửi công thức cập nhật.</p>
+                </div>
+                <div class="pl-izalo-right">
+                    <a href="https://zalo.me/0977300098" target="_blank" rel="noopener noreferrer" class="pl-izalo-btn" onclick="plTrackZalo(\'in_article_card\', this.href)">
+                        <span class="pl-izalo-ico">💬</span>
+                        <span>Chat Zalo Với Chuyên Gia</span>
+                    </a>
+                    <div class="pl-izalo-hotline">Hotline: <a href="tel:0977300098">0977.300.098</a> (24/7)</div>
+                </div>
+            </div>';
+
+            return $content . "\n" . $zalo_card . "\n";
+        }
+    }
+
+    if (!function_exists('pl_render_video_facade')) {
+        function pl_render_video_facade($video_url, $title) {
+            if (empty($video_url)) return '';
+
+            $video_id = '';
+            $is_shorts = (strpos($video_url, '/shorts/') !== false);
+
+            if (preg_match('/(?:youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i', $video_url, $m)) {
+                $video_id = $m[1];
+            }
+
+            if (empty($video_id)) {
+                return '<div class="container center pl-video-wrapper"><div class="pl-video-responsive"><iframe width="560" height="315" src="' . htmlspecialchars($video_url) . '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div></div>';
+            }
+
+            $embed_src = 'https://www.youtube.com/embed/' . $video_id . '?autoplay=1&rel=0';
+            $thumbnail_src = 'https://img.youtube.com/vi/' . $video_id . '/hqdefault.jpg';
+            $aspect_class = $is_shorts ? 'pl-video-facade-shorts' : 'pl-video-facade-16-9';
+
+            return '
+            <div class="container center pl-video-wrapper">
+                <div class="pl-video-facade-container ' . $aspect_class . '">
+                    <div class="pl-video-facade" data-src="' . htmlspecialchars($embed_src) . '" data-title="' . htmlspecialchars($title) . '" onclick="plActivateVideoFacade(this)">
+                        <img src="' . htmlspecialchars($thumbnail_src) . '" alt="' . htmlspecialchars($title) . '" class="pl-video-poster" loading="lazy" decoding="async">
+                        <div class="pl-video-overlay"></div>
+                        <div class="pl-video-play-btn" aria-label="Xem video">
+                            <svg viewBox="0 0 68 48" width="68" height="48">
+                                <path class="pl-yt-bg" d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#E53935"></path>
+                                <path d="M 45,24 27,14 27,34" fill="#FFFFFF"></path>
+                            </svg>
+                        </div>
+                        <div class="pl-video-caption">▶ Chạm để xem video thực hành tại quầy bar Passion Link</div>
+                    </div>
+                </div>
+            </div>';
+        }
+    }
+
+    if (!function_exists('pl_render_dynamic_faq_schema')) {
+        function pl_render_dynamic_faq_schema($title, $news) {
+            $uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+            $page_id = isset($news['page_id']) ? (int)$news['page_id'] : 0;
+            $is_business = (strpos($uri, '/mo-quan') !== false) || ($page_id == 24);
+            $is_course = (strpos($uri, '/cac-khoa-hoc-day-pha-che') !== false) || ($page_id == 22);
+
+            $faqs = array();
+            if ($is_business) {
+                $faqs[] = array(
+                    'q' => 'Mở quán kinh doanh trà sữa, cà phê cần chuẩn bị bao nhiêu vốn?',
+                    'a' => 'Số vốn mở quán phụ thuộc vào mô hình: Kiot hoặc xe đẩy Takeaway từ 80 - 150 triệu; Quán quy mô vừa 40-60m² từ 250 - 400 triệu; Quán lớn hoặc không gian sân vườn từ 500 triệu trở lên. Passion Link hỗ trợ học viên lập bảng dự toán chi tiết từng hạng mục để tối ưu vốn đầu tư ban đầu.'
+                );
+                $faqs[] = array(
+                    'q' => 'Chi phí giá vốn nguyên liệu (Cost) đồ uống trong quán nên chiếm bao nhiêu phần trăm?',
+                    'a' => 'Chuẩn biên lợi nhuận ngành F&B đồ uống khuyến nghị chi phí giá vốn (Cost nguyên liệu + bao bì) chỉ nên chiếm từ 28% đến 32% giá bán lẻ. Biên lợi nhuận gộp đạt 68% - 72% để đảm bảo trang trải chi phí mặt bằng, nhân sự và có lợi nhuận ròng an toàn.'
+                );
+                $faqs[] = array(
+                    'q' => 'Thời gian thu hồi vốn trung bình của quán cà phê, trà sữa là bao lâu?',
+                    'a' => 'Với tỷ lệ lấp đầy ổn định và quản trị định lượng chuẩn, thời gian thu hồi vốn trung bình của các mô hình quán do học viên Passion Link vận hành dao động từ 4 đến 8 tháng.'
+                );
+            } elseif ($is_course) {
+                $faqs[] = array(
+                    'q' => 'Chưa có kinh nghiệm hoặc chưa từng pha chế có theo học khóa học được không?',
+                    'a' => 'Hoàn toàn được. Lộ trình đào tạo tại Passion Link được thiết kế từ căn bản đến chuyên sâu, hơn 90% thời lượng là thực hành trực tiếp tại quầy bar chuẩn quốc tế với giảng viên kèm 1-1.'
+                );
+                $faqs[] = array(
+                    'q' => 'Sau khi hoàn thành khóa học, Passion Link có hỗ trợ gì cho học viên mở quán?',
+                    'a' => 'Học viên được áp dụng chính sách Bảo hành tay nghề trọn đời: ôn tập thực hành miễn phí bất cứ lúc nào, hỗ trợ tư vấn thiết kế quầy bar, lên danh mục máy móc và cung ứng nguyên liệu giá sỉ tận gốc từ hệ sinh thái Vua An Toàn.'
+                );
+                $faqs[] = array(
+                    'q' => 'Thời gian đào tạo một khóa học pha chế tại Passion Link kéo dài bao lâu?',
+                    'a' => 'Thời gian học linh hoạt từ 3 đến 10 ngày tùy chuyên đề hoặc khóa tổng hợp. Có lớp cấp tốc kèm riêng cho học viên ở tỉnh hoặc chuẩn bị khai trương quán.'
+                );
+            } else {
+                $faqs[] = array(
+                    'q' => 'Cách pha chế công thức này có thể áp dụng để kinh doanh mở quán được không?',
+                    'a' => 'Được. Tất cả công thức tại Passion Link đều được chuẩn hóa theo định lượng thực chiến quầy bar, đảm bảo hương vị đậm đà đồng nhất và tối ưu chi phí giá vốn (Cost) dưới 30% để chủ quán đạt lợi nhuận cao nhất.'
+                );
+                $faqs[] = array(
+                    'q' => 'Bảo quản nguyên liệu và cốt trà/cà phê như thế nào để giữ trọn vị ngon trong ngày?',
+                    'a' => 'Cốt trà nên được ủ ở nhiệt độ chuẩn 85°C - 90°C và bảo quản trong bình giữ nhiệt chuyên dụng từ 4 - 6 tiếng. Không nên dùng trà ủ qua đêm để tránh bị biến chất và mất hương thơm tự nhiên.'
+                );
+                $faqs[] = array(
+                    'q' => 'Làm sao để đăng ký học trực tiếp công thức và kỹ thuật tạo menu độc quyền tại Passion Link?',
+                    'a' => 'Bạn có thể đăng ký trực tuyến tại website phache.com.vn hoặc nhắn tin Zalo số hotline 0977.300.098 để được chuyên viên tư vấn lịch học và nhận ưu đãi học phí mới nhất.'
+                );
+            }
+
+            $schema = array(
+                '@context' => 'https://schema.org',
+                '@type' => 'FAQPage',
+                'mainEntity' => array()
+            );
+
+            foreach ($faqs as $item) {
+                $schema['mainEntity'][] = array(
+                    '@type' => 'Question',
+                    'name' => $item['q'],
+                    'acceptedAnswer' => array(
+                        '@type' => 'Answer',
+                        'text' => $item['a']
+                    )
+                );
+            }
+
+            return '<script type="application/ld+json">' . json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>';
+        }
+    }
+
+    if (!function_exists('seo_enrich_complete_article_content')) {
+        function seo_enrich_complete_article_content($content, $title, $news) {
+            $uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+            $page_id = isset($news['page_id']) ? (int)$news['page_id'] : 0;
+            $is_recipe = ($page_id === 22) || (strpos($uri, '/day-pha-che-tra-sua-ngon/') !== false);
+
+            if ($is_recipe && function_exists('seo_enrich_recipe_article_content')) {
+                $content = seo_enrich_recipe_article_content($content, $title, $news);
+            }
+
+            // DX-04: Inject Mid-article Lead Card after 2nd H2 tag
+            if (function_exists('seo_inject_mid_article_lead_card')) {
+                $content = seo_inject_mid_article_lead_card($content, $title, $news);
+            }
+
+            // DX-02: Inject In-article Zalo Card near the end
+            if (function_exists('seo_inject_inarticle_zalo_card')) {
+                $content = seo_inject_inarticle_zalo_card($content, $title, $news);
+            }
+
+            return $content;
+        }
+    }
+
      ?>
     <div class="panel_content">
     <?php
@@ -897,22 +1503,22 @@ position: absolute;
 
                 <?php 
                 $raw_article_content = !empty($news['news_img_slide']) ? prefix_insert_post_ads($news['content'], $news['news_img_slide'], $article_seo_h1) : $news['content'];
-                $normalized_article_content = seo_normalize_article_headings($raw_article_content, $article_seo_h1);
-                echo seo_enrich_recipe_article_content($normalized_article_content, $article_seo_h1, $news);
+                $normalized_article_content = seo_normalize_article_headings($raw_article_content, $article_seo_h1, $news);
+                echo seo_enrich_complete_article_content($normalized_article_content, $article_seo_h1, $news);
                 ?>
                 
             </div>
 
+            <?php echo pl_render_dynamic_faq_schema($article_seo_h1, $news); ?>
+
             <?php include dirname(__FILE__) . '/widget_drink_calculator.php'; ?>
   
-<div class="container center">
     <?php 
      if (!empty($news['news_videos'])) {
-     ?>
+         echo pl_render_video_facade($news['news_videos'], $article_seo_h1);
+     }
+    ?>
 
-    <iframe width="560" height="315" src="<?php echo $news['news_videos']; ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    <?php } ?>
-</div>
             <div id="news_share">
                 <span class='st_facebook_hcount' displayText='Facebook'></span>
                 <span class='st_fblike_hcount' displayText='Facebook Like'></span>
@@ -1140,4 +1746,100 @@ ToC +=
   "</nav>";
 
 $(".all-questions").prepend(ToC);
+</script>
+
+<script>
+/* ==================== DX-04: MID-ARTICLE LEAD CAPTURE HANDLER ==================== */
+var plMidFormStarted = false;
+function plTrackMidFormStart() {
+    if (!plMidFormStarted) {
+        plMidFormStarted = true;
+        if (typeof gtag === 'function') {
+            gtag('event', 'form_start', {
+                'form_name': 'mid_article_lead',
+                'event_category': 'Lead'
+            });
+        }
+    }
+}
+
+function plSubmitMidLead(e, form) {
+    if (e && e.preventDefault) e.preventDefault();
+    var input = form.querySelector('input[name="phone"]');
+    var phone = input ? input.value.trim() : '';
+    if (!phone || phone.length < 9) {
+        alert('Vui lòng nhập đúng số điện thoại hoặc Zalo!');
+        return false;
+    }
+
+    // 1. GA4 event
+    if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+            'form_name': 'mid_article_lead',
+            'event_category': 'Lead',
+            'event_label': 'Mid-Article Quick Consultation',
+            'value': 100000
+        });
+    }
+
+    // 2. Gửi AJAX về CMS admin (dual redundant endpoints: saveSign + saveCallToAction)
+    var BASE = 'https://phache.com.vn/';
+    var d1 = new URLSearchParams();
+    d1.append('template_function', 'saveSign');
+    d1.append('dk_name', 'Khách Zalo đăng ký giữa bài viết');
+    d1.append('dk_email', '');
+    d1.append('dk_number', phone);
+    d1.append('dk_class', 'Tư Vấn Mở Quán 1-1 (Mid-Article Lead)');
+    fetch(BASE, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: d1.toString() }).catch(function(){});
+
+    var d2 = new URLSearchParams();
+    d2.append('template_function', 'saveCallToAction');
+    d2.append('cta_name', 'Khách Zalo đăng ký giữa bài viết');
+    d2.append('cta_phone', phone);
+    d2.append('cta_course', 'Tư Vấn Mở Quán & Báo Giá 1-1');
+    d2.append('cta_purpose', 'Mid-Article Quick Consultation Lead');
+    fetch(BASE, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: d2.toString() }).catch(function(){});
+
+    // 3. Hiển thị thông báo thành công
+    var successDiv = form.parentElement.querySelector('.pl-mid-success');
+    if (successDiv) {
+        form.style.display = 'none';
+        successDiv.style.display = 'block';
+    }
+
+    return false;
+}
+
+/* ==================== DX-03: VIDEO FACADE ACTIVATION ==================== */
+function plActivateVideoFacade(el) {
+    var src = el.getAttribute('data-src');
+    var title = el.getAttribute('data-title') || 'Video thực hành';
+    if (!src) return;
+
+    // GA4 tracking
+    if (typeof gtag === 'function') {
+        gtag('event', 'video_interaction', {
+            'video_url': src,
+            'video_title': title,
+            'action': 'play_facade',
+            'event_category': 'Video'
+        });
+    }
+
+    var iframe = document.createElement('iframe');
+    iframe.setAttribute('src', src);
+    iframe.setAttribute('title', title);
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+    iframe.setAttribute('allowfullscreen', '1');
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.position = 'absolute';
+    iframe.style.top = '0';
+    iframe.style.left = '0';
+    iframe.style.border = 'none';
+
+    el.innerHTML = '';
+    el.appendChild(iframe);
+}
 </script>

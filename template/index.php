@@ -2490,9 +2490,10 @@ function toggleTuVanPanel(){
     <span class="pl-bar-ico" aria-hidden="true">📞</span>
     <span class="pl-bar-txt">Gọi Hotline</span>
   </a>
-  <a href="https://zalo.me/0977300098" target="_blank" rel="noopener noreferrer" class="pl-bar-btn pl-bar-zalo" title="Chat Zalo Tư Vấn" onclick="plTrackZalo()">
+  <a href="https://zalo.me/0977300098" target="_blank" rel="noopener noreferrer" class="pl-bar-btn pl-bar-zalo" title="Chat Zalo Tư Vấn" onclick="plTrackZalo('sticky_bottom_bar', this.href)">
     <span class="pl-bar-ico" aria-hidden="true">💬</span>
     <span class="pl-bar-txt">Chat Zalo</span>
+    <span class="pl-zalo-mini-badge">Báo giá 5p</span>
   </a>
   <a href="https://phache.com.vn/nhan-uu-dai/" class="pl-bar-btn pl-bar-lead" title="Đăng Ký Tư Vấn & Nhận Ưu Đãi 40%" onclick="if(typeof plTrackConversion==='function'){plTrackConversion('click_open_tuvan_panel','sticky_bottom_bar',100000);}">
     <span class="pl-bar-ico" aria-hidden="true">🎁</span>
@@ -3391,9 +3392,37 @@ document.addEventListener('DOMContentLoaded', function() {
     border: 1px solid rgba(255, 255, 255, 0.25);
   }
   .pl-bar-zalo {
+    position: relative;
     background: linear-gradient(135deg, #0068FF, #0052cc);
     color: #ffffff !important;
     border: 1px solid rgba(255, 255, 255, 0.25);
+    animation: plPulseBarZalo 2.4s infinite ease-in-out;
+  }
+  @keyframes plPulseBarZalo {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 2px 6px rgba(0,104,255,0.30);
+    }
+    50% {
+      transform: scale(1.025);
+      box-shadow: 0 4px 12px rgba(0,104,255,0.60);
+    }
+  }
+  .pl-zalo-mini-badge {
+    position: absolute;
+    top: -6px;
+    right: 3px;
+    background: #FFD54F;
+    color: #1F3F1F;
+    font-size: 8.5px;
+    font-weight: 900;
+    line-height: 1;
+    padding: 2px 5px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    pointer-events: none;
   }
   .pl-bar-lead {
     background: linear-gradient(135deg, #FF6B35 0%, #E53935 100%);
