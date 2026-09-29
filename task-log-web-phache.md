@@ -461,4 +461,41 @@ Khi bắt đầu phiên làm việc tiếp theo, kỹ thuật viên hoặc agent
   - [x] **Test 4 - Tăng giảm số tùy chỉnh (Custom Input Stepper):** Thay đổi số ly bán lên 500 ly -> Toàn bộ bảng tự động tính lại ngay lập tức: Doanh thu 570.000.000 đ, Lợi nhuận ròng 281.500.000 đ/tháng, Hoàn vốn sau ~2.0 tháng -> **PASS**.
   - [x] **Test 5 - Trải nghiệm di động (Mobile Viewport 390x844 - iPhone):** Giao diện responsive 100%, thao tác chạm mượt mà, định dạng tiền tệ chuẩn xác -> **PASS**.
 
+---
+
+### [2026-09-29 12:30] HOÀN TẤT & DEPLOY PRODUCTION: CỔNG THU THẬP LEAD (HỌ TÊN, EMAIL, SĐT) CHO FILE EXCEL DÒNG TIỀN MỞ QUÁN
+- **Yêu cầu triển khai:** Gating việc tải file Excel `ke-hoach-dong-tien-mo-quan-passion-link.xlsx`. Khách hàng bắt buộc phải nhập đủ 3 giá trị: **Họ và tên**, **Email**, và **Số điện thoại (Zalo)**. Chặn hoàn toàn hành vi tải về nếu Email hoặc Số điện thoại sai định dạng.
+- **Thực thi kỹ thuật (`template/widget_drink_calculator.php`):**
+  1. **Thay đổi nút tải thành nút kích hoạt Modal:** Thay thế liên kết `<a>` tải trực tiếp bằng nút `button` gắn sự kiện `onclick="plOpenExcelLeadModal()"`.
+  2. **Popup Modal Lead Capture Glassmorphism (`#pl-excel-lead-modal`):**
+     - Thiết kế giao diện Glassmorphism sang trọng, đồng bộ tone xanh thương hiệu Passion Link (`#1FA84B`, `#2C7A7B`, `#1a4d3f`).
+     - 3 trường nhập liệu: Họ tên (`pl-xlm-name`), Số điện thoại (`pl-xlm-phone`), Email (`pl-xlm-email`).
+     - Tự động đóng modal khi nhấp nút `✕` hoặc bấm ra vùng mờ (backdrop) bên ngoài.
+  3. **Bộ lọc xác thực dữ liệu nghiêm ngặt (Strict Regex Validation):**
+     - Họ tên: `plValidateName()` kiểm tra độ dài tối thiểu 2 ký tự.
+     - Số điện thoại: `plValidateVietnamesePhone()` kiểm tra chuẩn định dạng di động Việt Nam 10 chữ số (`03x`, `05x`, `07x`, `08x`, `09x` hoặc `+84`).
+     - Email: `plValidateEmailRFC()` kiểm tra chuẩn RFC 5322 (đầy đủ ký tự, dấu `@`, tên miền và không có khoảng trắng).
+     - Báo lỗi trực quan ngay dưới từng trường với viền đỏ và text cảnh báo lỗi; **tuyệt đối không kích hoạt tải nếu còn lỗi**.
+  4. **Lưu trữ Lead kép vào CMS Admin:**
+     - `template_function=saveSign`: Lưu vào mục *Đăng ký học / Nhận tài liệu*.
+     - `template_function=saveCallToAction`: Lưu vào bảng *Gọi hành động / Lead Hot*.
+  5. **Bắn sự kiện đo lường GA4:**
+     - `generate_lead` (`lead_source: 'gated_excel_download'`).
+     - `file_download` (`file_name: 'ke-hoach-dong-tien-mo-quan-passion-link.xlsx'`).
+  6. **Cơ chế tải thông minh & Ghi nhớ phiên (Session Frictionless UX):**
+     - Tự động kích hoạt tải file `.xlsx` về máy người dùng sau khi xác thực 100% thành công.
+     - Hiển thị màn hình chúc mừng kèm nút bấm tải dự phòng (phòng trường hợp trình duyệt chặn popup tải tự động).
+     - Lưu `sessionStorage.setItem('pl_excel_unlocked', '1')` để người dùng có thể tải lại trong cùng phiên mà không cần nhập lại thông tin.
+- **Quy trình triển khai & Bảo mật:**
+  - Git commit & push: Commit `c5857c9` (`feat(cro): gate excel download behind 3-field validated lead capture modal`).
+  - Deploy lên FTP Production: Thực hiện qua script Python ngầm trong bộ nhớ, tuân thủ tuyệt đối quy định bảo mật `gemini.md` (không in credential ra chat hay log).
+- **Kết quả kiểm thử tự động trên trình duyệt Chrome thực tế (Desktop & Mobile):**
+  - [x] **Test 1 - Kích hoạt Modal:** Bấm nút Tải File Excel -> Modal hiển thị mượt mà với hiệu ứng làm mờ nền -> **PASS**.
+  - [x] **Test 2 - Chặn submit rỗng:** Bấm gửi khi chưa nhập thông tin -> Hiển thị 3 thông báo lỗi đỏ, không tải file -> **PASS**.
+  - [x] **Test 3 - Bắt lỗi định dạng SĐT & Email:** Nhập SĐT `012345` và email `notanemail` -> Hệ thống báo lỗi "Số điện thoại không đúng định dạng di động Việt Nam" và "Email không đúng định dạng", chặn tải file -> **PASS**.
+  - [x] **Test 4 - Gửi thành công với dữ liệu hợp lệ:** Nhập đầy đủ Họ tên, SĐT VN chuẩn (`0977300098`), Email chuẩn (`vanhung.fnb@gmail.com`) -> Bấm gửi -> Trạng thái loading -> Màn hình chúc mừng xuất hiện, tự động kích hoạt tải file `.xlsx` về máy -> **PASS**.
+  - [x] **Test 5 - Tải lại không phiền phức (Unlocked Session):** Bấm lại nút tải trong cùng phiên -> Tự động tải file ngay lập tức mà không cần nhập lại -> **PASS**.
+  - [x] **Test 6 - Trải nghiệm di động (iPhone Viewport 390x844):** Modal co giãn vừa vặn, nút bấm ngón tay dễ chạm, giao diện cao cấp chuẩn Retina -> **PASS**.
+
+
 
