@@ -1148,6 +1148,24 @@ input, textarea, select, button, p, span, a, div, li, label,
 </section>
 <!-- /SECTION 2 -->
 
+<!-- ===== MỤC 2.5: BẢNG TÍNH GIÁ VỐN & DỰ TOÁN CHI PHÍ LỢI NHUẬN MỞ QUÁN ===== -->
+<section class="adv-section adv-calc-sec" id="cong-cu-tinh-chi-phi" style="padding:48px 0 36px;box-sizing:border-box;background:linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(244,250,245,0.9) 100%);border-top:1px solid rgba(31,168,75,0.15);border-bottom:1px solid rgba(31,168,75,0.15);">
+  <div class="container" style="max-width:920px;margin:0 auto;padding:0 16px;">
+    <div style="text-align:center;margin-bottom:20px;">
+      <span style="display:inline-block;padding:6px 18px;background:rgba(31,168,75,0.12);color:#1F3F1F;font-size:12px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;border-radius:50px;margin-bottom:12px;box-shadow:0 2px 8px rgba(31,168,75,0.10);">
+        🧮 CÔNG CỤ TÍNH TOÁN DÀNH CHO CHỦ QUÁN TƯƠNG LAI
+      </span>
+      <h2 style="font-family:var(--font-display, 'Lexend', sans-serif);font-size:clamp(22px, 3.5vw, 30px);font-weight:800;color:var(--green-dark, #1F3F1F);line-height:1.3;margin-bottom:10px;">
+        Bảng Tính Giá Vốn (Cost) Đồ Uống & Dự Toán Dòng Tiền Mở Quán
+      </h2>
+      <p style="font-size:14.5px;color:var(--on-muted, #5A6B52);max-width:720px;margin:0 auto;line-height:1.6;">
+        Tự động tính chi phí nguyên vật liệu từng ly và mô phỏng kế hoạch tài chính thực tế giúp bạn biết chính xác cần bao nhiêu vốn, bán bao nhiêu ly mỗi ngày thì đạt điểm hòa vốn và bao lâu thu hồi vốn.
+      </p>
+    </div>
+    <?php include dirname(dirname(__FILE__)) . '/template/widget_drink_calculator.php'; ?>
+  </div>
+</section>
+
 
 <!-- ===== MỤC 3: CÁC CHUYÊN MỤC KHÁC + 2 DÀN VIDEO (adv2) ===== -->
 <style>
