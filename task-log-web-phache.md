@@ -497,5 +497,40 @@ Khi bắt đầu phiên làm việc tiếp theo, kỹ thuật viên hoặc agent
   - [x] **Test 5 - Tải lại không phiền phức (Unlocked Session):** Bấm lại nút tải trong cùng phiên -> Tự động tải file ngay lập tức mà không cần nhập lại -> **PASS**.
   - [x] **Test 6 - Trải nghiệm di động (iPhone Viewport 390x844):** Modal co giãn vừa vặn, nút bấm ngón tay dễ chạm, giao diện cao cấp chuẩn Retina -> **PASS**.
 
+---
+
+### [2026-09-30 20:45] HOÀN TẤT SAO LƯU & TÍCH HỢP BẢNG TÍNH GIÁ VỐN + DỰ TOÁN DÒNG TIỀN MỞ QUÁN (KÈM GATED EXCEL) VÀO TRANG ĐÍCH KHÓA TỔNG HỢP
+- **Yêu cầu thực thi:**
+  1. Sao lưu toàn bộ website và tải về máy Mac an toàn.
+  2. Tích hợp chức năng tính giá vốn (Cost) đồ uống và dự toán dòng tiền mở quán kèm tính năng Gated tải file Excel vào trang đích `https://phache.com.vn/khoa-tong-hop/` (giống trang mở quán `mo-quan-tra-sua-can-chuan-bi-bao-nhieu-von-135.html`) để tăng thời gian giữ chân khách hàng (Dwell Time) và thu hút Lead chất lượng.
+- **Kết quả sao lưu an toàn (100% hoàn tất):**
+  - Nén tarball mã nguồn cục bộ: `BACKUPS/backup_phache_20260930_203800/local_phache_20260930_203800.tar.gz` (27 MB).
+  - Tải toàn bộ mã nguồn `khoa-tong-hop/` và `template/` trực tiếp từ server FTP live về: `BACKUPS/backup_phache_20260930_203800/server_source/`.
+  - Tuân thủ tuyệt đối quy định bảo mật `gemini.md` (không in hay để lộ mật khẩu máy chủ / FTP ra màn hình hay log).
+- **Thực thi kỹ thuật (`khoa-tong-hop/index.php` & `khoa-tong-hop/index.html`):**
+  1. **Khối Section 2.5 (`#cong-cu-tinh-chi-phi`):**
+     - Đặt ngay sau Mục 2 (3 Gói Khóa Học & Hướng Dẫn Chọn Gói theo ngân sách).
+     - Thiết kế giao diện sang trọng: Badge nhận diện, tiêu đề H2 chuẩn SEO, đoạn mô tả định hướng giá trị.
+     - Nhúng trọn vẹn bộ công cụ `widget_drink_calculator.php` với 2 Tab tính toán tương tác thời gian thực:
+       - **Tab 1 - Tính Cost Đồ Uống:** 3 nhóm món (Trà sữa, Trà trái cây, Cà phê), 2 Size ly (M, L), 5 thông số chi phí, tự tính tổng cost và giá bán lẻ gợi ý biên lãi ~70%.
+       - **Tab 2 - Dự Toán Lợi Nhuận Mở Quán:** 3 Preset mô hình quán (Kiot 150tr, Quán vừa 300tr, Quán lớn 550tr), 6 ô nhập linh hoạt (Vốn, Số ly, Giá bán, Mặt bằng, Nhân sự, Điện nước), tự tính Doanh thu, COGS, Chi phí vận hành, Lợi nhuận ròng EBIT, Điểm hòa vốn và Thời gian hoàn vốn.
+       - **Nút Zalo CTA:** Kết nối trực tiếp chuyên gia tư vấn kèm nội dung tóm tắt bảng dự toán.
+       - **Nút Tải File Excel Kế Hoạch Dòng Tiền & Chi Phí (Gated Lead Modal):** Yêu cầu bắt buộc Họ tên, SĐT Zalo chuẩn di động VN, Email chuẩn RFC trước khi mở khóa tải file `.xlsx`.
+  2. **Đồng bộ hóa 100%:**
+     - `khoa-tong-hop/index.php`: Nhúng qua PHP include động.
+     - `khoa-tong-hop/index.html`: Đồng bộ toàn bộ mã HTML/CSS/JS tĩnh tương đương.
+- **Triển khai & Kiểm định Production:**
+  - Git commit & push: Commit `f67ba76` (`feat(cro): embed drink cost & cashflow calculator with gated excel download in khoa-tong-hop`).
+  - Deploy lên FTP Production: Upload thành công `khoa-tong-hop/index.php` (102.499 bytes) và `khoa-tong-hop/index.html` (153.939 bytes).
+  - Kiểm thử tự động trên trình duyệt Chrome thực tế (`https://phache.com.vn/khoa-tong-hop/`):
+    - [x] **Test 1 - Nhận diện Section & Tab 1:** Section `#cong-cu-tinh-chi-phi` tải mượt mà, tính Cost Trà Trái Cây chuẩn 10.700đ, giá gợi ý 36.000đ -> **PASS**.
+    - [x] **Test 2 - Chuyển Tab 2 & Click Preset Quán Vừa:** Tự động điền 300tr vốn, 200 ly/ngày, doanh thu 192tr, lãi ròng 78.8tr/tháng -> **PASS**.
+    - [x] **Test 3 - Click Preset Quán Lớn:** Tự động điền 550tr vốn, 350 ly/ngày, doanh thu 399tr, lãi ròng 170.35tr/tháng -> **PASS**.
+    - [x] **Test 4 - Tăng giảm số ly lên 500:** Bảng tính lại ngay lập tức: Doanh thu 570tr, lãi ròng 281.5tr/tháng -> **PASS**.
+    - [x] **Test 5 - Modal Gating Tải Excel:** Mở modal khi bấm tải, chặn submit khi để trống hoặc nhập sai định dạng SĐT/Email -> **PASS**.
+    - [x] **Test 6 - Submit Lead thành công & Tự động tải file:** Đẩy dữ liệu về CMS (`saveSign` + `saveCallToAction`), bắn GA4 `generate_lead`, mở khóa tải file `.xlsx` -> **PASS**.
+    - [x] **Test 7 - Mobile Viewport (iPhone 390x844):** Co giãn vừa vặn 100%, thao tác chạm ngón tay mượt mà -> **PASS**.
+
+
 
 
