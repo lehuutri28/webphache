@@ -112,6 +112,108 @@ footer a:hover{text-decoration:underline;}
   .hero-intro-card { margin: 18px 0 0 !important; padding: 12px 14px !important; font-size: 13.5px !important; line-height: 1.6 !important; }
 }
 
+/* --- HERO INTERACTIVE HOOK BUTTON (DX-HERO-HOOK - NHIỆM VỤ 1) --- */
+@keyframes heroCalcPulse {
+  0% { transform: scale(1); box-shadow: 0 8px 24px rgba(31,168,75,0.28); }
+  50% { transform: scale(1.025); box-shadow: 0 12px 30px rgba(31,168,75,0.45), 0 0 15px rgba(255,213,79,0.35); }
+  100% { transform: scale(1); box-shadow: 0 8px 24px rgba(31,168,75,0.28); }
+}
+.hero-calc-hook {
+  position: relative;
+  z-index: 2;
+  margin: 22px auto 28px;
+  text-align: center;
+}
+.btn-hero-calc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 28px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #1fa84b 0%, #178a3b 60%, #0e6b2c 100%) !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  font-size: 14.5px;
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgba(31,168,75,0.28);
+  border: 1.5px solid rgba(255,255,255,0.35) !important;
+  animation: heroCalcPulse 2.8s infinite ease-in-out;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+.btn-hero-calc:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 14px 34px rgba(31,168,75,0.45);
+  background: linear-gradient(135deg, #23bd54 0%, #1a9642 100%) !important;
+  color: #ffffff !important;
+}
+.calc-pulse-icon {
+  font-size: 19px;
+  display: inline-block;
+}
+.calc-btn-title {
+  letter-spacing: 0.02em;
+}
+.calc-btn-badge {
+  background: linear-gradient(90deg, #FFE082, #FFD54F);
+  color: #5c3800;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+@media (max-width: 600px) {
+  .btn-hero-calc {
+    padding: 11px 16px;
+    font-size: 13px;
+    gap: 6px;
+    border-radius: 30px;
+    width: calc(100% - 20px);
+    max-width: 380px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+  }
+  .calc-btn-title { font-size: 12.5px; }
+  .calc-btn-badge { font-size: 10.5px; padding: 2px 8px; }
+}
+
+/* HIỆU ỨNG VIỀN PHÁT SÁNG KHI ĐIỀU HƯỚNG TỚI GÓI HỌC (GLOW FLASH ANIMATION - NHIỆM VỤ 3) */
+@keyframes plGlowFlash {
+  0% {
+    box-shadow: 0 0 0 0 rgba(31, 168, 75, 0);
+    border-color: rgba(31, 168, 75, 0.22);
+    transform: scale(1);
+  }
+  20% {
+    box-shadow: 0 0 35px 12px rgba(31, 168, 75, 0.75), 0 0 50px 20px rgba(255, 213, 79, 0.55);
+    border-color: #1FA84B !important;
+    transform: scale(1.03);
+  }
+  50% {
+    box-shadow: 0 0 25px 8px rgba(31, 168, 75, 0.55), 0 0 40px 14px rgba(255, 213, 79, 0.4);
+    border-color: #FFD54F !important;
+    transform: scale(1.02);
+  }
+  75% {
+    box-shadow: 0 0 35px 12px rgba(31, 168, 75, 0.75), 0 0 50px 20px rgba(255, 213, 79, 0.55);
+    border-color: #1FA84B !important;
+    transform: scale(1.03);
+  }
+  100% {
+    box-shadow: 0 12px 32px rgba(31, 168, 75, 0.14);
+    transform: scale(1);
+  }
+}
+.pl-glow-highlight {
+  animation: plGlowFlash 2.5s ease-in-out forwards !important;
+  z-index: 20 !important;
+  position: relative !important;
+}
+
 </style>
 
 <meta name="twitter:card" content="summary_large_image">
@@ -500,6 +602,15 @@ input, textarea, select, button, p, span, a, div, li, label,
   </div>
   <div class="hero-intro-card" style="max-width: 860px; margin: 26px auto 0; text-align: center; font-size: 14.5px; color: var(--on-muted); line-height: 1.7; padding: 14px 20px; background: rgba(255,255,255,0.75); border-radius: 16px; border: 1px solid rgba(31,168,75,0.22); box-shadow: 0 4px 16px rgba(31,168,75,0.06); position: relative; z-index: 1;">
     Khởi nghiệp đồ uống F&B thành công không bắt đầu từ sự khéo tay, mà từ quy trình chuẩn hóa. Với hơn <strong>17 năm kinh nghiệm (since 2009)</strong> và hơn <strong>3.000+ chủ quán thành công</strong>, Passion Link cam kết phương pháp "Cầm tay chỉ việc" trong các lớp nhỏ 2–5 học viên. Dù bạn là người mới bắt đầu từ con số 0, bạn sẽ hoàn toàn tự tin làm chủ kỹ thuật chiết xuất cà phê máy, nấu trà sữa chuẩn vị Đài Loan và kiểm soát cost nguyên liệu dưới 22% doanh thu.
+  </div>
+
+  <!-- HERO INTERACTIVE HOOK (NHIỆM VỤ 1) -->
+  <div class="hero-calc-hook" style="margin: 22px auto 28px; text-align: center;">
+    <a href="#cong-cu-tinh-chi-phi" class="btn-hero-calc" onclick="plTrackHeroCalcShortcut(event)">
+      <span class="calc-pulse-icon">🧮</span>
+      <span class="calc-btn-title"><strong>TỰ TÍNH CHI PHÍ & LỢI NHUẬN MỞ QUÁN CỦA BẠN</strong></span>
+      <span class="calc-btn-badge">Tính trong 10 giây ⚡</span>
+    </a>
   </div>
 </header>
 
@@ -1023,7 +1134,7 @@ input, textarea, select, button, p, span, a, div, li, label,
   </div>
   <div class="cards">
 
-    <article class="card standard">
+    <article class="card standard" id="pl-pkg-fee-1">
       <div class="card-eyebrow">Tổng Hợp Cao Cấp</div>
       <h3 class="card-name" style="font-size: 20px;">Gói Cao Cấp (6.000.000đ) · Khởi nghiệp ngân sách vừa</h3>
       <div class="card-price-row">
@@ -1043,7 +1154,7 @@ input, textarea, select, button, p, span, a, div, li, label,
       <a href="https://phache.com.vn/khoa-tong-hop/cao-cap.html" class="card-cta">Xem chi tiết Cao Cấp →</a>
     </article>
 
-    <article class="card featured">
+    <article class="card featured" id="pl-pkg-fee-2">
       <div class="badge hot">⭐ BÁN CHẠY NHẤT</div>
       <div class="card-eyebrow">Tổng Hợp Chuyên Nghiệp</div>
       <h3 class="card-name" style="font-size: 20px;">Gói Chuyên Nghiệp (8.880.000đ) · 70% học viên chọn</h3>
@@ -1064,7 +1175,7 @@ input, textarea, select, button, p, span, a, div, li, label,
       <a href="https://phache.com.vn/khoa-tong-hop/chuyen-nghiep.html" class="card-cta">Xem chi tiết Chuyên Nghiệp →</a>
     </article>
 
-    <article class="card premium">
+    <article class="card premium" id="pl-pkg-fee-3">
       <div class="badge gold">👑 PREMIUM</div>
       <div class="card-eyebrow">Tổng Hợp Thương Hiệu</div>
       <h3 class="card-name" style="font-size: 20px;">Gói Thương Hiệu (25.000.000đ) · Mở chuỗi & Brand riêng</h3>
@@ -1098,7 +1209,7 @@ input, textarea, select, button, p, span, a, div, li, label,
     <div class="adv-pick__grid">
 
       <!-- Card 1: Cao Cấp -->
-      <div class="adv-pick__card">
+      <div class="adv-pick__card" id="pl-pkg-adv-1">
         <span class="adv-pick__badge adv-pick__badge--default">Vốn vừa phải</span>
         <p class="adv-pick__persona">"Mình mới bắt đầu, vốn vừa phải"</p>
         <p class="adv-pick__need">Quán nhỏ, vỉa hè, take-away, ngân sách vừa. Cần menu đủ bán, dễ làm, mở quán nhanh mà không quá tải.</p>
@@ -1108,7 +1219,7 @@ input, textarea, select, button, p, span, a, div, li, label,
       </div>
 
       <!-- Card 2: Chuyên Nghiệp — FEATURED -->
-      <div class="adv-pick__card adv-pick__card--featured">
+      <div class="adv-pick__card adv-pick__card--featured" id="pl-pkg-adv-2">
         <span class="adv-pick__badge adv-pick__badge--featured">Bán chạy nhất — 70% học viên chọn</span>
         <p class="adv-pick__persona">"Mình muốn làm bài bản, menu mạnh để cạnh tranh"</p>
         <p class="adv-pick__need">Nhắm quán chuẩn vị, menu đầy đủ, đứng vững ở khu trung tâm hay nơi nhiều đối thủ. Muốn khách nhớ và quay lại.</p>
@@ -1118,7 +1229,7 @@ input, textarea, select, button, p, span, a, div, li, label,
       </div>
 
       <!-- Card 3: Thương Hiệu — PREMIUM -->
-      <div class="adv-pick__card">
+      <div class="adv-pick__card" id="pl-pkg-adv-3">
         <span class="adv-pick__badge adv-pick__badge--premium">Premium — Xây thương hiệu</span>
         <p class="adv-pick__persona">"Mình xây thương hiệu riêng, đầu tư nghiêm túc"</p>
         <p class="adv-pick__need">Không chỉ mở một quán, mà muốn xây thương hiệu riêng, định vị cao cấp, có thể mở chuỗi sau này. Cần công thức độc quyền và người đồng hành sát sao.</p>
@@ -1591,12 +1702,12 @@ document.addEventListener('DOMContentLoaded', function(){
   }
   
   /* Một số section giữ accent màu nhẹ */
-  .hero, [class*="hero"] { background: linear-gradient(135deg, #f0f7eb, #e8f4df) !important; }
+  header.hero, section.hero, .hero { background: linear-gradient(135deg, #f0f7eb, #e8f4df) !important; }
   .compare-section, [class*="compare"] { background: #f8faf5 !important; }
   .pricing-section, [class*="pricing"] { background: #fff !important; }
 
   /* 6. Card → solid background thay glass (mobile không cần glass thật) */
-  [class*="glass-card"], [class*="glass"], .card, [class*="card"] {
+  [class*="glass-card"], [class*="glass"], .cards .card {
     background: rgba(255, 255, 255, 0.92) !important;
     border: 1px solid rgba(31, 168, 75, 0.15) !important;
   }
@@ -2055,6 +2166,37 @@ function plScrollToOrOpenForm() {
     openTuVanPanel();
   } else {
     window.location.href = 'https://phache.com.vn/nhan-uu-dai/';
+  }
+}
+
+/* HERO INTERACTIVE HOOK TRACKING & NAVIGATION (NHIỆM VỤ 1) */
+function plTrackHeroCalcShortcut(event) {
+  if (event) event.preventDefault();
+  
+  if (typeof gtag === 'function') {
+    gtag('event', 'click_hero_calc_shortcut', {
+      'event_category': 'Engagement',
+      'event_label': 'Hero Calculate Shortcut Button',
+      'source': 'Hero Banner'
+    });
+  }
+  if (window.dataLayer && Array.isArray(window.dataLayer)) {
+    window.dataLayer.push({
+      'event': 'click_hero_calc_shortcut',
+      'event_category': 'Engagement',
+      'event_label': 'Hero Calculate Shortcut Button',
+      'source': 'Hero Banner'
+    });
+  }
+
+  var targetSec = document.getElementById('cong-cu-tinh-chi-phi');
+  if (targetSec) {
+    targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Chuyển sang Tab 2 (Dự toán mở quán)
+  if (typeof plSwitchTab === 'function') {
+    plSwitchTab('business');
   }
 }
 

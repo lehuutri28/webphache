@@ -222,6 +222,10 @@
           📥 Tải File Excel Kế Hoạch Dòng Tiền & Chi Phí (Chuẩn Passion Link)
         </button>
       </div>
+
+      <!-- KHỐI GỢI Ý GÓI HỌC THÔNG MINH ĐỘNG (DYNAMIC PACKAGE RECOMMENDATION - NHIỆM VỤ 2) -->
+      <div id="pl-biz-package-recommendation" class="pl-pkg-rec-box"></div>
+
       <div class="pl-calc-note-ttl">
         * Dữ liệu tạm thời được lưu cục bộ trên trình duyệt trong 24 giờ để bạn tiện đối chiếu khi khảo sát mặt bằng.
       </div>
@@ -593,6 +597,168 @@
   font-style: italic;
 }
 
+/* --- KHỐI GỢI Ý GÓI HỌC ĐỘNG THEO MỨC VỐN (NHIỆM VỤ 2 & 3) --- */
+.pl-pkg-rec-box {
+  margin-top: 22px;
+}
+.pl-rec-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(244, 250, 245, 0.95));
+  border: 2px solid #1FA84B;
+  border-radius: 18px;
+  padding: 20px 22px;
+  box-shadow: 0 10px 28px rgba(31, 168, 75, 0.14);
+  position: relative;
+  text-align: left;
+  transition: all 0.28s ease;
+  box-sizing: border-box;
+}
+.pl-rec-card.pl-rec-pkg-2 {
+  border-color: #1FA84B;
+  background: linear-gradient(135deg, rgba(255, 253, 231, 0.95), rgba(244, 250, 245, 0.98));
+  box-shadow: 0 12px 32px rgba(31, 168, 75, 0.18), 0 0 0 1px rgba(255, 213, 79, 0.4);
+}
+.pl-rec-card.pl-rec-pkg-3 {
+  border-color: #FFA726;
+  background: linear-gradient(135deg, rgba(255, 248, 225, 0.95), rgba(255, 255, 255, 0.98));
+  box-shadow: 0 12px 32px rgba(255, 167, 38, 0.20), 0 0 0 1px rgba(255, 167, 38, 0.4);
+}
+.pl-rec-badge {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #1FA84B, #2dc75e);
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(31, 168, 75, 0.35);
+  margin-bottom: 12px;
+}
+.pl-rec-card.pl-rec-pkg-3 .pl-rec-badge {
+  background: linear-gradient(90deg, #FFA726, #FF9800);
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(255, 167, 38, 0.35);
+}
+.pl-rec-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.pl-rec-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: #1F3F1F;
+  line-height: 1.35;
+}
+.pl-rec-fee {
+  font-size: 17px;
+  font-weight: 800;
+  color: #d9381e;
+  background: rgba(217, 56, 30, 0.08);
+  padding: 3px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+.pl-rec-desc {
+  font-size: 13.5px;
+  color: #3b5034;
+  line-height: 1.6;
+  margin: 0 0 16px;
+  font-style: italic;
+  background: rgba(31, 168, 75, 0.06);
+  padding: 10px 14px;
+  border-radius: 10px;
+  border-left: 3px solid #1FA84B;
+}
+.pl-rec-card.pl-rec-pkg-3 .pl-rec-desc {
+  border-left-color: #FFA726;
+  background: rgba(255, 167, 38, 0.08);
+}
+.pl-rec-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.pl-rec-btn-view {
+  flex: 1 1 240px;
+  background: linear-gradient(135deg, #1FA84B 0%, #168a3b 100%);
+  color: #ffffff !important;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(31, 168, 75, 0.3);
+  transition: all 0.2s ease;
+  text-align: center;
+  font-family: inherit;
+  text-decoration: none;
+}
+.pl-rec-btn-view:hover {
+  background: linear-gradient(135deg, #22bd54 0%, #1aa246 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(31, 168, 75, 0.4);
+}
+.pl-rec-btn-zalo {
+  flex: 1 1 240px;
+  background: linear-gradient(135deg, #0068ff 0%, #0050cc 100%);
+  color: #ffffff !important;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 104, 255, 0.28);
+  transition: all 0.2s ease;
+  text-align: center;
+  font-family: inherit;
+  text-decoration: none;
+}
+.pl-rec-btn-zalo:hover {
+  background: linear-gradient(135deg, #0056d6 0%, #003da6 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 104, 255, 0.38);
+}
+
+/* HIỆU ỨNG VIỀN PHÁT SÁNG KHI ĐIỀU HƯỚNG TỚI GÓI HỌC (GLOW FLASH ANIMATION) */
+@keyframes plGlowFlash {
+  0% {
+    box-shadow: 0 0 0 0 rgba(31, 168, 75, 0);
+    border-color: rgba(31, 168, 75, 0.22);
+    transform: scale(1);
+  }
+  20% {
+    box-shadow: 0 0 35px 12px rgba(31, 168, 75, 0.75), 0 0 50px 20px rgba(255, 213, 79, 0.55);
+    border-color: #1FA84B !important;
+    transform: scale(1.03);
+  }
+  50% {
+    box-shadow: 0 0 25px 8px rgba(31, 168, 75, 0.55), 0 0 40px 14px rgba(255, 213, 79, 0.4);
+    border-color: #FFD54F !important;
+    transform: scale(1.02);
+  }
+  75% {
+    box-shadow: 0 0 35px 12px rgba(31, 168, 75, 0.75), 0 0 50px 20px rgba(255, 213, 79, 0.55);
+    border-color: #1FA84B !important;
+    transform: scale(1.03);
+  }
+  100% {
+    box-shadow: 0 12px 32px rgba(31, 168, 75, 0.14);
+    transform: scale(1);
+  }
+}
+.pl-glow-highlight {
+  animation: plGlowFlash 2.5s ease-in-out forwards !important;
+  z-index: 20 !important;
+  position: relative !important;
+}
+
 @media (max-width: 600px) {
   .pl-calc-card { padding: 18px 14px; }
   .pl-calc-grid { grid-template-columns: 1fr; gap: 10px; }
@@ -603,6 +769,12 @@
   .pl-tab-btn { font-size: 13px; padding: 10px 8px; }
   .pl-xlm-card { padding: 22px 16px; margin: 10px; }
   .pl-xlm-title { font-size: 17px; }
+  .pl-rec-card { padding: 16px 14px; }
+  .pl-rec-title { font-size: 15.5px; }
+  .pl-rec-fee { font-size: 15px; }
+  .pl-rec-desc { font-size: 13px; padding: 8px 10px; }
+  .pl-rec-actions { flex-direction: column; }
+  .pl-rec-btn-view, .pl-rec-btn-zalo { width: 100%; font-size: 13.5px; padding: 11px 12px; }
 }
 
 /* ==================== MODAL GATING TẢI FILE EXCEL CSS ==================== */
@@ -1093,6 +1265,9 @@ function plCalculateBiz() {
   if (resBreakeven) resBreakeven.textContent = "Hòa vốn: " + breakevenCupsPerDay + " ly/ngày";
   if (resPayback) resPayback.textContent = (paybackMonths !== 'Chưa hòa vốn') ? ("Hoàn vốn sau: ~" + paybackMonths + " tháng") : "Cần tăng số ly bán";
 
+  // Cập nhật khối gợi ý gói học thông minh động theo mức vốn (Nhiệm Vụ 2)
+  plUpdatePackageRecommendation(capital);
+
   plLastBizCalcResult = {
     capital: capital,
     cups: cups,
@@ -1131,6 +1306,155 @@ function plCalculateBiz() {
       });
     }
   }, 1500);
+}
+
+/* ==================== GỢI Ý GÓI HỌC THÔNG MINH ĐỘNG (NHIỆM VỤ 2 & 3) ==================== */
+function plUpdatePackageRecommendation(capital) {
+  var recContainer = document.getElementById('pl-biz-package-recommendation');
+  if (!recContainer) return;
+
+  var pkgNum = 1;
+  var pkgName = 'Gói 1: Cao Cấp (Kiot/Takeaway)';
+  var pkgBadge = '🛵 GÓI 1: MENU TRÀ SỮA & CÀ PHÊ MANG ĐI (TIẾT KIỆM)';
+  var pkgTitle = 'Gói Tổng Hợp Cao Cấp · Khởi Nghiệp Ngân Sách Vừa';
+  var pkgFee = '6.000.000 đ';
+  var pkgDesc = 'Ngân sách dưới 180 triệu phù hợp mở Kiot/xe đẩy. Tập trung 20 món Best-seller tinh gọn, không tốn chi phí máy móc đắt đỏ, giúp bạn thu hồi vốn nhanh nhất sau ~3.5 tháng.';
+  var cta1Text = '🔍 Xem Chi Tiết Gói 1 (6.000.000 đ)';
+  var cta2Text = '💬 Chat Zalo Tư Vấn Lộ Trình Kiot';
+  var cardClass = 'pl-rec-pkg-1';
+
+  if (capital <= 180000000) {
+    pkgNum = 1;
+    pkgName = 'Gói 1: Cao Cấp (Kiot/Takeaway)';
+    pkgBadge = '🛵 GÓI 1: MENU TRÀ SỮA & CÀ PHÊ MANG ĐI (TIẾT KIỆM)';
+    pkgTitle = 'Gói Tổng Hợp Cao Cấp · Khởi Nghiệp Ngân Sách Vừa';
+    pkgFee = '6.000.000 đ';
+    pkgDesc = 'Ngân sách dưới 180 triệu phù hợp mở Kiot/xe đẩy. Tập trung 20 món Best-seller tinh gọn, không tốn chi phí máy móc đắt đỏ, giúp bạn thu hồi vốn nhanh nhất sau ~3.5 tháng.';
+    cta1Text = '🔍 Xem Chi Tiết Gói 1 (6.000.000 đ)';
+    cta2Text = '💬 Chat Zalo Tư Vấn Lộ Trình Kiot';
+    cardClass = 'pl-rec-pkg-1';
+  } else if (capital > 180000000 && capital <= 400000000) {
+    pkgNum = 2;
+    pkgName = 'Gói 2: Chuyên Nghiệp (Quán vừa 40-60m²)';
+    pkgBadge = '🪑 GÓI 2: KHÓA HỌC PHA CHẾ TOÀN DIỆN (LỰA CHỌN CỦA 80% CHỦ QUÁN - BEST SELLER)';
+    pkgTitle = 'Gói Tổng Hợp Chuyên Nghiệp · Chuẩn Vị & Cạnh Tranh Cao';
+    pkgFee = '8.880.000 đ';
+    pkgDesc = 'Ngân sách lý tưởng cho quán ngồi lại 40-60m². Làm chủ 50+ món hot trend (Trà sữa Đài Loan, Cà phê máy, Trà trái cây), chuẩn hóa quy trình vận hành và kiểm soát cost nguyên liệu dưới 28%.';
+    cta1Text = '⭐ Xem Chi Tiết Gói 2 (8.880.000 đ)';
+    cta2Text = '💬 Chat Zalo Nhận Ưu Đãi Gói 2';
+    cardClass = 'pl-rec-pkg-2';
+  } else {
+    pkgNum = 3;
+    pkgName = 'Gói 3: Thương Hiệu (Quán lớn / Chuỗi)';
+    pkgBadge = '🏢 GÓI 3: KHÓA HỌC CAO CẤP & ĐỊNH HÌNH THƯƠNG HIỆU F&B';
+    pkgTitle = 'Gói Tổng Hợp Thương Hiệu · Setup Độc Quyền & Chuỗi F&B';
+    pkgFee = '25.000.000 đ';
+    pkgDesc = 'Ngân sách phù hợp quán quy mô lớn / chuỗi. Đào tạo chuyên sâu setup quầy bar nhượng quyền, chiến lược menu độc quyền theo mùa, bảo hành tay nghề trọn đời từ Chuyên Gia Passion Link.';
+    cta1Text = '👑 Xem Chi Tiết Gói 3 (25.000.000 đ)';
+    cta2Text = '💬 Đặt Hẹn Tư Vấn 1-1 Cùng Thầy Trí';
+    cardClass = 'pl-rec-pkg-3';
+  }
+
+  var html = '<div class="pl-rec-card ' + cardClass + '">' +
+    '<div class="pl-rec-badge">' + pkgBadge + '</div>' +
+    '<div class="pl-rec-header">' +
+      '<div class="pl-rec-title">' + pkgTitle + '</div>' +
+      '<div class="pl-rec-fee">' + pkgFee + '</div>' +
+    '</div>' +
+    '<p class="pl-rec-desc">"' + pkgDesc + '"</p>' +
+    '<div class="pl-rec-actions">' +
+      '<button type="button" class="pl-rec-btn-view" onclick="plNavigateToPackage(' + pkgNum + ', \'' + pkgName.replace(/'/g, "\\'") + '\', ' + capital + ')">' +
+        cta1Text +
+      '</button>' +
+      '<button type="button" class="pl-rec-btn-zalo" onclick="plOpenZaloPackage(' + pkgNum + ', \'' + pkgName.replace(/'/g, "\\'") + '\', ' + capital + ')">' +
+        cta2Text +
+      '</button>' +
+    '</div>' +
+  '</div>';
+
+  recContainer.innerHTML = html;
+}
+
+function plNavigateToPackage(pkgNum, pkgName, capital) {
+  // GA4 Event
+  if (typeof gtag === 'function') {
+    gtag('event', 'click_recommended_package_cta', {
+      'event_category': 'Engagement',
+      'event_label': 'Xem Chi Tiet Goi ' + pkgNum,
+      'selected_package': 'Goi ' + pkgNum,
+      'package_name': pkgName,
+      'capital': capital
+    });
+  }
+  if (window.dataLayer && Array.isArray(window.dataLayer)) {
+    window.dataLayer.push({
+      'event': 'click_recommended_package_cta',
+      'event_category': 'Engagement',
+      'event_label': 'Xem Chi Tiet Goi ' + pkgNum,
+      'selected_package': 'Goi ' + pkgNum,
+      'package_name': pkgName,
+      'capital': capital
+    });
+  }
+
+  // Find target card on current page
+  var targetEl = document.getElementById('pl-pkg-adv-' + pkgNum) || document.getElementById('pl-pkg-fee-' + pkgNum);
+  if (targetEl) {
+    targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    targetEl.classList.remove('pl-glow-highlight');
+    void targetEl.offsetWidth; // trigger reflow
+    targetEl.classList.add('pl-glow-highlight');
+    setTimeout(function() {
+      targetEl.classList.remove('pl-glow-highlight');
+    }, 2500);
+
+    // Also flash fee table card if both exist
+    var feeCard = document.getElementById('pl-pkg-fee-' + pkgNum);
+    if (feeCard && feeCard !== targetEl) {
+      feeCard.classList.remove('pl-glow-highlight');
+      void feeCard.offsetWidth;
+      feeCard.classList.add('pl-glow-highlight');
+      setTimeout(function() {
+        feeCard.classList.remove('pl-glow-highlight');
+      }, 2500);
+    }
+  } else {
+    // If not on khoa-tong-hop, navigate there with anchor
+    window.location.href = 'https://phache.com.vn/khoa-tong-hop/#pl-pkg-adv-' + pkgNum;
+  }
+}
+
+function plOpenZaloPackage(pkgNum, pkgName, capital) {
+  var formattedCap = plFormatMoney(capital);
+  var msg = "Chào Passion Link! Em vừa tính dự toán mở quán với mức vốn " + formattedCap + ". Em muốn nhận tư vấn chi tiết cho " + pkgName + " và lộ trình học mở quán nhé!";
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(msg).catch(function(){});
+  }
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'click_package_zalo_consultation', {
+      'event_category': 'Engagement',
+      'event_label': 'Chat Zalo Tu Van Goi ' + pkgNum,
+      'package_number': pkgNum,
+      'package_name': pkgName,
+      'capital': capital,
+      'capital_formatted': formattedCap
+    });
+  }
+  if (window.dataLayer && Array.isArray(window.dataLayer)) {
+    window.dataLayer.push({
+      'event': 'click_package_zalo_consultation',
+      'event_category': 'Engagement',
+      'event_label': 'Chat Zalo Tu Van Goi ' + pkgNum,
+      'package_number': pkgNum,
+      'package_name': pkgName,
+      'capital': capital,
+      'capital_formatted': formattedCap
+    });
+  }
+
+  window.open('https://zalo.me/0977300098', '_blank');
 }
 
 function plSendCalcViaZalo() {
