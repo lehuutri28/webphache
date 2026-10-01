@@ -22,6 +22,7 @@
 
 Hệ thống Backend API tại `phache.com.vn` đã mở sẵn cổng giao tiếp RESTful bảo mật cao để tiếp nhận các bài viết do n8n đẩy về:
 
+### 1.1 Endpoint Đăng Bài Viết (Publish News API)
 * **Endpoint:** `https://phache.com.vn/api/publish-news.php`
 * **HTTP Method:** `POST`
 * **Xác thực:** Bearer Token trong Header:
@@ -34,6 +35,42 @@ Hệ thống Backend API tại `phache.com.vn` đã mở sẵn cổng giao tiế
   - Rate Limiting: Tối đa 10 requests / phút từ cùng 1 địa chỉ IP.
   - Tự động kiểm định và băm tên file ảnh (chống trùng lặp, chống tải mã độc).
   - Tự động đặt thứ tự hiển thị `news_order = MAX(news_order) + 1` để bài viết luôn đứng **Top 1 trang danh mục**.
+
+### 1.2 Endpoint Khai Thác Thư Viện Ảnh Đồ Uống Thực Tế (Media Library Reference API)
+* **Endpoint:** `https://phache.com.vn/api/media-library.php`
+* **HTTP Method:** `GET` hoặc `POST`
+* **Xác thực:** Cùng mã Bearer Token `Authorization: Bearer {{ $env.PHACHE_API_SECRET }}`
+* **Mục đích:** Cung cấp cho C11 kho ảnh thực tế gồm hơn **1.680+ bức ảnh món đồ uống chụp đẹp của Passion Link** (từ `/upload/images/`, `/upload/news/`, `/upload/gallery/`) để:
+  1. Làm **Ảnh tham chiếu (Reference Image)** cho các mô hình AI sinh ảnh (Midjourney Image-to-Image, Flux, DALL-E, Gemini Multimodal).
+  2. Hoặc lấy trực tiếp URL ảnh thật có sẵn làm ảnh đại diện bài viết.
+* **Tham số truy vấn (Query Params / JSON Body):**
+  - `keyword`: Từ khóa tìm kiếm món đồ uống (VD: `tra-sua`, `tra-dao`, `ca-phe`, `matcha`, `kem`, `olong`, `boba`...).
+  - `limit`: Số lượng ảnh muốn lấy (mặc định 12, tối đa 50).
+  - `random`: `true` hoặc `false` (nếu `true`, xáo trộn ngẫu nhiên để lấy các ảnh khác nhau mỗi lần chạy).
+* **Ví dụ gọi từ n8n (HTTP Request Node):**
+  ```http
+  GET https://phache.com.vn/api/media-library.php?keyword=tra-dao&limit=5&random=true
+  Authorization: Bearer {{ $env.PHACHE_API_SECRET }}
+  ```
+* **Dữ liệu trả về (JSON Response):**
+  ```json
+  {
+    "success": true,
+    "total_found": 1053,
+    "returned": 5,
+    "data": [
+      {
+        "id": 1,
+        "title": "Cach Lam Tra Dao Hibiscus",
+        "filename": "cach-lam-tra-dao-hibiscus.jpg",
+        "url": "https://phache.com.vn/upload/images/cach-lam-tra-dao-hibiscus.jpg",
+        "thumb_url": "https://phache.com.vn/index.php?t=ajax&p=tthumb&src=...",
+        "dimensions": "1200x800",
+        "size_kb": 178
+      }
+    ]
+  }
+  ```
 
 ---
 
