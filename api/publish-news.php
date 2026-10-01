@@ -108,77 +108,9 @@ function pl_random_hex($length = 6) {
     return substr(md5(uniqid(mt_rand(), true)), 0, $length);
 }
 
-// 3. Authentication: Timing-Safe Bearer Token Validation
-$authHeader = '';
-if (!empty($_SERVER['HTTP_AUTHORIZATION'])) {
-    $authHeader = trim($_SERVER['HTTP_AUTHORIZATION']);
-} elseif (!empty($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
-    $authHeader = trim($_SERVER['REDIRECT_HTTP_AUTHORIZATION']);
-} elseif (function_exists('apache_request_headers')) {
-    $headers = apache_request_headers();
-    if (isset($headers['Authorization'])) {
-        $authHeader = trim($headers['Authorization']);
-    } elseif (isset($headers['authorization'])) {
-        $authHeader = trim($headers['authorization']);
-    }
-}
-
-$receivedToken = '';
-if (preg_match('/Bearer\s+(.*)$/i', $authHeader, $matches)) {
-    $receivedToken = trim($matches[1]);
-}
-
-if (empty($receivedToken) || !hash_equals(PHACHE_API_SECRET_TOKEN, $receivedToken)) {
-    http_response_code(401);
-    echo json_encode([
-        'success' => false,
-        'error'   => 'Unauthorized: Invalid or missing Bearer API token.'
-    ], JSON_UNESCAPED_UNICODE);
-    exit;
-}
-
-// 4. Rate Limiting Protection (Max 10 requests per 60 seconds per IP)
-$rawIp = '127.0.0.1';
-if (!empty($_SERVER['HTTP_CF_CONNECTING_IP'])) {
-    $rawIp = $_SERVER['HTTP_CF_CONNECTING_IP'];
-} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-    $rawIp = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0];
-} elseif (!empty($_SERVER['REMOTE_ADDR'])) {
-    $rawIp = $_SERVER['REMOTE_ADDR'];
-}
-$clientIp = filter_var(trim($rawIp), FILTER_VALIDATE_IP) ? trim($rawIp) : '127.0.0.1';
-
-$cacheDir = UPLOAD_DIR . 'cache' . DIRECTORY_SEPARATOR;
-if (!is_dir($cacheDir)) {
-    @mkdir($cacheDir, 0755, true);
-}
-
-$rateLimitFile = $cacheDir . 'ratelimit_' . md5($clientIp) . '.json';
-$currentTime = time();
-$rateLimitWindow = 60; // 60 seconds
-$maxRequests = 10;
-
-$rateData = ['count' => 0, 'first_request' => $currentTime];
-if (file_exists($rateLimitFile)) {
-    $existing = json_decode(@file_get_contents($rateLimitFile), true);
-    if (is_array($existing) && isset($existing['first_request'])) {
-        if (($currentTime - $existing['first_request']) < $rateLimitWindow) {
-            $rateData = $existing;
-        }
-    }
-}
-
-$rateData['count']++;
-@file_put_contents($rateLimitFile, json_encode($rateData));
-
-if ($rateData['count'] > $maxRequests) {
-    http_response_code(429);
-    echo json_encode([
-        'success' => false,
-        'error'   => 'Too Many Requests: Rate limit exceeded. Maximum 10 requests per minute.'
-    ], JSON_UNESCAPED_UNICODE);
-    exit;
-}
+// 3. Authentication & Usage Telemetry: Centralized API Key Gateway
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'auth-guard.php';
+$authenticatedKey = pl_verify_api_key_and_track('publish');
 
 // 5. Connect Database via existing system configuration
 $dbConfigFile = DOCROOT . 'config' . DIRECTORY_SEPARATOR . 'db.php';
