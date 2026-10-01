@@ -322,7 +322,41 @@ $cleanContent = preg_replace_callback('/<img\b([^>]*)>/i', function($matches) us
     return '<img' . $attrs . '>';
 }, $cleanContent);
 
-// D. Table Mobile Responsiveness: Wrap <table> with .table-responsive
+// D. Auto-Rehost External Images (Chuyển toàn bộ ảnh wecha.vn về lưu trữ máy chủ phache.com.vn)
+if (stripos($cleanContent, 'wecha.vn') !== false) {
+    $cleanContent = preg_replace_callback('/src=([\'"])(https?:\/\/[^\'"]*wecha\.vn[^\'"]+)\1/i', function($m) use ($slug) {
+        $extUrl = $m[2];
+        $imgBytes = '';
+        if (function_exists('curl_init')) {
+            $ch = curl_init($extUrl);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 12);
+            $imgBytes = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+            if ($httpCode !== 200) $imgBytes = '';
+        }
+        if (empty($imgBytes)) {
+            $imgBytes = @file_get_contents($extUrl);
+        }
+        if (!empty($imgBytes) && strlen($imgBytes) <= (10 * 1024 * 1024)) {
+            $allowedExts = ['jpg' => 'jpg', 'jpeg' => 'jpg', 'png' => 'png', 'webp' => 'webp'];
+            $fileExt = strtolower(pathinfo(parse_url($extUrl, PHP_URL_PATH), PATHINFO_EXTENSION));
+            if (!isset($allowedExts[$fileExt])) $fileExt = 'jpg';
+            $localName = 'pl_rehost_' . mb_substr($slug, 0, 30, 'UTF-8') . '_' . time() . '_' . pl_random_hex(4) . '.' . $fileExt;
+            $savePath = DOCROOT . 'upload' . DIRECTORY_SEPARATOR . 'news' . DIRECTORY_SEPARATOR . $localName;
+            if (@file_put_contents($savePath, $imgBytes) !== false) {
+                @chmod($savePath, 0644);
+                return 'src=' . $m[1] . 'https://phache.com.vn/upload/news/' . $localName . $m[1];
+            }
+        }
+        return $m[0];
+    }, $cleanContent);
+}
+
+// E. Table Mobile Responsiveness: Wrap <table> with .table-responsive
 if (strpos($cleanContent, '<table') !== false && strpos($cleanContent, 'table-responsive') === false) {
     $cleanContent = preg_replace('/(<table\b[^>]*>.*?<\/table>)/is', '<div class="table-responsive" style="overflow-x:auto;margin:20px 0;">$1</div>', $cleanContent);
 }

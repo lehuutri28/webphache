@@ -67,10 +67,54 @@ Hệ thống Backend API tại `phache.com.vn` đã mở sẵn cổng giao tiế
         "thumb_url": "https://phache.com.vn/index.php?t=ajax&p=tthumb&src=...",
         "dimensions": "1200x800",
         "size_kb": 178
-      }
-    ]
+### 1.3 Endpoint Tiếp Nhận Upload Hình Ảnh Từ Vertex AI / n8n (Upload Media API - P0)
+* **Endpoint:** `https://phache.com.vn/api/upload-media.php`
+* **HTTP Method:** `POST`
+* **Xác thực:** Cùng mã Bearer Token `Authorization: Bearer {{ $env.PHACHE_API_SECRET }}`
+* **Mục đích:** Tiếp nhận hình ảnh do Vertex AI sinh ra (dạng Base64 hoặc Image URL), lưu vĩnh viễn vào máy chủ `phache.com.vn/upload/news/`, chấm dứt hoàn toàn sự phụ thuộc vào link ảnh ngoài `wecha.vn`.
+* **Định dạng dữ liệu gửi lên (Hỗ trợ 3 hình thức):**
+  1. **Hình thức 1 (Vertex AI Base64 - Khuyến nghị cho n8n):**
+     ```json
+     {
+       "image_base64": "data:image/png;base64,iVBORw0KGgo...",
+       "filename": "tra-sua-nuong-hoang-kim",
+       "caption": "Ly trà sữa nướng hoàng kim thơm ngon béo ngậy tại Passion Link",
+       "folder": "news"
+     }
+     ```
+  2. **Hình thức 2 (Image URL công khai):**
+     ```json
+     {
+       "image_url": "https://example.com/generated-drink.png",
+       "filename": "tra-trai-cay-nhiet-doi",
+       "caption": "Trà trái cây nhiệt đới giải nhiệt mùa hè",
+       "folder": "news"
+     }
+     ```
+  3. **Hình thức 3 (Multipart/form-data):** Gửi qua field `file` hoặc `image`.
+
+* **Dữ liệu API trả về (HTTP 201 Created):**
+  ```json
+  {
+    "success": true,
+    "message": "Upload hình ảnh thành công lên phache.com.vn!",
+    "data": {
+      "filename": "pl_tra-sua-nuong-hoang-kim_1790896415_c9af9b.png",
+      "folder": "news",
+      "url": "https://phache.com.vn/upload/news/pl_tra-sua-nuong-hoang-kim_1790896415_c9af9b.png",
+      "thumb_url": "https://phache.com.vn/index.php?t=ajax&p=tthumb&src=...",
+      "dimensions": "1200x800",
+      "width": 1200,
+      "height": 800,
+      "size_kb": 145.2,
+      "mime_type": "image/png",
+      "caption": "Ly trà sữa nướng hoàng kim thơm ngon béo ngậy tại Passion Link",
+      "html_tag": "<figure class=\"pl-article-figure\" style=\"margin:24px auto;text-align:center;max-width:100%;\">\n  <img src=\"https://phache.com.vn/upload/news/pl_tra-sua-nuong-hoang-kim_1790896415_c9af9b.png\" alt=\"Ly trà sữa nướng hoàng kim thơm ngon béo ngậy tại Passion Link\" loading=\"lazy\" decoding=\"async\" style=\"border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,0.08);max-width:100%;height:auto;\" />\n  <figcaption style=\"font-size:14px;color:#64748b;font-style:italic;margin-top:8px;\">Ly trà sữa nướng hoàng kim thơm ngon béo ngậy tại Passion Link</figcaption>\n</figure>"
+    }
   }
   ```
+* **Bảo vệ Kép (Layer 2 Safeguard trong `publish-news.php`):**
+  - Ngay cả khi trong nội dung bài viết gửi sang `publish-news.php` vẫn còn sót bất kỳ link ảnh nào từ `wecha.vn`, hệ thống Backend sẽ **TỰ ĐỘNG cào ảnh đó về lưu trữ nội bộ tại `phache.com.vn/upload/news/` và rewrite lại thẻ `<img src="...">` thành domain `phache.com.vn`** trước khi ghi vào CSDL!
 
 ---
 
