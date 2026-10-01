@@ -21,8 +21,8 @@ legacy/wc_tables.txt
 
 # Environment & Sensitive configs
 .env*
-config/.env
-config/.env.local
+config/
+api/config.php
 *.env
 *ftp*.rtf
 *ftp*.txt

@@ -1,0 +1,24 @@
+# Apache configuration for phache.com.vn API Endpoint
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Prevent parent .htaccess from rewriting requests inside /api/
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+</IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "DENY"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Block access to hidden files and backup/config files
+<FilesMatch "^\.|\.(bak|config|sql|sh|env|log)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Explicitly forbid directory browsing
+Options -Indexes
