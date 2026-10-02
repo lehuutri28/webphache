@@ -2627,7 +2627,7 @@ function plTrackConversion(eventName, locationName, estimatedValue) {
     });
     if (eventName === 'generate_lead') {
       gtag('event', 'conversion', {
-        'send_to': 'AW-16775247010/lead_form',
+        'send_to': 'AW-16775247010/7qOlCOeDroodEKLph78-',
         'value': estimatedValue || 500000,
         'currency': 'VND'
       });

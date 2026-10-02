@@ -1555,7 +1555,9 @@ $isSuccessView = (isset($_GET['success']) && $_GET['success'] === '1');
                 // 2. Google tag Conversion
                 if (typeof gtag === 'function') {
                     gtag('event', 'conversion', {
-                        'send_to': 'AW-16775247010'
+                        'send_to': 'AW-16775247010/7qOlCOeDroodEKLph78-',
+                        'value': 500000.0,
+                        'currency': 'VND'
                     });
                 }
             } catch (err) {

@@ -1668,6 +1668,11 @@ function plSubmitExcelLead(e) {
       'lead_source': 'gated_excel_download',
       'value': 1
     });
+    gtag('event', 'conversion', {
+      'send_to': 'AW-16775247010/7qOlCOeDroodEKLph78-',
+      'value': 500000.0,
+      'currency': 'VND'
+    });
     gtag('event', 'file_download', {
       'file_name': 'ke-hoach-dong-tien-mo-quan-passion-link.xlsx',
       'file_extension': 'xlsx'
