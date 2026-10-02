@@ -135,6 +135,61 @@ if (!$obMySQLi || $obMySQLi->connect_errno) {
 }
 $obMySQLi->set_charset("utf8mb4");
 
+// Helper: Detect placeholder/dummy description strings
+function pl_is_dummy_description($str) {
+    if (empty($str)) {
+        return true;
+    }
+    $trimmed = trim(strip_tags($str));
+    if (mb_strlen($trimmed, 'UTF-8') < 20) {
+        return true;
+    }
+    $dummyRegex = '/^(?:t\x{00F3}m t\x{1EAF}t b\x{00E0}i vi\x{1EBF}t|t\x{00F3}m t\x{1EAF}t|m\x{00F4} t\x{1EA3} b\x{00E0}i vi\x{1EBF}t|m\x{00F4} t\x{1EA3}|description|summary|excerpt|ch\x{01B0}a c\x{00F3} m\x{00F4} t\x{1EA3}|n\/a|none|ch\x{01B0}a c\x{00F3}|ti\x{00EA}u \x{0111}\x{1EC1}|b\x{00E0}i vi\x{1EBF}t)\b/iu';
+    if (preg_match($dummyRegex, $trimmed)) {
+        return true;
+    }
+    return false;
+}
+
+// Helper: Generate clean, rich summary excerpt from article HTML content
+function pl_generate_clean_excerpt($html, $maxLength = 155) {
+    if (empty($html)) {
+        return '';
+    }
+    // Remove scripts, styles, iframes, embeds, videos, figures, tables, headings, and special modules
+    $cleaned = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $html);
+    $cleaned = preg_replace('/<style\b[^>]*>(.*?)<\/style>/is', '', $cleaned);
+    $cleaned = preg_replace('/<video\b[^>]*>(.*?)<\/video>/is', '', $cleaned);
+    $cleaned = preg_replace('/<figure\b[^>]*>(.*?)<\/figure>/is', '', $cleaned);
+    $cleaned = preg_replace('/<table\b[^>]*>(.*?)<\/table>/is', '', $cleaned);
+    $cleaned = preg_replace('/<iframe\b[^>]*>(.*?)<\/iframe>/is', '', $cleaned);
+    $cleaned = preg_replace('/<h[1-6]\b[^>]*>(.*?)<\/h[1-6]>/is', '', $cleaned);
+    $cleaned = preg_replace('/<div class="[^"]*(?:video|author|cta|retention|meta)[^"]*"[^>]*>(.*?)<\/div>/is', '', $cleaned);
+    
+    // Strip tags and decode entities
+    $text = strip_tags($cleaned);
+    $text = html_entity_decode($text, ENT_QUOTES, 'UTF-8');
+    // Normalize spaces and newlines
+    $text = preg_replace('/\s+/', ' ', $text);
+    $text = trim($text);
+    
+    if (empty($text)) {
+        $text = trim(preg_replace('/\s+/', ' ', strip_tags($html)));
+    }
+    
+    if (mb_strlen($text, 'UTF-8') <= $maxLength) {
+        return $text;
+    }
+    
+    // Trim to last word boundary
+    $cut = mb_substr($text, 0, $maxLength, 'UTF-8');
+    $lastSpace = mb_strrpos($cut, ' ', 0, 'UTF-8');
+    if ($lastSpace !== false && $lastSpace > ($maxLength - 25)) {
+        $cut = mb_substr($cut, 0, $lastSpace, 'UTF-8');
+    }
+    return rtrim($cut, " \t\n\r\0\x0B.,;:-") . '...';
+}
+
 // 6. Parse and Validate Ingestion Payload
 $rawInput = file_get_contents('php://input');
 $payload = json_decode($rawInput, true);
@@ -145,6 +200,67 @@ if (!is_array($payload) || empty($payload)) {
         'success' => false,
         'error'   => 'Bad Request: Missing or invalid JSON request body.'
     ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+// Special maintenance actions (authenticated via Bearer token)
+if (isset($payload['action']) && in_array($payload['action'], array('heal_descriptions', 'inspect_descriptions'))) {
+    $isInspectOnly = ($payload['action'] === 'inspect_descriptions');
+    $overrides = (isset($payload['overrides']) && is_array($payload['overrides'])) ? $payload['overrides'] : array();
+
+    $res = $obMySQLi->query("SELECT news_id, news_title, news_description, news_content FROM `news` ORDER BY news_id DESC LIMIT 100");
+    $items = array();
+    $updateStmt = null;
+    if (!$isInspectOnly) {
+        $updateStmt = $obMySQLi->prepare("UPDATE `news` SET `news_description` = ?, `news_date_modified` = ? WHERE `news_id` = ?");
+    }
+
+    if ($res) {
+        while ($row = $res->fetch_assoc()) {
+            $nid = intval($row['news_id']);
+            $currentDesc = str_replace(array('&#34;', '&#39;'), array('"', "'"), $row['news_description']);
+            $titleDecoded = str_replace(array('&#34;', '&#39;'), array('"', "'"), $row['news_title']);
+            $isDummy = pl_is_dummy_description($currentDesc);
+            $hasOverride = isset($overrides[$nid]) || isset($overrides[(string)$nid]);
+
+            if ($isDummy || $hasOverride) {
+                if ($hasOverride) {
+                    $newDesc = trim(strip_tags(isset($overrides[$nid]) ? $overrides[$nid] : $overrides[(string)$nid]));
+                } else {
+                    $rawHtml = str_replace(array('&#34;', '&#39;'), array('"', "'"), $row['news_content']);
+                    $newDesc = pl_generate_clean_excerpt($rawHtml, 155);
+                    if (empty($newDesc)) {
+                        $newDesc = 'Khám phá bí quyết pha chế và kinh nghiệm mở quán thực chiến tại Passion Link.';
+                    }
+                }
+
+                if (!$isInspectOnly && $updateStmt) {
+                    $encodedNewDesc = trim(str_replace(array('"', "'"), array('&#34;', '&#39;'), $newDesc));
+                    $nowTs = time();
+                    $updateStmt->bind_param('sii', $encodedNewDesc, $nowTs, $nid);
+                    $updateStmt->execute();
+                }
+
+                $items[] = array(
+                    'news_id' => $nid,
+                    'title' => $titleDecoded,
+                    'old_description' => $currentDesc,
+                    'new_description' => $newDesc,
+                    'updated' => !$isInspectOnly
+                );
+            }
+        }
+        if ($updateStmt) {
+            $updateStmt->close();
+        }
+    }
+
+    echo json_encode(array(
+        'success' => true,
+        'action' => $payload['action'],
+        'affected_count' => count($items),
+        'items' => $items
+    ), JSON_UNESCAPED_UNICODE);
     exit;
 }
 
@@ -212,13 +328,32 @@ function pl_vietnamese_slugify($str) {
 
 $slug = !empty($payload['slug']) ? pl_vietnamese_slugify($payload['slug']) : pl_vietnamese_slugify($title);
 
-// Meta description
+// Meta description (Multi-alias support & Anti-dummy protection)
 $description = '';
-if (!empty($payload['description'])) {
-    $description = trim(strip_tags($payload['description']));
-} else {
-    $plain = trim(strip_tags($rawContent));
-    $description = mb_substr($plain, 0, 155, 'UTF-8') . (mb_strlen($plain, 'UTF-8') > 155 ? '...' : '');
+$descAliases = array('description', 'summary', 'excerpt', 'short_description', 'meta_description', 'tom_tat', 'mo_ta');
+foreach ($descAliases as $alias) {
+    if (!empty($payload[$alias]) && is_string($payload[$alias])) {
+        $candidate = trim(strip_tags($payload[$alias]));
+        if (!pl_is_dummy_description($candidate)) {
+            $description = $candidate;
+            break;
+        }
+    }
+}
+
+// Fallback to intelligent excerpt generation if candidate is empty or dummy
+if (empty($description)) {
+    $description = pl_generate_clean_excerpt($rawContent, 155);
+}
+
+// Normalize length (keep within 140 - 165 chars for optimal SEO)
+if (mb_strlen($description, 'UTF-8') > 165) {
+    $cut = mb_substr($description, 0, 160, 'UTF-8');
+    $lastSpace = mb_strrpos($cut, ' ', 0, 'UTF-8');
+    if ($lastSpace !== false && $lastSpace > 130) {
+        $cut = mb_substr($cut, 0, $lastSpace, 'UTF-8');
+    }
+    $description = rtrim($cut, " \t\n\r\0\x0B.,;:-") . '...';
 }
 
 // Meta keywords

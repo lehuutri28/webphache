@@ -34,7 +34,7 @@
 
 | Ngày | Task ID | Ngày Viết & Duyệt | Ngày Đăng Chính Thức | Tên Đề Tài Bài Viết | Nhóm Chủ Đề | Khóa Học Mục Tiêu Chuyển Đổi | Trạng Thái |
 | :---: | :---: | :---: | :---: | :--- | :--- | :--- | :---: |
-| **D1** | `WF018-D01` | 02/10/2026 | **03/10/2026 (08:30)** | Top 5 Công Thức Trà Sữa Đậm Vị Mở Quán Hút Khách Nhất [2026] | Menu Hot Trend | Khóa Trà Sữa Chuẩn Vị (ID 34/72) | ⏳ Sẵn sàng |
+| **D1** | `WF018-D01` | 02/10/2026 | **02/10/2026** | [Top 5 Công Thức Trà Sữa Đậm Vị Hút Khách Mở Quán 2026](https://phache.com.vn/tin-tuc/cong-thuc-tra-sua-dam-vi-mo-quan-hut-khach-2026-678.html) | Menu Hot Trend | Khóa Trà Sữa Chuẩn Vị (ID 34/72) | ✅ Hoàn thành xuất bản |
 | **D2** | `WF018-D02` | 03/10/2026 | **04/10/2026 (08:30)** | Kinh Doanh Menu Matcha 2026: Cách Đánh Bọt Foam & Phối Vị Chuẩn Gu Gen Z | Menu Hot Trend | Khóa Học Tổng Hợp (ID 22) | ⏳ Chờ lịch |
 | **D3** | `WF018-D03` | 04/10/2026 | **05/10/2026 (08:30)** | Top 7 Món Trà Trái Cây Tươi Mở Quán Doanh Thu Cao: Công Thức Tối Ưu Cost | Menu Hot Trend | Khóa Trà Trái Cây Hiện Đại | ⏳ Chờ lịch |
 | **D4** | `WF018-D04` | 05/10/2026 | **06/10/2026 (08:30)** | Cách Làm Cà Phê Muối & Cà Phê Trứng Chuẩn Vị Mở Quán: Bí Quyết Đánh Foam Lâu Tan | Menu Hot Trend | Khóa Barista Chuyên Nghiệp (ID 137) | ⏳ Chờ lịch |
@@ -52,14 +52,28 @@
 ---
 
 ### 🟢 TASK WF018-D01: MENU TRÀ SỮA ĐẬM VỊ NGUYÊN LÁ
-* **Ngày viết & tạo ảnh:** 02/10/2026  
-* **Ngày xuất bản chính thức:** 03/10/2026 lúc 08:30 AM  
+* **Trạng thái thực thi:** ✅ **HOÀN THÀNH XUẤT BẢN TỰ ĐỘNG 100% (LIVE 200 OK)**
+* **URL Bài viết chính thức:** [https://phache.com.vn/tin-tuc/cong-thuc-tra-sua-dam-vi-mo-quan-hut-khach-2026-678.html](https://phache.com.vn/tin-tuc/cong-thuc-tra-sua-dam-vi-mo-quan-hut-khach-2026-678.html)
+* **ID Bài viết CMS:** `678` | **Article ID n8n:** `3f02893e-55f0-4ef6-8658-a799e2d2c190`
+* **Ngày viết & xuất bản:** 02/10/2026  
 * **Chuyên mục:** `category_id: 31` (Tin tức & Xu hướng)  
-* **Tiêu đề SEO:** `Top 5 Công Thức Trà Sữa Đậm Vị Mở Quán Hút Khách Nhất [2026]`  
+* **Tiêu đề SEO:** `Top 5 Công Thức Trà Sữa Đậm Vị Hút Khách Mở Quán 2026`  
 * **Slug URL:** `cong-thuc-tra-sua-dam-vi-mo-quan-hut-khach-2026`  
 * **Từ khóa chính:** `trà sữa đậm vị mở quán` (KGR = 0.18 - Siêu tiềm năng Top 1)  
 * **Từ khóa phụ:** `cách ủ trà sữa đậm vị`, `trà sữa ô long nướng kinh doanh`, `chi phí 1 ly trà sữa đậm vị`, `công thức trà sữa nguyên lá`.  
 * **Meta Description:** `Bật mí 5 công thức trà sữa đậm vị nguyên lá chuẩn gu kinh doanh 2026: Bí quyết ủ cốt trà không chát, bảng định lượng chi tiết và bảng tính cost giá vốn tối ưu lợi nhuận gộp > 70%.`  
+* **Kết quả kiểm định On-Page & Kỹ thuật:**
+  - ✅ **Single H1:** Đạt chuẩn duy nhất 1 thẻ `<h1>` (Top 5 Công Thức Trà Sữa Đậm Vị Hút Khách Mở Quán 2026).
+  - ✅ **Tài chính & Cost Table:** Bảng định lượng gram/ml, giá vốn nguyên liệu chi tiết (Cost < 30%, Lợi nhuận gộp > 70%).
+  - ✅ **Zero Wecha Dependency:** 100% hình ảnh (5/5 ảnh) lưu trữ nội bộ domain `https://phache.com.vn/upload/news/` (Không có bất kỳ URL wecha.vn nào).
+  - ✅ **Schema Google Rich Snippet:** 3 script `application/ld+json` chuẩn cấu trúc `FAQPage` tự động hiển thị trên kết quả tìm kiếm Google.
+  - ✅ **Internal Link:** Contextual link trỏ về `https://phache.com.vn/day-pha-che-tra-sua-ngon.html` hoạt động hoàn hảo.
+* **Danh sách Media 5 ảnh chuẩn Passion Link:**
+  1. `https://phache.com.vn/upload/news/pl_pl-cong-thuc-tra-sua-dam-vi-mo-quan-hut-kha_1790927807_48620b.png`
+  2. `https://phache.com.vn/upload/news/pl_pl-cong-thuc-tra-sua-dam-vi-mo-quan-hut-kha_1790927698_846eb5.png`
+  3. `https://phache.com.vn/upload/news/pl_pl-cong-thuc-tra-sua-dam-vi-mo-quan-hut-kha_1790927874_d2fd9f.png`
+  4. `https://phache.com.vn/upload/news/pl_pl-cong-thuc-tra-sua-dam-vi-mo-quan-hut-kha_1790927539_db5b66.png`
+  5. `https://phache.com.vn/upload/news/pl_pl-cong-thuc-tra-sua-dam-vi-mo-quan-hut-kha_1790927632_fe5208.png`
 
 #### 1. Dàn ý cấu trúc nội dung (Outline)
 * `H1`: Top 5 Công Thức Trà Sữa Đậm Vị Mở Quán Hút Khách Nhất [2026]
@@ -397,4 +411,60 @@ Sau mỗi bài đăng được n8n bắn API xuất bản thành công lúc 08:3
 5. **Cập nhật Nhật ký:** C11/C12 đánh dấu `[x]` vào Bảng Kanban mục II và lưu ID bài viết thực tế vào tài liệu này.
 
 ---
-*Kế hoạch đã được lưu trữ vĩnh viễn tại file mã nguồn: `task-log-danh-sach-bai-viet-website-phache.md` trên hệ thống máy chủ.*
+
+## 🛠️ VI. BIÊN BẢN KỸ THUẬT: QUY ĐỊNH & XỬ LÝ DỨT ĐIỂM TÓM TẮT BÀI VIẾT (SUMMARY / DESCRIPTION)
+
+**Chuyên viên thực hiện:** C12 - Senior Full-Stack Web Developer & Technical SEO Lead  
+**Thời gian xử lý:** 02/10/2026  
+**Trạng thái:** ✅ Đã hoàn thành 100% - Đã triển khai Production & Xác thực Live  
+
+---
+
+### 1. Phân Tích Nguyên Nhân Gốc Rễ (Root Cause Analysis)
+* **Thực trạng phát hiện:** Trên trang danh mục `https://phache.com.vn/tin-tuc.html`, 4 bài viết đăng tự động qua API bởi n8n (ID 677, 678, 679, 680) hiển thị phần tóm tắt là chữ giữ chỗ thô: `<div class="description">Tóm tắt bài viết</div>`. Trong khi đó, các bài người viết hiển thị 1-2 câu tóm tắt nội dung hấp dẫn, chứa từ khóa.
+* **Nguyên nhân tại luồng n8n (WF-018):** Trong node JSON template của n8n, trường `description` đang bị gán cứng chuỗi placeholder `"Tóm tắt bài viết"` hoặc prompt LLM chưa sinh ra đoạn tóm tắt thực tế.
+* **Nguyên nhân tại Backend API cũ (`api/publish-news.php`):** Code cũ chỉ kiểm tra `if (!empty($payload['description']))`. Do chuỗi `"Tóm tắt bài viết"` không rỗng, API đã chấp nhận và lưu thẳng vào cột `news_description` trong CSDL MySQL `news`.
+* **Nguyên nhân tại Template (`template/news.php` dòng 1824):** Code giao diện chỉ gọi `limitCharsUnicode($n['news_description'], 150)` mà không có bộ lọc chống chuỗi rác placeholder.
+
+---
+
+### 2. Quy Định Chuẩn Cho API & Prompt n8n (Payload Contract)
+
+#### A. Tên trường dữ liệu (Field Aliases)
+Hệ thống API Backend hiện hỗ trợ đầy đủ các bí danh trường sau để n8n linh hoạt sử dụng:
+* `description` (Khuyến nghị chuẩn)
+* `summary`
+* `excerpt`
+* `short_description`
+* `meta_description`
+* `tom_tat` / `mo_ta`
+
+#### B. Tiêu chuẩn nội dung tóm tắt
+* **Độ dài vàng:** **130 – 160 ký tự**.
+* **Cấu trúc:** Tóm tắt 1-2 câu súc tích nêu bật điểm giá trị nhất của bài viết, chứa từ khóa chính ngay 50 ký tự đầu.
+* **Định dạng:** Văn bản thuần túy (Plain text UTF-8), tuyệt đối không chèn mã HTML, không chứa icon rác.
+* **Quy tắc cấm kỵ cho C11:** **TUYỆT ĐỐI KHÔNG gửi chuỗi placeholder** như `"Tóm tắt bài viết"`, `"Mô tả"`, `"N/A"`, `"None"`.
+
+#### C. Cấu hình Prompt gợi ý trong Node n8n LLM
+```text
+"description": "Viết 1 đoạn tóm tắt bài viết súc tích, hấp dẫn dài từ 130 đến 160 ký tự. Nêu bật giải pháp hoặc công thức chính trong bài, chứa từ khóa chính ngay đầu câu để kích thích người đọc bấm vào xem."
+```
+
+---
+
+### 3. Cơ Chế Bảo Vệ Đa Tầng Đã Triển Khai (Multi-Layer Safeguards)
+
+1. **Tầng 1 (Tại Backend Ingestion - `api/publish-news.php`):**
+   * Hàm `pl_is_dummy_description()`: Nhận diện và loại bỏ tự động mọi chuỗi rác/placeholder (`Tóm tắt bài viết`, `Mô tả`, chuỗi ngắn < 20 ký tự).
+   * Hàm `pl_generate_clean_excerpt()`: Khi `description` bị thiếu hoặc là chuỗi placeholder, API tự động trích xuất thông minh 155 ký tự từ thân bài viết HTML (đã loại bỏ sạch sẽ thẻ video, heading `<h2>/<h3>`, bảng cost, script/style, lấy đúng đoạn văn mở đầu tự nhiên).
+2. **Tầng 2 (Tại Frontend Render - `template/news.php`):**
+   * Tại dòng 1824, bổ sung lớp bảo vệ trực tiếp: Nếu `news_description` rỗng hoặc phát hiện chuỗi placeholder, giao diện web tự động trích xuất tóm tắt trực tiếp từ `news_content` để hiển thị mượt mà.
+3. **Tầng 3 (Data Healing CSDL Live):**
+   * Đã kích hoạt action `heal_descriptions` thông qua API xác thực Bearer token, vĩnh viễn sửa 4 bài viết cũ trên máy chủ:
+     - **ID 677:** `Chiến lược xây dựng menu cà phê đột phá 2026 giúp quán đông khách nườm nượp: Định vị sản phẩm chủ lực, kỹ thuật decor ấn tượng và tối ưu cost giá vốn dưới 15%.`
+     - **ID 678:** `Khám phá 5 công thức trà sữa đậm vị độc quyền hút khách mở quán 2026: Kỹ thuật ủ trà đậm đà, tỷ lệ phối sữa chuẩn vị và cách làm topping tươi giữ chân thực khách.`
+     - **ID 679:** `Bí quyết pha chế 5 món trà sữa đậm vị hot trend 2026: Cốt trà đậm sâu không ngọt gắt, định lượng giá vốn chuẩn và quy trình vận hành tối ưu cho chủ quán.`
+     - **ID 680:** `Cẩm nang mở quán cà phê đắt khách 2026: Bí quyết thiết kế menu tinh gọn, bảng tính cost chi tiết từng món và phương pháp gia tăng biên lợi nhuận bền vững.`
+
+---
+*Kế hoạch & Biên bản kỹ thuật đã được lưu trữ vĩnh viễn tại file mã nguồn: `task-log-danh-sach-bai-viet-website-phache.md` trên hệ thống máy chủ.*

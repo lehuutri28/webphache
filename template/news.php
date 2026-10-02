@@ -1807,6 +1807,25 @@ position: absolute;
                             $n['news_url'] = getUrlUri($template['page']['page_permalink'],'.html',$n['news_id'],$n['title']);
                             $n['img_url']  = prepareImg(NEWS_DIR.$n['news_image'], NEWS_URL.$n['news_image']);
                             $n['img_thumb'] = TTHUMB_URL . '&amp;src=' . base64_encode($n['img_url']) . '&amp;w=600&amp;h=400';
+
+                            // Tối ưu mô tả tóm tắt hiển thị: Chống hiển thị placeholder thô "Tóm tắt bài viết"
+                            $n_desc = !empty($n['news_description']) ? trim(strip_tags(quotesDecode($n['news_description']))) : '';
+                            if (empty($n_desc) || preg_match('/^(?:tóm tắt bài viết|tóm tắt|mô tả bài viết|mô tả|description|summary|excerpt)\b/iu', $n_desc)) {
+                                if (!empty($n['news_content'])) {
+                                    $rawClean = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $n['news_content']);
+                                    $rawClean = preg_replace('/<style\b[^>]*>(.*?)<\/style>/is', '', $rawClean);
+                                    $rawClean = preg_replace('/<video\b[^>]*>(.*?)<\/video>/is', '', $rawClean);
+                                    $rawClean = preg_replace('/<figure\b[^>]*>(.*?)<\/figure>/is', '', $rawClean);
+                                    $rawClean = preg_replace('/<table\b[^>]*>(.*?)<\/table>/is', '', $rawClean);
+                                    $rawClean = preg_replace('/<h[1-6]\b[^>]*>(.*?)<\/h[1-6]>/is', '', $rawClean);
+                                    $rawClean = trim(preg_replace('/\s+/', ' ', strip_tags(quotesDecode($rawClean))));
+                                    $n_desc = !empty($rawClean) ? limitCharsUnicode($rawClean, 150) : 'Khám phá bí quyết pha chế và kinh nghiệm mở quán thực chiến tại Passion Link.';
+                                } else {
+                                    $n_desc = 'Khám phá bí quyết pha chế và kinh nghiệm mở quán thực chiến tại Passion Link.';
+                                }
+                            } else {
+                                $n_desc = limitCharsUnicode($n_desc, 150);
+                            }
                 ?>
                         <div class="news_item col-md-4 col-sm-6">
                             <div class="box-effect">
@@ -1821,7 +1840,7 @@ position: absolute;
                                             <?php echo limitCharsUnicode($n['title'], 50) ?>
                                         </a>
                                     </div>
-                                    <div class="description"><?php echo limitCharsUnicode($n['news_description'], 150) ?></div>
+                                    <div class="description"><?php echo $n_desc ?></div>
                                 </div>
                             </div>
                         </div>
