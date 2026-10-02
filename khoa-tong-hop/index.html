@@ -559,14 +559,23 @@ footer a:hover{text-decoration:underline;}
 }
 </script>
 
-<!-- GOOGLE TAG CHUẨN KÉP GA4 & GOOGLE ADS (Passion Link 2026) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5QT1MTZHXT"></script>
+<!-- Google tag (gtag.js) - Google Ads & GA4 Chuẩn Kép -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16775247010"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-5QT1MTZHXT', { 'send_page_view': true });
-  gtag('config', 'AW-16775247010');
+
+  // 1. Cấu hình Thẻ Google Ads (Có bật Chuyển đổi nâng cao & Tự động liên kết)
+  gtag('config', 'AW-16775247010', {
+    'allow_enhanced_conversions': true,
+    'send_page_view': true
+  });
+
+  // 2. Cấu hình Google Analytics 4 đồng bộ
+  gtag('config', 'G-5QT1MTZHXT', {
+    'send_page_view': true
+  });
 </script>
 </head>
 <body>
