@@ -262,6 +262,113 @@ if (isset($payload['action']) && in_array($payload['action'], array('heal_descri
         'items' => $items
     ), JSON_UNESCAPED_UNICODE);
     exit;
+} elseif (isset($payload['action']) && $payload['action'] === 'get_article') {
+    $aid = isset($payload['article_id']) ? intval($payload['article_id']) : 0;
+    $stmt = $obMySQLi->prepare("SELECT news_id, page_id, news_title, news_description, news_content, news_image, news_order FROM `news` WHERE news_id = ?");
+    $stmt->bind_param('i', $aid);
+    $stmt->execute();
+    $stmt->bind_result($db_id, $db_page, $db_title, $db_desc, $db_content, $db_img, $db_order);
+    if ($stmt->fetch()) {
+        $stmt->close();
+        echo json_encode(array(
+            'success' => true,
+            'data' => array(
+                'news_id' => intval($db_id),
+                'page_id' => intval($db_page),
+                'order' => intval($db_order),
+                'title' => str_replace(array('&#34;', '&#39;'), array('"', "'"), $db_title),
+                'description' => str_replace(array('&#34;', '&#39;'), array('"', "'"), $db_desc),
+                'content_html' => str_replace(array('&#34;', '&#39;'), array('"', "'"), $db_content),
+                'image' => $db_img
+            )
+        ), JSON_UNESCAPED_UNICODE);
+    } else {
+        $stmt->close();
+        http_response_code(404);
+        echo json_encode(array('success' => false, 'error' => 'Article not found'), JSON_UNESCAPED_UNICODE);
+    }
+    exit;
+} elseif (isset($payload['action']) && $payload['action'] === 'update_article') {
+    $aid = isset($payload['article_id']) ? intval($payload['article_id']) : 0;
+    if ($aid <= 0) {
+        http_response_code(400);
+        echo json_encode(array('success' => false, 'error' => 'Invalid article_id'), JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+    $fields = array();
+    $types = '';
+    $values = array();
+
+    if (isset($payload['page_id'])) {
+        $fields[] = "`page_id` = ?";
+        $types .= 'i';
+        $values[] = intval($payload['page_id']);
+    }
+    if (isset($payload['order'])) {
+        $fields[] = "`news_order` = ?";
+        $types .= 'i';
+        $values[] = intval($payload['order']);
+    }
+    if (isset($payload['title'])) {
+        $fields[] = "`news_title` = ?";
+        $types .= 's';
+        $values[] = trim(str_replace(array('"', "'"), array('&#34;', '&#39;'), $payload['title']));
+    }
+    if (isset($payload['description'])) {
+        $fields[] = "`news_description` = ?";
+        $types .= 's';
+        $values[] = trim(str_replace(array('"', "'"), array('&#34;', '&#39;'), $payload['description']));
+    }
+    if (isset($payload['content_html'])) {
+        $fields[] = "`news_content` = ?";
+        $types .= 's';
+        $values[] = trim(str_replace(array('"', "'"), array('&#34;', '&#39;'), $payload['content_html']));
+    }
+    if (isset($payload['image'])) {
+        $fields[] = "`news_image` = ?";
+        $types .= 's';
+        $values[] = trim($payload['image']);
+    }
+
+    $fields[] = "`news_date_modified` = ?";
+    $types .= 'i';
+    $values[] = time();
+
+    $types .= 'i';
+    $values[] = $aid;
+
+    $sql = "UPDATE `news` SET " . implode(', ', $fields) . " WHERE `news_id` = ?";
+    $stmt = $obMySQLi->prepare($sql);
+    if ($stmt) {
+        $bindParams = array($types);
+        for ($i = 0; $i < count($values); $i++) {
+            $bindParams[] = &$values[$i];
+        }
+        call_user_func_array(array($stmt, 'bind_param'), $bindParams);
+        $stmt->execute();
+        $affected = $stmt->affected_rows;
+        $stmt->close();
+        echo json_encode(array('success' => true, 'affected' => $affected, 'article_id' => $aid), JSON_UNESCAPED_UNICODE);
+    } else {
+        http_response_code(500);
+        echo json_encode(array('success' => false, 'error' => $obMySQLi->error), JSON_UNESCAPED_UNICODE);
+    }
+    exit;
+} elseif (isset($payload['action']) && $payload['action'] === 'delete_article') {
+    $aids = isset($payload['article_ids']) ? (array)$payload['article_ids'] : (isset($payload['article_id']) ? array(intval($payload['article_id'])) : array());
+    $cleanAids = array();
+    foreach ($aids as $v) {
+        $iv = intval($v);
+        if ($iv > 0) $cleanAids[] = $iv;
+    }
+    if (!empty($cleanAids)) {
+        $inList = implode(',', $cleanAids);
+        $delRes = $obMySQLi->query("DELETE FROM `news` WHERE `news_id` IN ($inList)");
+        echo json_encode(array('success' => true, 'deleted_ids' => $cleanAids, 'status' => $delRes), JSON_UNESCAPED_UNICODE);
+    } else {
+        echo json_encode(array('success' => false, 'error' => 'No article IDs provided'), JSON_UNESCAPED_UNICODE);
+    }
+    exit;
 }
 
 // Required fields validation
@@ -293,10 +400,8 @@ $categoryMap = [
     24 => 'day-pha-che-tra-sua-ngon',
     22 => 'cac-khoa-hoc-day-pha-che'
 ];
-$categoryId = isset($payload['category_id']) ? intval($payload['category_id']) : 31;
-if (!isset($categoryMap[$categoryId])) {
-    $categoryId = 31;
-}
+$defaultCat = (isset($defaultCategoryId) && isset($categoryMap[intval($defaultCategoryId)])) ? intval($defaultCategoryId) : 31;
+$categoryId = (isset($payload['category_id']) && isset($categoryMap[intval($payload['category_id'])])) ? intval($payload['category_id']) : $defaultCat;
 $categorySlug = $categoryMap[$categoryId];
 
 // 7. SEO Helper Functions

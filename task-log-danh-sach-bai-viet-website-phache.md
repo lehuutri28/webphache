@@ -20,38 +20,42 @@
 2. **Quy Chuẩn Hình Ảnh (Zero Wecha Dependency):** 
    - Tuyệt đối **không** dùng link ảnh ngoài (`wecha.vn/images/...`).
    - C11 sinh ảnh từ Vertex AI (Base64) ➡️ Gửi qua endpoint `POST https://phache.com.vn/api/upload-media.php` để lưu trữ vĩnh viễn tại thư mục máy chủ `/upload/news/` trên domain `phache.com.vn`.
-   - Mỗi bài viết có tối thiểu: **1 ảnh đại diện** (Featured Image tỷ lệ 16:9, tối thiểu 1200x675px) + **1 đến 2 ảnh minh họa thân bài** (tỷ lệ 16:9 hoặc 4:3).
+   - Mỗi bài viết có tối thiểu: **1 ảnh đại diện** (Featured Image tỷ lệ 16:9, tối thiểu 1200x675px) + **1 đến 2 ảnh minh họa thân bài** (tỷ lệ 16:9 hoặc 800x500px). Dung lượng dưới 150KB.
+   - **Chú thích ảnh (figcaption & alt):** Dùng tiếng Việt tự nhiên, miêu tả chân thực tại xưởng Passion Link. **TUYỆT ĐỐI KHÔNG để lọt câu lệnh Prompt AI** vào alt hoặc caption.
 3. **Cấu Trúc Heading & Dữ Liệu Bảng (Table):**
-   - Duy nhất **1 thẻ H1** (tiêu đề bài viết).
-   - Thân bài phân cấp rõ ràng `H2` và `H3`.
+   - Duy nhất **1 thẻ H1** (tiêu đề bài viết). Thân bài phân cấp rõ ràng `H2` và `H3`.
    - Bắt buộc có **ít nhất 1 bảng Table HTML** phân tích chi tiết: Định lượng nguyên liệu (gram/ml), Giá vốn (Cost ly nước), Giá bán đề xuất và Tỷ lệ lợi nhuận gộp (> 70%).
-4. **Cấu Trúc FAQPage Schema:** Cung cấp mảng `faq_items` gồm tối thiểu 3 câu hỏi thực chiến để API tự động sinh mã cấu trúc Schema `FAQPage` chuẩn Google Rich Snippets.
+4. **Cấu Trúc FAQPage Schema:** Cung cấp mảng `faqs` gồm 2 đến 4 câu hỏi thực chiến để API tự động sinh mã cấu trúc Schema `FAQPage` chuẩn Google Rich Snippets.
 5. **Mạng Lưới Internal Link Silo:** Mỗi bài viết bắt buộc trỏ ngữ cảnh (Contextual Link) về khóa học đích và công cụ tính chi phí tương ứng trên `phache.com.vn`.
-6. **Chiến Lược Bán Nguyên Liệu Nhà Máy Độc Quyền (WECHA, SAFE KING, ROYAL'S - Bắt buộc 100%):**
-   - **Nguồn chân lý dữ liệu:** Bảng tính Google Sheet sản phẩm nhà máy: [Google Sheet Danh Mục Sản Phẩm Nhà Máy](https://docs.google.com/spreadsheets/d/17gNnZnicD7_u5aCt3QGE9s_Qw6QB6FEO9XO_DInXMzU/edit?gid=0#gid=0) (Tab `san_pham`).
+6. **Chiến Lược Bán Nguyên Liệu Nhà Máy Độc Quyền (VUA AN TOÀN, WECHA, SAFE KING, ROYAL'S - Bắt buộc 100%):**
    - Mọi công thức pha chế, định lượng và bảng tính chi phí giá vốn (Cost table) trong bài viết bắt buộc chỉ sử dụng nguyên liệu do nhà máy của công ty sản xuất:
-     * **TRÀ:** Bắt buộc dùng thương hiệu **WECHA** (Trà Đen Assam Wecha, Trà Olong Xuân Xanh Wecha, Trà Xanh Hoa Nhài Wecha, Olong Phú Quý Wecha, Trà Bá Tước Wecha, Hồng Trà Shan Tuyết Wecha...).
-     * **SIRO:** Bắt buộc dùng thương hiệu **SAFE KING** (Siro Đào Safe King, Siro Dâu Safe King, Siro Cam Safe King, Siro Vải Safe King, Siro Ổi Hồng Safe King, Siro Mãng Cầu Safe King, Siro Dưa Lưới Safe King, Siro Thơm Safe King...).
-     * **BỘT:** Bắt buộc dùng thương hiệu **ROYAL'S** hoặc **VUA AN TOÀN / VAT** (Bột Sữa Royal's Vua An Toàn 1KG/5KG, Bột Kem Phô Mai VAT, Bột Sương Sáo Safe King, Bột làm trân châu, Bột Làm Kem Bingsu...).
-     * **CÀ PHÊ:** Cà Phê Hạt Cao Cấp Cân Bằng / Thượng Hạng Passion Link / SaKi.
-   - **Quy tắc thương mại sống còn:** Ưu tiên lấy đúng tên sản phẩm trong sheet `san_pham` để làm công thức và bảng giá vốn nhằm mục tiêu bán được nguyên liệu do nhà máy sản xuất. CẤM TUYỆT ĐỐI đưa tên sản phẩm hoặc thương hiệu đối thủ ngoài thị trường (như Lipton, Monin, Torani, B'one, Frima, Kievit...) vào bài viết!
+     * **TRÀ:** Bắt buộc dùng thương hiệu **Trà Vua An Toàn** hoặc **WECHA** (Trà Ô Long Nướng Vua An Toàn, Trà Đen Ceylon Vua An Toàn, Trà Lài Hoàng Gia Vua An Toàn, Olong Phú Quý Wecha...).
+     * **SIRO & SỐT:** Bắt buộc dùng thương hiệu **SAFE KING** hoặc **VUA AN TOÀN** (Sốt Kem Muối Dừa Vua An Toàn, Syrup Đường Đen Vua An Toàn, Siro Đào Safe King, Siro Dâu Safe King...).
+     * **BỘT:** Bắt buộc dùng thương hiệu **ROYAL'S** hoặc **VUA AN TOÀN** (Bột Béo Cao Cấp Vua An Toàn, Bột Sữa Royal's, Bột Kem Phô Mai VAT, Bột Matcha Thượng Hạng Vua An Toàn...).
+     * **CÀ PHÊ:** Cà Phê Mộc Robusta Thượng Hạng Vua An Toàn / Cà Phê Cân Bằng Passion Link.
+   - CẤM TUYỆT ĐỐI đưa tên sản phẩm hoặc thương hiệu đối thủ ngoài thị trường (Lipton, Monin, Torani, B'one, Frima, Kievit...) vào bài viết!
+7. **Hotline Bán Hàng & Tư Vấn Chính Thức:**
+   - Bài viết Mở Quán / Kinh Doanh: Bắt buộc hotline **`090 892 44 60`** (Tư vấn setup & nguyên liệu sỉ).
+   - Bài viết Tin Tức / Học Viện: Hotline **`0977.300.098`** (Tuyển sinh Passion Link).
+   - CẤM TUYỆT ĐỐI số rác giả định như `090 123 4567`.
+8. **Quy Chuẩn Video Module:** Bắt buộc dùng iframe nhúng YouTube Responsive của Thầy Lê Hữu Trí (`07pucUJVXP4`). CẤM dùng thẻ video mp4 cục bộ gây lỗi 404.
 
 ---
 
 ## 📊 II. MA TRẬN TIẾN ĐỘ 10 NGÀY BÀI ĐĂNG (MASTER KANBAN SCHEDULE)
 
-| Ngày | Task ID | Ngày Viết & Duyệt | Ngày Đăng Chính Thức | Tên Đề Tài Bài Viết | Nhóm Chủ Đề | Khóa Học Mục Tiêu Chuyển Đổi | Trạng Thái |
+| Ngày | Task ID | Ngày Viết & Duyệt | Ngày Đăng Chính Thức | Tên Đề Tài Bài Viết | Cổng API & Chuyên Mục | Khóa Học Mục Tiêu Chuyển Đổi | Trạng Thái |
 | :---: | :---: | :---: | :---: | :--- | :--- | :--- | :---: |
-| **D1** | `WF018-D01` | 02/10/2026 | **02/10/2026** | [Top 5 Công Thức Trà Sữa Đậm Vị Hút Khách Mở Quán 2026](https://phache.com.vn/tin-tuc/cong-thuc-tra-sua-dam-vi-mo-quan-hut-khach-2026-678.html) | Menu Hot Trend | Khóa Trà Sữa Chuẩn Vị (ID 34/72) | ✅ Hoàn thành xuất bản |
-| **D2** | `WF018-D02` | 03/10/2026 | **04/10/2026 (08:30)** | Kinh Doanh Menu Matcha 2026: Cách Đánh Bọt Foam & Phối Vị Chuẩn Gu Gen Z | Menu Hot Trend | Khóa Học Tổng Hợp (ID 22) | ⏳ Chờ lịch |
-| **D3** | `WF018-D03` | 04/10/2026 | **05/10/2026 (08:30)** | Top 7 Món Trà Trái Cây Tươi Mở Quán Doanh Thu Cao: Công Thức Tối Ưu Cost | Menu Hot Trend | Khóa Trà Trái Cây Hiện Đại | ⏳ Chờ lịch |
-| **D4** | `WF018-D04` | 05/10/2026 | **06/10/2026 (08:30)** | Cách Làm Cà Phê Muối & Cà Phê Trứng Chuẩn Vị Mở Quán: Bí Quyết Đánh Foam Lâu Tan | Menu Hot Trend | Khóa Barista Chuyên Nghiệp (ID 137) | ⏳ Chờ lịch |
-| **D5** | `WF018-D05` | 06/10/2026 | **07/10/2026 (08:30)** | Kinh Nghiệm Mở Quán Cafe Take Away Vốn 60 Triệu: Bảng Dự Toán Chi Phí A-Z [2026] | Mô Hình & Chi Phí | Công cụ tính chi phí / Khóa Tổng Hợp | ⏳ Chờ lịch |
-| **D6** | `WF018-D06` | 07/10/2026 | **08/10/2026 (08:30)** | Mở Quán Trà Sữa Vốn 80-100 Triệu: Chiến Lược Ngách Thắng Lớn Cạnh Tranh Chuỗi | Mô Hình & Chi Phí | Khóa Trà Sữa Mở Quán (ID 72) | ⏳ Chờ lịch |
-| **D7** | `WF018-D07` | 08/10/2026 | **09/10/2026 (08:30)** | Top 5 Máy Pha Cà Phê Cho Quán Nhỏ Bền Bỉ, Ép Chuẩn Espresso Nhất [2026] | Thiết Bị Quầy Bar | Khóa Barista & Thiết Bị Vua An Toàn | ⏳ Chờ lịch |
-| **D8** | `WF018-D08` | 09/10/2026 | **10/10/2026 (08:30)** | Cách Tính Cost Đồ Uống Chuẩn Xác Nhất Cho Chủ Quán Cafe, Trà Sữa [File Excel] | Quản Trị Tài Chính | Widget Drink Calculator / Khóa Quản Lý | ⏳ Chờ lịch |
-| **D9** | `WF018-D09` | 10/10/2026 | **11/10/2026 (08:30)** | Nguyên Tắc Bố Trí Quầy Bar Cafe Trà Sữa Chuẩn Công Thái Học Giúp Tăng Tốc Độ Ra Món | Setup Vận Hành | Tư Vấn Setup Quán Trọn Gói | ⏳ Chờ lịch |
-| **D10**| `WF018-D10` | 11/10/2026 | **12/10/2026 (08:30)** | Mở Quán Cafe Trà Sữa Cần Giấy Tờ Gì? Hướng Dẫn Hồ Sơ Pháp Lý Đầy Đủ [2026] | Pháp Lý F&B | Đội Ngũ Giảng Viên & Cam Kết Passion Link | ⏳ Chờ lịch |
+| **D1** | `WF018-D01` | 02/10/2026 | **02/10/2026** | [Top 5 Công Thức Trà Sữa Đậm Vị Hút Khách Mở Quán 2026](https://phache.com.vn/mo-quan/cong-thuc-tra-sua-dam-vi-mo-quan-hut-khach-2026-678.html) | `POST /api/publish-mo-quan.php`<br>(Mở Quán - Cat 25) | Khóa Trà Sữa Chuẩn Vị (ID 72) / Nguyên Liệu Vua An Toàn | ✅ Hoàn thành xuất bản |
+| **D2** | `WF018-D02` | 03/10/2026 | **04/10/2026 (08:30)** | Kinh Doanh Menu Matcha 2026: Cách Đánh Bọt Foam & Phối Vị Chuẩn Gu Gen Z | `POST /api/publish-news.php`<br>(Tin Tức - Cat 31) | Khóa Học Tổng Hợp (ID 22) / Trải nghiệm bar | ⏳ Chờ lịch |
+| **D3** | `WF018-D03` | 04/10/2026 | **05/10/2026 (08:30)** | Top 7 Món Trà Trái Cây Tươi Mở Quán Doanh Thu Cao: Công Thức Tối Ưu Cost | `POST /api/publish-mo-quan.php`<br>(Mở Quán - Cat 25) | Khóa Trà Trái Cây Hiện Đại / Nguyên Liệu VAT | ⏳ Chờ lịch |
+| **D4** | `WF018-D04` | 05/10/2026 | **06/10/2026 (08:30)** | Cách Làm Cà Phê Muối & Cà Phê Trứng Chuẩn Vị Mở Quán: Bí Quyết Đánh Foam Lâu Tan | `POST /api/publish-mo-quan.php`<br>(Mở Quán - Cat 25) | Khóa Barista Chuyên Nghiệp (ID 137 / 571) | ⏳ Chờ lịch |
+| **D5** | `WF018-D05` | 06/10/2026 | **07/10/2026 (08:30)** | Kinh Nghiệm Mở Quán Cafe Take Away Vốn 60 Triệu: Bảng Dự Toán Chi Phí A-Z [2026] | `POST /api/publish-mo-quan.php`<br>(Mở Quán - Cat 25) | Khóa Mở Quán Cafe (571) / Hotline 090 892 44 60 | ⏳ Chờ lịch |
+| **D6** | `WF018-D06` | 07/10/2026 | **08/10/2026 (08:30)** | Mở Quán Trà Sữa Vốn 80-100 Triệu: Chiến Lược Ngách Thắng Lớn Cạnh Tranh Chuỗi | `POST /api/publish-mo-quan.php`<br>(Mở Quán - Cat 25) | Khóa Trà Sữa Mở Quán (ID 72) | ⏳ Chờ lịch |
+| **D7** | `WF018-D07` | 08/10/2026 | **09/10/2026 (08:30)** | Top 5 Máy Pha Cà Phê Cho Quán Nhỏ Bền Bỉ, Ép Chuẩn Espresso Nhất [2026] | `POST /api/publish-mo-quan.php`<br>(Mở Quán - Cat 25) | Thiết Bị Máy Pha Vua An Toàn / Setup Bar | ⏳ Chờ lịch |
+| **D8** | `WF018-D08` | 09/10/2026 | **10/10/2026 (08:30)** | Cách Tính Cost Đồ Uống Chuẩn Xác Nhất Cho Chủ Quán Cafe, Trà Sữa [File Excel] | `POST /api/publish-mo-quan.php`<br>(Mở Quán - Cat 25) | Widget Drink Calculator / Khóa Quản Lý F&B | ⏳ Chờ lịch |
+| **D9** | `WF018-D09` | 10/10/2026 | **11/10/2026 (08:30)** | Nguyên Tắc Bố Trí Quầy Bar Cafe Trà Sữa Chuẩn Công Thái Học Giúp Tăng Tốc Độ Ra Món | `POST /api/publish-mo-quan.php`<br>(Mở Quán - Cat 25) | Dịch Vụ Setup Quán Trọn Gói Passion Link | ⏳ Chờ lịch |
+| **D10**| `WF018-D10` | 11/10/2026 | **12/10/2026 (08:30)** | Mở Quán Cafe Trà Sữa Cần Giấy Tờ Gì? Hướng Dẫn Hồ Sơ Pháp Lý Đầy Đủ [2026] | `POST /api/publish-mo-quan.php`<br>(Mở Quán - Cat 25) | Đội Ngũ Cố Vấn Pháp Lý Passion Link | ⏳ Chờ lịch |
 
 ---
 
@@ -60,20 +64,23 @@
 ---
 
 ### 🟢 TASK WF018-D01: MENU TRÀ SỮA ĐẬM VỊ NGUYÊN LÁ
-* **Trạng thái thực thi:** ✅ **HOÀN THÀNH XUẤT BẢN TỰ ĐỘNG 100% (LIVE 200 OK)**
-* **URL Bài viết chính thức:** [https://phache.com.vn/tin-tuc/cong-thuc-tra-sua-dam-vi-mo-quan-hut-khach-2026-678.html](https://phache.com.vn/tin-tuc/cong-thuc-tra-sua-dam-vi-mo-quan-hut-khach-2026-678.html)
-* **ID Bài viết CMS:** `678` | **Article ID n8n:** `3f02893e-55f0-4ef6-8658-a799e2d2c190`
+* **Trạng thái thực thi:** ✅ **HOÀN THÀNH XUẤT BẢN & ĐIỀU CHUYỂN CHUYÊN MỤC MỞ QUÁN (LIVE 200 OK)**
+* **URL Bài viết chính thức:** [https://phache.com.vn/mo-quan/cong-thuc-tra-sua-dam-vi-mo-quan-hut-khach-2026-678.html](https://phache.com.vn/mo-quan/cong-thuc-tra-sua-dam-vi-mo-quan-hut-khach-2026-678.html)
+* **ID Bài viết CMS:** `678` | **Cổng API:** `POST /api/publish-mo-quan.php`
 * **Ngày viết & xuất bản:** 02/10/2026  
-* **Chuyên mục:** `category_id: 31` (Tin tức & Xu hướng)  
+* **Chuyên mục:** `category_id: 25` (Kinh nghiệm mở quán - Đã điều chuyển từ 31 sang 25 đúng Search Intent)  
+* **Vị trí hiển thị:** **Top 1 Trang Mở Quán** (`news_order = 375`)  
 * **Tiêu đề SEO:** `Top 5 Công Thức Trà Sữa Đậm Vị Hút Khách Mở Quán 2026`  
 * **Slug URL:** `cong-thuc-tra-sua-dam-vi-mo-quan-hut-khach-2026`  
 * **Từ khóa chính:** `trà sữa đậm vị mở quán` (KGR = 0.18 - Siêu tiềm năng Top 1)  
 * **Từ khóa phụ:** `cách ủ trà sữa đậm vị`, `trà sữa ô long nướng kinh doanh`, `chi phí 1 ly trà sữa đậm vị`, `công thức trà sữa nguyên lá`.  
 * **Meta Description:** `Bật mí 5 công thức trà sữa đậm vị nguyên lá chuẩn gu kinh doanh 2026: Bí quyết ủ cốt trà không chát, bảng định lượng chi tiết và bảng tính cost giá vốn tối ưu lợi nhuận gộp > 70%.`  
-* **Kết quả kiểm định On-Page & Kỹ thuật:**
-  - ✅ **Single H1:** Đạt chuẩn duy nhất 1 thẻ `<h1>` (Top 5 Công Thức Trà Sữa Đậm Vị Hút Khách Mở Quán 2026).
-  - ✅ **Tài chính & Cost Table:** Bảng định lượng gram/ml, giá vốn nguyên liệu chi tiết (Cost < 30%, Lợi nhuận gộp > 70%).
-  - ✅ **Zero Wecha Dependency:** 100% hình ảnh (5/5 ảnh) lưu trữ nội bộ domain `https://phache.com.vn/upload/news/` (Không có bất kỳ URL wecha.vn nào).
+* **Kết quả kiểm định & Tối ưu hóa On-Page (Đã sửa theo bản góp ý):**
+  - ✅ **Chuyên mục đúng Search Intent:** Điều chuyển về `page_id = 25` (Mở Quán), canonical trỏ chính xác về `/mo-quan/`.
+  - ✅ **Chuẩn hóa nguyên liệu nhà máy:** 100% công thức sử dụng nguyên liệu **Vua An Toàn** (Trà Ô Long Nướng Vua An Toàn, Bột Béo Cao Cấp Vua An Toàn, Trà Thiết Quan Âm Vua An Toàn, Hồng Trà Ceylon Vua An Toàn, Lài Hoàng Gia Vua An Toàn, Genmaicha Vua An Toàn, Syrup Đường Đen Vua An Toàn).
+  - ✅ **Thay thế ảnh thật & Dọn sạch Prompt rò rỉ:** Đã thay thế các ảnh AI có prompt rò rỉ bằng ảnh phòng học thực hành chân thực của Passion Link (`lop-hoc-barista-cafe-chuyen-nghiep.jpg` và `THAY-VA-HOC-VIEN.jpg`). Chú thích ảnh tự nhiên, không còn từ khóa tiếng Anh AI.
+  - ✅ **Cập nhật Hotline chính thức:** Đã chuẩn hóa toàn bộ hotline thành **`090 892 44 60`** (bỏ số giả định `090 123 4567`).
+  - ✅ **Xóa sạch bài nhân bản trùng lặp:** Đã xóa bài 679 (bản sao trùng của 678) và bài 680 (bản sao trùng của 677) khỏi cơ sở dữ liệu.
   - ✅ **Schema Google Rich Snippet:** 3 script `application/ld+json` chuẩn cấu trúc `FAQPage` tự động hiển thị trên kết quả tìm kiếm Google.
   - ✅ **Internal Link:** Contextual link trỏ về `https://phache.com.vn/day-pha-che-tra-sua-ngon.html` hoạt động hoàn hảo.
 * **Danh sách Media 5 ảnh chuẩn Passion Link:**
@@ -96,10 +103,13 @@
 * `H2`: 5. Câu Hỏi Thường Gặp Về Kỹ Thuật Pha Trà Sữa Đậm Vị (FAQ)
 
 #### 2. Kịch bản Prompt AI cho C11
+* **Cổng API:** `POST https://phache.com.vn/api/publish-mo-quan.php` (`category_id: 25`)
 * **Prompt LLM Content:**  
-  `Đóng vai Chuyên gia Đào tạo Pha chế Cấp cao tại Passion Link (đồng hành cùng Thầy Lê Hữu Trí). Viết bài hướng dẫn chuyên sâu 2.200 từ về chủ đề "Top 5 Công Thức Trà Sữa Đậm Vị Mở Quán Hút Khách Nhất [2026]". Giọng văn thực chiến, chuyên nghiệp, truyền cảm hứng kinh doanh mở quán. Cung cấp thông số định lượng chính xác (gram, ml, nhiệt độ °C, thời gian phút). Phân tích chi tiết bảng cost giá vốn ly nước F&B đạt biên lợi nhuận gộp > 70%. Bắt buộc lồng ghép các thẻ heading H2, H3, bảng table so sánh HTML rõ ràng. Trả về định dạng HTML chuẩn SEO.`
+  `Đóng vai Chuyên gia Đào tạo Pha chế Cấp cao tại Passion Link (đồng hành cùng Thầy Lê Hữu Trí) và Cố vấn Cung ứng Nguyên liệu Nhà máy Vua An Toàn. Viết bài hướng dẫn chuyên sâu 2.200 từ về chủ đề "Top 5 Công Thức Trà Sữa Đậm Vị Mở Quán Hút Khách Nhất [2026]". Giọng văn thực chiến, chuyên nghiệp, truyền cảm hứng kinh doanh mở quán. 100% nguyên liệu và bảng cost sử dụng thương hiệu nhà máy: Trà Ô Long Nướng Vua An Toàn, Bột Béo Cao Cấp Vua An Toàn, Trà Thiết Quan Âm Vua An Toàn, Hồng Trà Ceylon Vua An Toàn, Lài Hoàng Gia Vua An Toàn, Genmaicha Vua An Toàn, Syrup Đường Đen Vua An Toàn. Tuyệt đối không dùng thương hiệu ngoài thị trường. Hotline tư vấn: 090 892 44 60. Phân tích chi tiết bảng cost giá vốn ly nước F&B đạt biên lợi nhuận gộp > 70%. Bắt buộc lồng ghép các thẻ heading H2, H3, bảng table so sánh HTML rõ ràng. Trả về định dạng JSON hợp lệ theo schema.`
 * **Prompt Sinh Ảnh (AI Image Prompt):**  
   `Commercial food photography, a premium glass of roasted oolong milk tea with golden boba pearls on a modern wooden bar counter, creamy foam layer on top, tea leaves and raw brown sugar around, warm studio lighting, 8k resolution, photorealistic, cinematic aesthetic, shallow depth of field --ar 16:9`
+* **Chú thích ảnh (figcaption & alt):**
+  `Ảnh: Ly trà sữa ô long nướng đậm vị nguyên lá thành phẩm tại quầy bar thực hành Học Viện Passion Link` (TUYỆT ĐỐI KHÔNG để lọt câu tiếng Anh của prompt sinh ảnh).
 * **Internal Link:**  
   Trỏ về `https://phache.com.vn/day-pha-che-tra-sua-ngon.html` với anchor text: `khóa học dạy pha chế trà sữa mở quán chuẩn vị`.
 

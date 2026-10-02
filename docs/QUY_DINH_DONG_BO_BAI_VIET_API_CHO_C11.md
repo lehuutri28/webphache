@@ -9,34 +9,90 @@
 ---
 
 ## MỤC LỤC
-1. [Tổng Quan Kiến Trúc & Hợp Đồng Dữ Liệu (Data Contract)](#1-tổng-quan-kiến-trúc--hợp-đồng-dữ-liệu-data-contract)
+1. [Tổng Quan Kiến Trúc 2 API & Phân Định Search Intent](#1-tổng-quan-kiến-trúc-2-api--phân-định-search-intent)
 2. [Chi Tiết Quy Chuẩn Dữ Liệu Đầu Vào (API Payload Schema)](#2-chi-tiết-quy-chuẩn-dữ-liệu-đầu-vào-api-payload-schema)
-3. [Quy Tắc Định Dạng Nội Dung Chuẩn SEO Top 1 & AI Overview (GEO)](#3-quy-tắc-định-dạng-nội-dung-chuẩn-seo-top-1--ai-overview-geo)
-4. [Master Prompt Dành Cho C11 Thiết Kế n8n Workflow](#4-master-prompt-dành-cho-c11-thiết-kế-n8n-workflow)
+3. [Các Quy Tắc Nội Dung Và Khắc Phục Lỗi Triệt Để (Theo Bản Đánh Giá Sửa Bài AI)](#3-các-quy-tắc-nội-dung-và-khắc-phục-lỗi-triệt-để-theo-bản-đánh-giá-sửa-bài-ai)
+4. [Master Prompt Nâng Cấp Dành Cho C11 Thiết Kế n8n Workflow](#4-master-prompt-nâng-cấp-dành-cho-c11-thiết-kế-n8n-workflow)
 5. [Cấu Trúc Các Node Trong Luồng n8n Khuyến Nghị Cho C11](#5-cấu-trúc-các-node-trong-luồng-n8n-khuyến-nghị-cho-c11)
 6. [Quy Trình Kiểm Tra & Báo Lỗi Tự Động](#6-quy-trình-kiểm-tra--báo-lỗi-tự-động)
 
 ---
 
-## 1. TỔNG QUAN KIẾN TRÚC & HỢP ĐỒNG DỮ LIỆU (DATA CONTRACT)
+## 1. TỔNG QUAN KIẾN TRÚC 2 API & PHÂN ĐỊNH SEARCH INTENT
 
-Hệ thống Backend API tại `phache.com.vn` đã mở sẵn cổng giao tiếp RESTful bảo mật cao để tiếp nhận các bài viết do n8n đẩy về:
+Hệ thống Backend tại `phache.com.vn` vận hành **2 cổng API riêng biệt** tương ứng với 2 chuyên mục trọng điểm, phục vụ 2 nhóm Search Intent hoàn toàn khác nhau của người dùng:
 
-### 1.1 Endpoint Đăng Bài Viết (Publish News API)
-* **Endpoint:** `https://phache.com.vn/api/publish-news.php`
+```
+                  ┌─────────────────────────────────────────┐
+                  │    n8n Workflow WF-018 (Agent C11)      │
+                  │   Phân loại Search Intent theo đề tài   │
+                  └────────────────────┬────────────────────┘
+                                       │
+            ┌──────────────────────────┴──────────────────────────┐
+            ▼                                                     ▼
+┌───────────────────────────────────────┐   ┌───────────────────────────────────────┐
+│     NHÓM 1: MỞ QUÁN & KINH DOAN       │   │      NHÓM 2: TIN TỨC & XU HƯỚNG       │
+│  • Search Intent: Commercial / Trans  │   │  • Search Intent: Informational / Nav │
+│  • Đối tượng: Chủ quán, Khởi nghiệp   │   │  • Đối tượng: Giới trẻ, Barista, F&B  │
+│  • Bảng Cost, Menu ma trận, Mặt bằng  │   │  • Trend đồ uống, Review, Sự kiện PL  │
+└───────────────────┬───────────────────┘   └───────────────────┬───────────────────┘
+                    │                                           │
+                    ▼                                           ▼
+┌───────────────────────────────────────┐   ┌───────────────────────────────────────┐
+│   POST /api/publish-mo-quan.php       │   │    POST /api/publish-news.php         │
+│   (Default category_id = 25)          │   │    (Default category_id = 31)         │
+│   URL: /mo-quan/[slug]-[id].html      │   │    URL: /tin-tuc/[slug]-[id].html     │
+└───────────────────────────────────────┘   └───────────────────────────────────────┘
+```
+
+---
+
+### 1.1 Chi Tiết 2 Endpoint Đăng Bài Viết
+
+#### A. Endpoint 1: Chuyên Mục Mở Quán (Commercial & Business Intent)
+* **Endpoint:** `https://phache.com.vn/api/publish-mo-quan.php`
 * **HTTP Method:** `POST`
+* **Chuyên mục mặc định:** `category_id = 25` (Kinh nghiệm mở quán)
+* **Định dạng URL bài viết:** `https://phache.com.vn/mo-quan/[slug]-[id].html`
 * **Xác thực:** Bearer Token trong Header:
   ```http
   Authorization: Bearer {{ $env.PHACHE_API_SECRET }}
   Content-Type: application/json
   ```
-* **Cơ chế An toàn:**
-  - Token được lưu trữ nội bộ tại `config/api_secret.php` trên máy chủ (chống rò rỉ theo luật `gemini.md`).
-  - Rate Limiting: Tối đa 10 requests / phút từ cùng 1 địa chỉ IP.
-  - Tự động kiểm định và băm tên file ảnh (chống trùng lặp, chống tải mã độc).
-  - Tự động đặt thứ tự hiển thị `news_order = MAX(news_order) + 1` để bài viết luôn đứng **Top 1 trang danh mục**.
+* **Mục tiêu chuyển đổi:** Khóa học Pha Chế Mở Quán Cafe Chuyên Nghiệp (ID 571), Khóa Trà Sữa Mở Quán (ID 72), Dịch vụ Setup Quán Trọn Gói Passion Link, Nguồn nguyên liệu sỉ **Vua An Toàn**.
+* **Hotline bán hàng & tư vấn bắt buộc:** **`090 892 44 60`** (Hotline Zalo/Điện thoại phòng kinh doanh).
 
-### 1.2 Endpoint Khai Thác Thư Viện Ảnh Đồ Uống Thực Tế (Media Library Reference API)
+#### B. Endpoint 2: Chuyên Mục Tin Tức & Xu Hướng (Informational & Trend Intent)
+* **Endpoint:** `https://phache.com.vn/api/publish-news.php`
+* **HTTP Method:** `POST`
+* **Chuyên mục mặc định:** `category_id = 31` (Tin tức F&B & Sự kiện)
+* **Định dạng URL bài viết:** `https://phache.com.vn/tin-tuc/[slug]-[id].html`
+* **Xác thực:** Bearer Token trong Header:
+  ```http
+  Authorization: Bearer {{ $env.PHACHE_API_SECRET }}
+  Content-Type: application/json
+  ```
+* **Mục tiêu chuyển đổi:** Khóa học tổng hợp (ID 22), Lịch khai giảng học viện Passion Link, Workshop trải nghiệm quầy bar, Đăng ký học thử, Tuyển sinh.
+* **Hotline tư vấn đào tạo:** **`0977.300.098`** hoặc **`090 892 44 60`**.
+
+---
+
+### 1.2 Bảng Ma Trận Phân Định Search Intent & Quy Hoạch Nội Dung (Bắt Buộc C11 Tuân Thủ 100%)
+
+| Tiêu Chí | Trang Mở Quán (`/mo-quan/`) | Trang Tin Tức (`/tin-tuc/`) |
+| :--- | :--- | :--- |
+| **API Endpoint** | `POST https://phache.com.vn/api/publish-mo-quan.php` | `POST https://phache.com.vn/api/publish-news.php` |
+| **Category ID** | `25` | `31` |
+| **Search Intent** | **Commercial Investigation / Transactional** (Khảo sát thương mại & Ra quyết định đầu tư) | **Informational / Navigational** (Tìm hiểu thông tin, giải trí, xu hướng thị trường) |
+| **Đối Tượng Độc Giả** | Chủ quán cafe, trà sữa sắp mở; Nhà đầu tư F&B; Quản lý quầy bar cần tối ưu chi phí & doanh thu. | Khách hàng trẻ, Barista mới vào nghề, Người yêu thích đồ uống, Học viên tìm hiểu lịch học. |
+| **Các Chủ Đề Đặc Trưng** | • Tính toán chi phí đầu tư mở quán (vốn 50tr, 100tr, 200tr)<br>• Bảng tính Cost giá vốn & Định giá bán lẻ tối ưu lãi > 70%<br>• Thiết kế ma trận Menu 3 tầng (Món dẫn, Món chủ lực, Món lợi nhuận)<br>• Nguyên tắc bố trí quầy bar công thái học tăng tốc độ ra món<br>• Thủ tục pháp lý mở quán, giấy phép VSATTP, đăng ký kinh doanh<br>• Tiêu chí chọn máy pha cà phê, máy dập nắp, máy xay công nghiệp<br>• Nguồn hàng nguyên liệu tận gốc giá xưởng (**Vua An Toàn**). | • Bắt trend đồ uống mới lạ (Trà chanh giã tay, Cafe muối, Matcha dừa...)<br>• Review thị trường F&B Việt Nam & Quốc tế qua từng quý/năm<br>• Kỹ năng pha chế nâng cao (Latte Art, Cupping, Sensory)<br>• Tin tức sự kiện khai giảng, workshop, lễ tốt nghiệp Passion Link<br>• Câu chuyện thành công của cựu học viên Passion Link<br>• Bí quyết bảo quản nông sản, thảo mộc, hương vị tự nhiên. |
+| **Tone of Voice** | Thực chiến, sắc bén, định lượng số liệu rõ ràng, tư duy tài chính kinh doanh an toàn, cố vấn trực tiếp từ Thầy Lê Hữu Trí. | Năng động, tươi mới, truyền cảm hứng đam mê pha chế, gợi mở trải nghiệm vị giác. |
+| **Hotline Hiển Thị** | **`090 892 44 60`** (Hotline Tư Vấn Setup & Nguyên Liệu Sỉ) | **`0977.300.098`** (Hotline Tuyển Sinh Học Viện Passion Link) |
+| **Khóa Học Trọng Tâm** | [Khóa Mở Quán Cafe Chuyên Nghiệp (571)](https://phache.com.vn/khoa-hoc-pha-che-mo-quan-cafe-chuyen-nghiep.html), [Khóa Trà Sữa Chuẩn Vị (72)](https://phache.com.vn/day-pha-che-tra-sua-ngon.html) | [Khóa Pha Chế Tổng Hợp (22)](https://phache.com.vn/day-pha-che-tong-hop.html), [Khóa Barista Cấp Tốc (137)](https://phache.com.vn/khoa-hoc-barista.html) |
+
+---
+
+### 1.3 Endpoint Khai Thác Thư Viện Ảnh Đồ Uống Thực Tế (Media Library Reference API)
 * **Endpoint:** `https://phache.com.vn/api/media-library.php`
 * **HTTP Method:** `GET` hoặc `POST`
 * **Xác thực:** Cùng mã Bearer Token `Authorization: Bearer {{ $env.PHACHE_API_SECRET }}`
@@ -52,69 +108,19 @@ Hệ thống Backend API tại `phache.com.vn` đã mở sẵn cổng giao tiế
   GET https://phache.com.vn/api/media-library.php?keyword=tra-dao&limit=5&random=true
   Authorization: Bearer {{ $env.PHACHE_API_SECRET }}
   ```
-* **Dữ liệu trả về (JSON Response):**
-  ```json
-  {
-    "success": true,
-    "total_found": 1053,
-    "returned": 5,
-    "data": [
-      {
-        "id": 1,
-        "title": "Cach Lam Tra Dao Hibiscus",
-        "filename": "cach-lam-tra-dao-hibiscus.jpg",
-        "url": "https://phache.com.vn/upload/images/cach-lam-tra-dao-hibiscus.jpg",
-        "thumb_url": "https://phache.com.vn/index.php?t=ajax&p=tthumb&src=...",
-        "dimensions": "1200x800",
-        "size_kb": 178
-### 1.3 Endpoint Tiếp Nhận Upload Hình Ảnh Từ Vertex AI / n8n (Upload Media API - P0)
+
+---
+
+### 1.4 Endpoint Tiếp Nhận Upload Hình Ảnh Chuẩn Hóa (Upload Media API)
 * **Endpoint:** `https://phache.com.vn/api/upload-media.php`
 * **HTTP Method:** `POST`
 * **Xác thực:** Cùng mã Bearer Token `Authorization: Bearer {{ $env.PHACHE_API_SECRET }}`
-* **Mục đích:** Tiếp nhận hình ảnh do Vertex AI sinh ra (dạng Base64 hoặc Image URL), lưu vĩnh viễn vào máy chủ `phache.com.vn/upload/news/`, chấm dứt hoàn toàn sự phụ thuộc vào link ảnh ngoài `wecha.vn`.
-* **Định dạng dữ liệu gửi lên (Hỗ trợ 3 hình thức):**
-  1. **Hình thức 1 (Vertex AI Base64 - Khuyến nghị cho n8n):**
-     ```json
-     {
-       "image_base64": "data:image/png;base64,iVBORw0KGgo...",
-       "filename": "tra-sua-nuong-hoang-kim",
-       "caption": "Ly trà sữa nướng hoàng kim thơm ngon béo ngậy tại Passion Link",
-       "folder": "news"
-     }
-     ```
-  2. **Hình thức 2 (Image URL công khai):**
-     ```json
-     {
-       "image_url": "https://example.com/generated-drink.png",
-       "filename": "tra-trai-cay-nhiet-doi",
-       "caption": "Trà trái cây nhiệt đới giải nhiệt mùa hè",
-       "folder": "news"
-     }
-     ```
-  3. **Hình thức 3 (Multipart/form-data):** Gửi qua field `file` hoặc `image`.
-
-* **Dữ liệu API trả về (HTTP 201 Created):**
-  ```json
-  {
-    "success": true,
-    "message": "Upload hình ảnh thành công lên phache.com.vn!",
-    "data": {
-      "filename": "pl_tra-sua-nuong-hoang-kim_1790896415_c9af9b.png",
-      "folder": "news",
-      "url": "https://phache.com.vn/upload/news/pl_tra-sua-nuong-hoang-kim_1790896415_c9af9b.png",
-      "thumb_url": "https://phache.com.vn/index.php?t=ajax&p=tthumb&src=...",
-      "dimensions": "1200x800",
-      "width": 1200,
-      "height": 800,
-      "size_kb": 145.2,
-      "mime_type": "image/png",
-      "caption": "Ly trà sữa nướng hoàng kim thơm ngon béo ngậy tại Passion Link",
-      "html_tag": "<figure class=\"pl-article-figure\" style=\"margin:24px auto;text-align:center;max-width:100%;\">\n  <img src=\"https://phache.com.vn/upload/news/pl_tra-sua-nuong-hoang-kim_1790896415_c9af9b.png\" alt=\"Ly trà sữa nướng hoàng kim thơm ngon béo ngậy tại Passion Link\" loading=\"lazy\" decoding=\"async\" style=\"border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,0.08);max-width:100%;height:auto;\" />\n  <figcaption style=\"font-size:14px;color:#64748b;font-style:italic;margin-top:8px;\">Ly trà sữa nướng hoàng kim thơm ngon béo ngậy tại Passion Link</figcaption>\n</figure>"
-    }
-  }
-  ```
-* **Bảo vệ Kép (Layer 2 Safeguard trong `publish-news.php`):**
-  - Ngay cả khi trong nội dung bài viết gửi sang `publish-news.php` vẫn còn sót bất kỳ link ảnh nào từ `wecha.vn`, hệ thống Backend sẽ **TỰ ĐỘNG cào ảnh đó về lưu trữ nội bộ tại `phache.com.vn/upload/news/` và rewrite lại thẻ `<img src="...">` thành domain `phache.com.vn`** trước khi ghi vào CSDL!
+* **Quy chuẩn kích thước & dung lượng:**
+  - **Tỷ lệ khuyến nghị:** `16:9` (1200x675px) cho ảnh đại diện, hoặc `800x500px` cho ảnh thân bài.
+  - **Dung lượng:** Dưới **150 KB** (API tự động nén tối ưu hiển thị nhanh chuẩn Google Core Web Vitals).
+* **Quy chuẩn Chú thích ảnh (Figcaption & Alt):**
+  - **TUYỆT ĐỐI KHÔNG để lộ câu lệnh Prompt AI** vào thẻ `alt` hoặc `<figcaption>` (Ví dụ lỗi: *"A high resolution photo of iced milk tea, realistic, 8k..."* ❌).
+  - Phải dùng chú thích tiếng Việt tự nhiên, chân thực (Ví dụ chuẩn: *"Ảnh: Giảng viên Passion Link hướng dẫn kỹ thuật đánh bọt sữa mịn cho học viên tại quầy bar"* ✅).
 
 ---
 
@@ -124,117 +130,121 @@ C11 cần định dạng JSON gửi từ Node HTTP Request trong n8n khớp chí
 
 ### Bảng Đặc Tả Trường Dữ Liệu (Payload Fields)
 
-| Tên Trường (Key) | Kiểu Dữ Liệu | Bắt Buộc | Mô Tả & Quy Tắc Chuẩn SEO |
+| Tên Trường (Key) | Kiểu Dữ Liệu | Bắt Buộc | Mô Tả & Quy Tắc Khắc Phục Lỗi |
 | :--- | :--- | :---: | :--- |
 | `title` | String | **Bắt buộc** | Tiêu đề bài viết (50 - 65 ký tự, max 200). Công thức CTR Magnet: `[Từ Khóa Chính] + [Lợi Ích/Con Số] + [Năm 2026]`. |
-| `content_html` | String (HTML) | **Bắt buộc** | Toàn bộ thân bài viết định dạng HTML. Độ dài từ 1.200 đến 2.500 từ. Tuân thủ phân cấp `<h2>`, `<h3>`, bảng biểu `<table>`. **Tuyệt đối không chứa thẻ `<h1>`**. |
-| `description` | String | Khuyến nghị (Rất quan trọng) | Đoạn tóm tắt bài viết hiển thị trên thẻ Card danh mục và thẻ `<meta name="description">` chuẩn Google SEO (130 - 160 ký tự).<br>• **Hỗ trợ các trường bí danh (Aliases):** `description`, `summary`, `excerpt`, `short_description`, `meta_description`, `tom_tat`.<br>• **Quy tắc vàng:** **TUYỆT ĐỐI KHÔNG gửi chuỗi placeholder** như `"Tóm tắt bài viết"`, `"Mô tả"`, `"N/A"`. Trong Prompt n8n, phải yêu cầu AI sinh tóm tắt súc tích, hấp dẫn, chứa từ khóa chính.<br>• **Bảo vệ tự động:** Nếu để trống hoặc nếu gửi chuỗi rác/placeholder, Backend API sẽ **tự động bóc tách thông minh 155 ký tự** từ đoạn văn mở đầu bài viết (đã loại bỏ sạch sẽ thẻ heading, video module, bảng cost) để hiển thị mượt mà. |
+| `content_html` | String (HTML) | **Bắt buộc** | Toàn bộ thân bài viết định dạng HTML (1.500 - 2.500 từ). Tuân thủ phân cấp `<h2>`, `<h3>`, bảng biểu `<table>`. **Tuyệt đối không chứa thẻ `<h1>`**. |
+| `description` | String | Khuyến nghị (Rất quan trọng) | Đoạn tóm tắt bài viết hiển thị trên Card chuyên mục và `<meta name="description">` chuẩn Google SEO (130 - 160 ký tự).<br>• **Quy tắc vàng:** **TUYỆT ĐỐI KHÔNG gửi chuỗi placeholder** như `"Tóm tắt bài viết"`, `"Mô tả"`, `"N/A"`. Phải tóm tắt ngắn gọn 2 câu cô đọng giá trị cốt lõi.<br>• **Bảo vệ tự động:** Nếu trống hoặc dính chuỗi rác, Backend API tự động bóc tách thông minh 155 ký tự từ đoạn mở bài. |
 | `keywords` | String | Khuyến nghị | Danh sách 4 - 8 từ khóa LSI ngữ nghĩa, ngăn cách bằng dấu phẩy. |
-| `category_id` | Integer | Tùy chọn | ID chuyên mục (Mặc định là `31`).<br>• `31`: **Tin tức chung & Xu hướng F&B** (Mục tiêu chính)<br>• `25`: **Kinh nghiệm mở quán trà sữa, cà phê**<br>• `24`: **Công thức pha chế đồ uống ngon**<br>• `22`: **Các khóa học dạy pha chế** |
-| `slug` | String | Tùy chọn | Đường dẫn URL tiếng Việt không dấu (VD: `bi-quyet-nau-tra-sua-dam-vi-2026`). Nếu để trống, API tự động chuyển từ `title`. |
-| `image_url` | String (URL) | Khuyến nghị | URL công khai của ảnh đại diện (Tỷ lệ 16:9, kích thước khuyến nghị 1200x630). API sẽ tự tải về, kiểm tra định dạng và lưu vào `/upload/news/`. |
-| `image_alt` | String | Tùy chọn | Văn bản mô tả ảnh đại diện cho SEO (Nếu để trống, API tự gán theo `title`). |
-| `faqs` | Array of Objects | Khuyến nghị | Mảng chứa các câu hỏi thường gặp: `[ { "q": "Câu hỏi?", "a": "Câu trả lời..." } ]`. API sẽ tự động sinh giao diện Accordion và chèn mã Schema `FAQPage` JSON-LD chuẩn Google. |
-
-### Payload Mẫu Hoàn Chỉnh (JSON Example)
-
-```json
-{
-  "title": "Bí Quyết Pha Trà Đào Cam Sả Đậm Vị Mở Quán [Menu 2026]",
-  "slug": "bi-quyet-pha-tra-dao-cam-sa-dam-vi-mo-quan-2026",
-  "description": "Bí quyết pha trà đào cam sả thanh mát đậm đà chuẩn vị Passion Link. Hướng dẫn chi tiết định lượng giá vốn dưới 6.000đ/ly, tối ưu biên lãi mở quán.",
-  "keywords": "trà đào cam sả, cách làm trà đào cam sả, công thức trà đào, học pha chế trà đào, mở quán trà sữa",
-  "category_id": 31,
-  "image_url": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=1200&q=80",
-  "image_alt": "Ly trà đào cam sả thanh mát thơm ngậy tại quầy bar Passion Link",
-  "content_html": "<p>Trà đào cam sả là thức uống giải nhiệt quốc dân không bao giờ lỗi thời trên menu của mọi quán nước...</p><h2>1. Bảng Định Lượng & Chi Phí Cost Cho Ly 500ml</h2><table border=\"1\" style=\"width:100%; border-collapse:collapse;\"><thead><tr style=\"background:#f1f5f9;\"><th style=\"padding:8px;\">Nguyên Liệu</th><th style=\"padding:8px;\">Định Lượng</th><th style=\"padding:8px;\">Giá Vốn (Cost)</th></tr></thead><tbody><tr><td style=\"padding:8px;\">Cốt Trà Earl Grey</td><td style=\"padding:8px;\">120ml</td><td style=\"padding:8px;\">1.100 đ</td></tr></tbody></table><h2>2. Bí Quyết Ủ Trà & Nấu Nước Sả Giữ Hương</h2><p>Cốt trà đào cần được hãm ở nhiệt độ 88°C - 90°C để không bị cháy lá...</p>",
-  "faqs": [
-    {
-      "q": "Nên dùng trà đen hay trà túi lọc để pha trà đào cam sả?",
-      "a": "Dùng trà đen Ceylon hoặc Earl Grey dạng lá ủ giúp nền trà thơm sâu, không bị nhạt nhòa khi kết hợp cùng đá và nước cam tươi."
-    },
-    {
-      "q": "Giá vốn ly trà đào cam sả nên chiếm bao nhiêu phần trăm giá bán?",
-      "a": "Chuẩn F&B khuyến nghị giá vốn nguyên liệu chỉ nên chiếm từ 20% đến 25% giá bán lẻ để quán đạt biên lợi nhuận gộp trên 75%."
-    }
-  ]
-}
-```
+| `category_id` | Integer | Tùy chọn | ID chuyên mục (Mặc định `25` cho `publish-mo-quan.php`, hoặc `31` cho `publish-news.php`). |
+| `slug` | String | Tùy chọn | Đường dẫn URL tiếng Việt không dấu (VD: `cong-thuc-tra-sua-dam-vi-mo-quan-hut-khach-2026`). |
+| `image_url` | String (URL) | Khuyến nghị | URL công khai của ảnh đại diện (Tỷ lệ 16:9, kích thước 1200x675 hoặc 800x500). API sẽ tự tải về lưu vào `/upload/news/`. |
+| `image_alt` | String | Tùy chọn | Văn bản mô tả ảnh cho SEO (tự nhiên, không chứa text prompt tiếng Anh). |
+| `faqs` | Array of Objects | Khuyến nghị | Mảng Q&A: `[ { "q": "Câu hỏi?", "a": "Câu trả lời..." } ]`. API tự sinh Accordion và chèn Schema `FAQPage` JSON-LD. |
 
 ---
 
-## 3. QUY TẮC ĐỊNH DẠNG NỘI DUNG CHUẨN SEO TOP 1 & AI OVERVIEW (GEO)
+## 3. CÁC QUY TẮC NỘI DUNG VÀ KHẮC PHỤC LỖI TRIỆT ĐỂ (THEO BẢN ĐÁNH GIÁ SỬA BÀI AI)
 
-Khi prompt cho mô hình LLM viết nội dung trong n8n, C11 cần cài đặt các quy tắc khắt khe sau:
+Khi n8n sinh nội dung, C11 phải thiết lập các rào chắn kỹ thuật (Guards) để loại bỏ 100% các sai sót nhân viên đã phản ánh:
 
-1. **Tuyệt đối không sinh thẻ `<h1>` trong `content_html`:**
-   - Hệ thống frontend của website đã tự động hiển thị thẻ `<h1>` từ trường `title`.
-   - Nội dung chỉ được bắt đầu phân cấp từ các thẻ `<h2>`, sau đó tới `<h3>`.
-2. **Quy tắc 100 từ đầu tiên (BLUF - Bottom Line Up Front):**
-   - Đoạn mở đầu phải trả lời trực diện câu hỏi cốt lõi của người dùng / Search Intent.
-   - Định nghĩa khái niệm ngắn gọn, súc tích trong 2 - 3 câu để Google AI Overviews và Perplexity dễ dàng trích dẫn nguồn (GEO - Generative Engine Optimization).
-3. **Bắt buộc có tối thiểu 1 Bảng Biểu (Rich Data Table):**
-   - Bảng định lượng nguyên liệu (ml, gram), bảng chi phí giá vốn (Cost), hoặc bảng so sánh các giải pháp.
-   - AI bot và Search bot đặc biệt ưu tiên hiển thị Featured Snippet cho các trang có bảng số liệu rõ ràng.
-4. **Tối ưu hình ảnh bên trong bài viết (In-article Images):**
-   - Mọi thẻ `<img>` nếu có phải có thuộc tính `alt` chứa từ khóa ngữ nghĩa LSI.
-   - API đã tích hợp sẵn tính năng tự động bổ sung `loading="lazy"` và `decoding="async"`.
-5. **Khối FAQ (Hỏi Đáp) Chuẩn E-E-A-T:**
-   - Đưa vào mảng `faqs` từ 2 đến 4 câu hỏi thực tế mà người mở quán F&B hay thắc mắc.
-   - API sẽ tự động ghép khối Accordion HTML và xuất mã Schema `FAQPage` JSON-LD tự động.
-6. **Khối Kêu Gọi Hành Động (CTA Chuyển Đổi):**
-   - Nếu trong nội dung chưa có thông tin liên hệ, API sẽ tự động bổ sung khối Banner chuyển đổi Passion Link kèm liên kết Zalo Hotline `0977.300.098` và trang khóa học tổng hợp.
+### 3.1 Quy Tắc Nguyên Liệu Nhà Máy Độc Quyền (VUA AN TOÀN, WECHA, SAFE KING, ROYAL'S)
+* **Bắt buộc 100%:** Trong mọi công thức pha chế, định lượng và bảng tính chi phí giá vốn (Cost table), bắt buộc sử dụng tên thương hiệu độc quyền của nhà máy công ty:
+  - **TRÀ:** Bắt buộc dùng **Trà Vua An Toàn** hoặc **Wecha** (VD: *Trà Ô Long Nướng Vua An Toàn*, *Trà Đen Ceylon Vua An Toàn*, *Trà Lài Hoàng Gia Vua An Toàn*, *Hồng Trà Wecha*...).
+  - **BỘT:** Bắt buộc dùng **Bột Béo Cao Cấp Vua An Toàn** hoặc **Royal's** (VD: *Bột Sữa Béo Vua An Toàn*, *Bột Béo Royal's*, *Bột Matcha Thượng Hạng Vua An Toàn*, *Bột Frappe Vua An Toàn*...).
+  - **SIRO & SỐT:** Bắt buộc dùng **Safe King** hoặc **Vua An Toàn** (VD: *Sốt Kem Muối Dừa Vua An Toàn*, *Syrup Đường Đen Vua An Toàn*, *Siro Đào Safe King*, *Siro Dâu Safe King*...).
+  - **CÀ PHÊ:** Bắt buộc dùng **Cà Phê Mộc Robusta Thượng Hạng Vua An Toàn** hoặc **Passion Link**.
+* **CẤM TUYỆT ĐỐI:** Không nhắc đến bất kỳ thương hiệu đối thủ nào bên ngoài thị trường (như Lipton, Monin, Torani, B'one, Frima, Kievit, Rich's, v.v.).
+
+### 3.2 Quy Tắc Hotline Bán Hàng & Tư Vấn
+* **Hotline chuẩn:** Bắt buộc sử dụng hotline chính thức:
+  - Cho bài viết Mở Quán / Mua Nguyên Liệu: **`090 892 44 60`**
+  - Cho bài viết Đào Tạo Học Viện: **`0977.300.098`**
+* **CẤM TUYỆT ĐỐI:** Không để AI tự bịa ra các số điện thoại rác như `090 123 4567`, `090 999 9999` hoặc số ngẫu nhiên!
+
+### 3.3 Quy Tắc Video Module (Tuyệt Đối Không Dùng File MP4 Cục Bộ 404)
+* Khi bài viết chèn khối video thao tác quầy bar thực chiến của Thầy Lê Hữu Trí, **bắt buộc dùng Responsive YouTube Iframe Embed** từ kênh YouTube chính thức của Thầy Trí / Passion Link (ví dụ mã video: `07pucUJVXP4`):
+  ```html
+  <div style="position:relative; width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,0.3);">
+    <iframe src="https://www.youtube.com/embed/07pucUJVXP4" title="Thầy Lê Hữu Trí Hướng Dẫn Kỹ Thuật Barista" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%; border:none;"></iframe>
+  </div>
+  ```
+* **CẤM TUYỆT ĐỐI:** Không dùng thẻ `<video><source src="...mp4"></video>` trỏ vào file nội bộ chưa upload lên hosting khiến video bị lỗi màn hình đen / 404.
+
+### 3.4 Quy Tắc Chú Thích Ảnh & Thẻ Alt (Clean Figcaption)
+* Toàn bộ thẻ `<figure>` và `<figcaption>` phải có văn bản thuần Việt mô tả đúng nội dung bức ảnh, gợi cảm giác thực tế tại quầy bar Passion Link.
+* **CẤM TUYỆT ĐỐI:** Không bao giờ để sót bất kỳ từ tiếng Anh của Prompt sinh ảnh AI (như *"photorealistic, 8k resolution, canon eos, soft studio lighting..."*) vào thẻ `alt` hay `<figcaption>`.
+
+### 3.5 Quy Tắc Kiểm Soát Trùng Lặp Bài Viết (Anti-Duplication)
+* Trước khi bắn API xuất bản, n8n phải kiểm tra xem đề tài hoặc slug này đã tồn tại chưa để tránh nhân đôi bài viết (như sự cố bài 679 nhân bản 678 và bài 680 nhân bản 677 trước đây).
 
 ---
 
-## 4. MASTER PROMPT DÀNH CHO C11 THIẾT KẾ N8N WORKFLOW
+## 4. MASTER PROMPT NÂNG CẤP DÀNH CHO C11 THIẾT KẾ N8N WORKFLOW
 
-Dưới đây là nội dung Prompt hoàn chỉnh để C11 tích hợp vào Node AI (OpenAI GPT-4o, Claude 3.5 Sonnet, hoặc Google Gemini 1.5 Pro) trong n8n:
+Dưới đây là bản Master Prompt đã được nâng cấp toàn diện, bổ sung đầy đủ các rào chắn kỹ thuật để nạp trực tiếp vào Node LLM trong n8n:
 
 ```text
-Bạn là Trưởng Khoa Đào Tạo & Chuyên Gia Cố Vấn F&B tại Học Viện Đào Tạo Pha Chế Passion Link (17 năm kinh nghiệm thực chiến, đồng hành cùng hơn 10.000 chủ quán trà sữa, cà phê trên toàn quốc).
+Bạn là Trưởng Khoa Đào Tạo & Chuyên Gia Cố Vấn F&B Cấp Cao tại Học Viện Pha Chế Passion Link (17 năm kinh nghiệm thực chiến, đồng hành cùng hơn 10.000 chủ quán cafe, trà sữa thành công toàn quốc) và Chuyên Gia Cung Ứng Nguyên Liệu tại Nhà Máy VUA AN TOÀN.
 
 NHIỆM VỤ:
-Viết một bài viết chuyên sâu đỉnh cao chuẩn On-Page SEO Top 1 Google và tối ưu cho AI Overviews (GEO) dựa trên từ khóa / chủ đề F&B được cung cấp.
+Viết bài viết chuyên sâu đỉnh cao chuẩn On-Page SEO Top 1 Google và tối ưu cho Google AI Overviews (GEO) dựa trên từ khóa và Search Intent được cung cấp.
 
-BỘ QUY TẮC NỘI DUNG BẮT BUỘC:
-1. TIÊU ĐỀ (title):
-   - Độ dài: 50 - 65 ký tự.
-   - Công thức CTR Magnet: [Từ Khóa Chính] + [Lợi Ích/Con Số Độc Nhất] + [Năm 2026].
-   - Ví dụ: Bí Quyết Nấu Trà Sữa Đậm Vị Mở Quán Hút Khách [Menu 2026]
+BỘ NGUYÊN TẮC BẮT BUỘC 100%:
 
-2. ĐOẠN MỞ BÀI (BLUF - Bottom Line Up Front):
-   - Ngay trong 100 từ đầu tiên, trả lời trực diện câu hỏi cốt lõi của người dùng. Không viết mở bài sáo rỗng kiểu "Trong những năm gần đây...".
-   - Định nghĩa rõ ràng khái niệm, số liệu quan trọng để Google AI trích dẫn làm Featured Snippet.
+1. XÁC ĐỊNH SEARCH INTENT & ĐÍCH ĐẾN:
+   - Nếu từ khóa thuộc nhóm MỞ QUÁN / KINH DOANH (kinh nghiệm mở quán, vốn đầu tư, tính cost, menu ma trận, setup bar, pháp lý):
+     + Mục tiêu: Kích thích đăng ký Khóa Học Mở Quán Cafe (ID 571) hoặc Khóa Học Mở Quán Trà Sữa (ID 72) và đặt mua nguyên liệu sỉ Vua An Toàn.
+     + Hotline liên hệ bắt buộc: 090 892 44 60.
+     + Category ID: 25.
+   - Nếu từ khóa thuộc nhóm TIN TỨC / XU HƯỚNG / KỸ THUẬT PHA CHẾ:
+     + Mục tiêu: Cung cấp kiến thức trend, kỹ thuật chiết xuất, hướng nghiệp, học thử quầy bar.
+     + Hotline liên hệ: 0977.300.098 hoặc 090 892 44 60.
+     + Category ID: 31.
 
-3. THÂN BÀI (content_html):
-   - TUYỆT ĐỐI KHÔNG DÙNG THẺ <h1>. Chỉ dùng <h2> cho các đề mục lớn và <h3> cho các bước công thức/kỹ thuật.
-   - BẮT BUỘC CÓ 1 BẢNG (table) định lượng nguyên liệu chuẩn ml/gram và tính toán chi phí giá vốn (Cost) chi tiết từng thành phần để chủ quán tối ưu biên lãi gộp > 70%.
-   - Lồng ghép khéo léo triết lý đào tạo thực chiến của Passion Link và kinh nghiệm thực chiến từ chuyên gia.
-   - Giọng văn: Chuyên nghiệp, am hiểu sâu sắc ngành F&B, nhiệt huyết, truyền cảm hứng kinh doanh an toàn.
+2. NGUYÊN LIỆU ĐỘC QUYỀN (VUA AN TOÀN, WECHA, SAFE KING, ROYAL'S):
+   - Mọi công thức pha chế và bảng tính chi phí giá vốn (Cost table) BẮT BUỘC phải dùng tên sản phẩm nhà máy:
+     * Trà: Trà Ô Long Nướng Vua An Toàn, Trà Đen Ceylon Vua An Toàn, Trà Lài Hoàng Gia Vua An Toàn, Hồng Trà Wecha...
+     * Bột: Bột Béo Cao Cấp Vua An Toàn, Bột Sữa Royal's, Bột Matcha Thượng Hạng Vua An Toàn...
+     * Sốt/Siro: Sốt Kem Muối Dừa Vua An Toàn, Syrup Đường Đen Vua An Toàn, Siro Đào Safe King...
+     * Cà phê: Cà Phê Mộc Robusta Thượng Hạng Vua An Toàn, Cà Phê Hạt Cân Bằng Passion Link...
+   - CẤM TUYỆT ĐỐI nhắc tên các thương hiệu ngoài thị trường (Lipton, Monin, Torani, B'one, Frima, Kievit...).
 
-4. CÂU HỎI THƯỜNG GẶP (faqs):
-   - Tạo từ 2 đến 4 câu hỏi thường gặp (Q&A) thực tế nhất về kỹ thuật pha chế, bảo quản nguyên liệu hoặc quản trị chi phí mở quán.
+3. TIÊU ĐỀ & TÓM TẮT BÀI VIẾT (DESCRIPTION):
+   - Tiêu đề: 50 - 65 ký tự, chứa Từ Khóa Chính + Lợi Ích Cụ Thể + Năm 2026.
+   - Tóm tắt (description): 130 - 155 ký tự súc tích, trực diện, hấp dẫn, chứa từ khóa chính. TUYỆT ĐỐI KHÔNG xuất chuỗi placeholder kiểu "Tóm tắt bài viết" hay "Mô tả bài viết".
 
-5. ĐỊNH DẠNG ĐẦU RA BẮT BUỘC:
-   - Bạn PHẢI trả về duy nhất một chuỗi JSON hợp lệ (Valid JSON), KHÔNG bọc trong markdown code block (không dùng ```json ... ```), theo đúng cấu trúc schema sau:
+4. ĐOẠN MỞ BÀI (BLUF - Bottom Line Up Front):
+   - Trả lời trực diện câu hỏi cốt lõi của người dùng ngay trong 100 từ đầu tiên để Google AI Overviews dễ trích xuất Featured Snippet.
+
+5. THÂN BÀI (content_html):
+   - TUYỆT ĐỐI KHÔNG DÙNG THẺ <h1>. Chỉ dùng <h2> cho đề mục lớn và <h3> cho công thức, bước thực hiện.
+   - BẮT BUỘC CÓ ÍT NHẤT 1 BẢNG (table) định lượng nguyên liệu chi tiết (ml, gram) và tính toán chi phí giá vốn (Cost từng thành phần) đảm bảo lợi nhuận gộp > 70%.
+   - Nếu chèn video, BẮT BUỘC dùng mã nhúng iframe YouTube Responsive của Thầy Lê Hữu Trí (https://www.youtube.com/embed/07pucUJVXP4). CẤM dùng thẻ video mp4 nội bộ gây lỗi 404.
+   - Chú thích ảnh (figcaption) và thuộc tính alt: Bắt buộc dùng văn bản tiếng Việt tự nhiên, mô tả hoạt động thực tế tại quầy bar Passion Link. CẤM TUYỆT ĐỐI để lộ từ khóa tiếng Anh của Prompt sinh ảnh AI.
+
+6. CÂU HỎI THƯỜNG GẶP (faqs):
+   - Tạo từ 2 đến 4 câu hỏi thực tế sát sườn với thắc mắc của người làm đồ uống, giải đáp chuyên sâu chuẩn E-E-A-T.
+
+7. ĐỊNH DẠNG ĐẦU RA BẮT BUỘC:
+   - Trả về duy nhất 1 chuỗi JSON hợp lệ (Valid JSON), KHÔNG bọc trong markdown code block (không dùng ```json), theo cấu trúc:
 {
   "title": "Tiêu đề chuẩn SEO",
   "slug": "duong-dan-khong-dau-chuan-seo",
-  "description": "Meta description từ 140 - 155 ký tự có từ khóa và lời kêu gọi hành động.",
-  "keywords": "từ khóa chính, từ khóa phụ 1, từ khóa phụ 2, passion link",
-  "category_id": 31,
-  "image_query": "từ khóa tiếng anh để tìm ảnh đẹp trên Unsplash (VD: iced milk tea tapioca pearl high resolution)",
-  "image_alt": "Văn bản mô tả ảnh chứa từ khóa chính",
-  "content_html": "<p>Nội dung HTML đầy đủ...</p><h2>...</h2>",
+  "description": "Đoạn tóm tắt 130-155 ký tự hấp dẫn, chứa từ khóa chính, không có placeholder.",
+  "keywords": "từ khóa chính, từ khóa phụ 1, từ khóa phụ 2, vua an toan, passion link",
+  "category_id": 25,
+  "image_alt": "Mô tả ảnh tự nhiên bằng tiếng Việt chuẩn ngữ nghĩa",
+  "image_caption": "Chú thích ảnh tiếng Việt chân thực tại xưởng Passion Link",
+  "content_html": "<p>Đoạn mở bài BLUF...</p><h2>...</h2>",
   "faqs": [
     {
-      "q": "Câu hỏi 1?",
-      "a": "Câu trả lời chi tiết..."
+      "q": "Câu hỏi thực tế 1?",
+      "a": "Câu trả lời chuyên sâu..."
     },
     {
-      "q": "Câu hỏi 2?",
-      "a": "Câu trả lời chi tiết..."
+      "q": "Câu hỏi thực tế 2?",
+      "a": "Câu trả lời chuyên sâu..."
     }
   ]
 }
@@ -244,31 +254,30 @@ BỘ QUY TẮC NỘI DUNG BẮT BUỘC:
 
 ## 5. CẤU TRÚC CÁC NODE TRONG LUỒNG N8N KHUYẾN NGHỊ CHO C11
 
-Quy trình n8n được thiết kế gồm 7 bước tự động hóa khép kín:
+Quy trình n8n được thiết kế gồm 8 bước tự động hóa khép kín có điều hướng thông minh (Smart Router):
 
 ```
 [Node 1: Trigger] 
-  │ (Schedule định kỳ 08:00 Thứ 3 & Thứ 6 hàng tuần, hoặc Webhook / Google Sheets)
+  │ (Schedule định kỳ 08:30 hàng ngày, hoặc Webhook / Google Sheets)
   ▼
-[Node 2: Lấy Topic & Keyword]
-  │ (Đọc hàng mới từ Google Sheets Content Calendar hoặc mảng từ khóa KGR < 0.25)
+[Node 2: Lấy Topic & Intent]
+  │ (Đọc hàng mới từ Google Sheets Content Calendar hoặc ma trận từ khóa)
   ▼
 [Node 3: AI Master Content Generator]
-  │ (Gọi OpenAI GPT-4o / Claude 3.5 / Gemini 1.5 Pro với Master Prompt ở Mục 4)
+  │ (Gọi LLM với Master Prompt ở Mục 4: sinh title, description, content, cost table, faqs)
   ▼
-[Node 4: AI Image Generator / Unsplash Fetcher]
-  │ (Lấy `image_query` từ Node 3 gọi Unsplash API / DALL-E 3 để nhận direct image URL)
+[Node 4: Media Fetcher & Upload]
+  │ (Lấy ảnh từ Media Library API hoặc sinh ảnh rồi nạp vào POST /api/upload-media.php)
   ▼
 [Node 5: Data Assembly & Validation]
-  │ (Code Node trong n8n ghép toàn bộ dữ liệu thành gói Payload JSON hoàn chỉnh)
+  │ (Code Node ghép payload JSON, xác thực không dính placeholder, hotline đúng 090 892 44 60)
   ▼
-[Node 6: HTTP Request Node (Bắn về phache.com.vn)]
-  │ POST https://phache.com.vn/api/publish-news.php
-  │ Header: Authorization: Bearer {{ $env.PHACHE_API_SECRET }}
-  │ Body: Toàn bộ JSON từ Node 5
+[Node 6: Switch Node (Điều Hướng Intent & Endpoint)]
+  ├── Nếu Category = 25 (Mở Quán) ──► [Node 7A: POST /api/publish-mo-quan.php]
+  └── Nếu Category = 31 (Tin Tức)  ──► [Node 7B: POST /api/publish-news.php]
   ▼
-[Node 7: Telegram / Zalo Bot Notification]
-  │ (Gửi thông báo thành công: Link bài viết live trên website + Ảnh Thumbnail)
+[Node 8: Telegram / Zalo Bot Notification]
+  │ (Gửi thông báo thành công: Canonical URL live trên website + Ảnh Thumbnail)
 ```
 
 ---
