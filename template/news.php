@@ -1,4 +1,154 @@
 <style type="text/css" media="screen">
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap');
+
+/* ==========================================================================
+   CHUYÊN MỤC TIN TỨC: PHÔNG CHỮ MẶC ĐỊNH LÀ QUICKSAND BOLD
+   ========================================================================== */
+.news_page,
+.news_page *,
+#wrap-list-news,
+#wrap-list-news *,
+#list_news,
+#list_news *,
+#news_content,
+#news_content * {
+    font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+/* Áp dụng mặc định trọng số Bold (700) cho toàn bộ trang tin tức */
+.news_page {
+    font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+    font-weight: 700;
+    color: #2c3e50;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Nội dung bài viết tin tức: Phông chữ mặc định Quicksand Bold */
+#news_content {
+    font-size: 16.5px;
+    color: #2c3e50;
+    line-height: 1.85;
+}
+
+#news_content p,
+#news_content li,
+#news_content div:not(.pl-geo-head):not(.pl-qrb-badge):not(.pl-calculator-container):not(.pl-retention-video-wrapper),
+#news_content span:not(.calc-pulse-icon):not(.pl-geo-icon),
+#news_content td,
+#news_content th,
+.news_page p,
+.news_page li,
+.news_page a,
+.news_page span:not(.calc-pulse-icon):not(.pl-geo-icon),
+.news_page .description,
+.news_page .des_course,
+.news_page .des_success,
+.news_page .intro,
+.news_page label,
+.news_page input,
+.news_page textarea {
+    font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+    font-weight: 700;
+    line-height: 1.85;
+}
+
+/* Tiêu đề & Chữ nhấn mạnh: Quicksand Extra Bold (800) */
+.news_page h1,
+.news_page h2,
+.news_page h3,
+.news_page h4,
+.news_page h5,
+.news_page h6,
+.news_page strong,
+.news_page b,
+.news_page .h1-title,
+.news_page .course-main-title,
+.news_page .sub-h2,
+.news_page .h2-title,
+.news_page .h3-relate,
+.news_page .news_title,
+.news_page .news_title a,
+#news_content h1,
+#news_content h2,
+#news_content h3,
+#news_content h4,
+#news_content h5,
+#news_content h6,
+#news_content strong,
+#news_content b {
+    font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+    font-weight: 800 !important;
+}
+
+/* Danh sách tin tức (Archive List) */
+#wrap-list-news .h1-title {
+    font-size: 26px;
+    color: #1F3F1F;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #2E7D32;
+    padding-bottom: 12px;
+}
+.news_page .news_item .box-effect {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background: #fff;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.news_page .news_item .box-effect:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(31,168,75,0.15);
+}
+.news_page .news_title a {
+    font-size: 17px;
+    font-weight: 800 !important;
+    color: #1F3F1F;
+    text-decoration: none;
+    line-height: 1.45;
+    display: inline-block;
+    margin-top: 10px;
+    transition: color 0.2s ease;
+}
+.news_page .news_title a:hover {
+    color: #2E7D32;
+}
+.news_page .description {
+    font-size: 14.5px;
+    color: #4b5563;
+    line-height: 1.65;
+    margin-top: 8px;
+}
+
+/* Khối tin tức liên quan */
+#list_news_other li a {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2e7d32;
+    transition: color 0.2s ease;
+}
+#list_news_other li a:hover {
+    color: #1b5e20;
+    text-decoration: underline;
+}
+
+/* Khoảng cách đoạn văn bản để đọc mượt mà */
+#news_content p {
+    margin-bottom: 18px;
+}
+#news_content ul,
+#news_content ol {
+    margin-bottom: 20px;
+    padding-left: 22px;
+}
+#news_content li {
+    margin-bottom: 8px;
+}
+
 .col-centered {
     float: none;
     margin: 0 auto;
