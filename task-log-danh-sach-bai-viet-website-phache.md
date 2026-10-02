@@ -27,6 +27,14 @@
    - Bắt buộc có **ít nhất 1 bảng Table HTML** phân tích chi tiết: Định lượng nguyên liệu (gram/ml), Giá vốn (Cost ly nước), Giá bán đề xuất và Tỷ lệ lợi nhuận gộp (> 70%).
 4. **Cấu Trúc FAQPage Schema:** Cung cấp mảng `faq_items` gồm tối thiểu 3 câu hỏi thực chiến để API tự động sinh mã cấu trúc Schema `FAQPage` chuẩn Google Rich Snippets.
 5. **Mạng Lưới Internal Link Silo:** Mỗi bài viết bắt buộc trỏ ngữ cảnh (Contextual Link) về khóa học đích và công cụ tính chi phí tương ứng trên `phache.com.vn`.
+6. **Chiến Lược Bán Nguyên Liệu Nhà Máy Độc Quyền (WECHA, SAFE KING, ROYAL'S - Bắt buộc 100%):**
+   - **Nguồn chân lý dữ liệu:** Bảng tính Google Sheet sản phẩm nhà máy: [Google Sheet Danh Mục Sản Phẩm Nhà Máy](https://docs.google.com/spreadsheets/d/17gNnZnicD7_u5aCt3QGE9s_Qw6QB6FEO9XO_DInXMzU/edit?gid=0#gid=0) (Tab `san_pham`).
+   - Mọi công thức pha chế, định lượng và bảng tính chi phí giá vốn (Cost table) trong bài viết bắt buộc chỉ sử dụng nguyên liệu do nhà máy của công ty sản xuất:
+     * **TRÀ:** Bắt buộc dùng thương hiệu **WECHA** (Trà Đen Assam Wecha, Trà Olong Xuân Xanh Wecha, Trà Xanh Hoa Nhài Wecha, Olong Phú Quý Wecha, Trà Bá Tước Wecha, Hồng Trà Shan Tuyết Wecha...).
+     * **SIRO:** Bắt buộc dùng thương hiệu **SAFE KING** (Siro Đào Safe King, Siro Dâu Safe King, Siro Cam Safe King, Siro Vải Safe King, Siro Ổi Hồng Safe King, Siro Mãng Cầu Safe King, Siro Dưa Lưới Safe King, Siro Thơm Safe King...).
+     * **BỘT:** Bắt buộc dùng thương hiệu **ROYAL'S** hoặc **VUA AN TOÀN / VAT** (Bột Sữa Royal's Vua An Toàn 1KG/5KG, Bột Kem Phô Mai VAT, Bột Sương Sáo Safe King, Bột làm trân châu, Bột Làm Kem Bingsu...).
+     * **CÀ PHÊ:** Cà Phê Hạt Cao Cấp Cân Bằng / Thượng Hạng Passion Link / SaKi.
+   - **Quy tắc thương mại sống còn:** Ưu tiên lấy đúng tên sản phẩm trong sheet `san_pham` để làm công thức và bảng giá vốn nhằm mục tiêu bán được nguyên liệu do nhà máy sản xuất. CẤM TUYỆT ĐỐI đưa tên sản phẩm hoặc thương hiệu đối thủ ngoài thị trường (như Lipton, Monin, Torani, B'one, Frima, Kievit...) vào bài viết!
 
 ---
 
