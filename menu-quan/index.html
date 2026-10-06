@@ -847,6 +847,453 @@ body {
 .site-footer strong { color: var(--green-dark); }
 .site-footer a { color: var(--green); text-decoration: none; font-weight: 700; }
 .site-footer a:hover { text-decoration: underline; }
+
+/* ==========================================================================
+   MENU BOARD REAL EXPERIENCE (CARD GRID, POSTER SHOWCASE & LIGHTBOX)
+   ========================================================================== */
+.poster-showcase-box {
+  background: linear-gradient(135deg, rgba(240, 253, 244, 0.95) 0%, rgba(220, 252, 231, 0.90) 100%);
+  border: 1.5px solid rgba(34, 197, 94, 0.35);
+  border-radius: 20px;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  box-shadow: 0 4px 18px rgba(31, 168, 75, 0.08);
+  backdrop-filter: blur(10px);
+}
+@media (max-width: 768px) {
+  .poster-showcase-box {
+    flex-direction: column;
+    text-align: center;
+    padding: 18px 16px;
+    gap: 16px;
+  }
+}
+.poster-preview-card {
+  position: relative;
+  width: 200px;
+  height: 140px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+  border: 2.5px solid #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  background: #1e293b;
+}
+@media (max-width: 768px) {
+  .poster-preview-card {
+    width: 100%;
+    max-width: 320px;
+    height: 170px;
+  }
+}
+.poster-preview-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.poster-preview-card:hover img {
+  transform: scale(1.08);
+}
+.poster-preview-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.2) 60%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 12px;
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 800;
+  transition: all 0.25s ease;
+}
+.poster-preview-card:hover .poster-preview-overlay {
+  background: rgba(0, 0, 0, 0.65);
+}
+.poster-showcase-content {
+  flex: 1;
+}
+.poster-showcase-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: var(--green-dark);
+  color: #FFD54F;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.poster-showcase-title {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--green-dark);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.poster-showcase-desc {
+  font-size: 13.5px;
+  color: #334155;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.poster-showcase-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+@media (max-width: 768px) {
+  .poster-showcase-btns {
+    justify-content: center;
+  }
+}
+.btn-poster-zoom {
+  background: linear-gradient(135deg, #1fa84b, #15803d);
+  color: #fff !important;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(31, 168, 75, 0.25);
+  transition: all 0.2s;
+}
+.btn-poster-zoom:hover {
+  background: #14532d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(31, 168, 75, 0.35);
+}
+.btn-poster-lead {
+  background: #fff;
+  color: var(--green-dark) !important;
+  border: 1.5px solid var(--green);
+  padding: 9px 18px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+.btn-poster-lead:hover {
+  background: rgba(31, 168, 75, 0.08);
+  transform: translateY(-2px);
+}
+
+/* View Mode Bar (Chuyển chế độ xem Hình Món / Bảng Cost) */
+.view-mode-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 18px 0 20px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  border: 1px solid rgba(31, 168, 75, 0.15);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.view-mode-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--green-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.view-mode-switches {
+  display: inline-flex;
+  background: #e2e8f0;
+  padding: 4px;
+  border-radius: 50px;
+  gap: 4px;
+}
+.view-mode-btn {
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.view-mode-btn.active {
+  background: #fff;
+  color: var(--green-dark);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  font-weight: 800;
+}
+
+/* Drink Visual Cards Grid (Lưới hình ảnh món thật của quán) */
+.drinks-visual-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 28px;
+}
+@media (max-width: 1100px) {
+  .drinks-visual-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .drinks-visual-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+@media (max-width: 440px) {
+  .drinks-visual-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+.drink-card {
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(31, 168, 75, 0.12);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.drink-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(31, 168, 75, 0.18);
+  border-color: var(--green);
+}
+.drink-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #f8fafc;
+}
+.drink-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.drink-card:hover .drink-card-img {
+  transform: scale(1.06);
+}
+.drink-card-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+.drink-card-speed {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  backdrop-filter: blur(8px);
+}
+.drink-card-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+.drink-card-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--green-dark);
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+.drink-card-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.drink-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.08);
+  gap: 8px;
+}
+.drink-card-price {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--green);
+  white-space: nowrap;
+}
+.drink-card-cost-pill {
+  font-size: 11px;
+  font-weight: 700;
+  color: #b91c1c;
+  background: #fef2f2;
+  border: 1px solid #fee2e2;
+  padding: 2px 7px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+/* Modal Lightbox Xem Bảng Menu Gốc */
+.poster-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeInModal 0.25s ease forwards;
+}
+.poster-modal-overlay.active {
+  display: flex;
+}
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.poster-modal-container {
+  background: #ffffff;
+  border-radius: 20px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+  border: 1.5px solid rgba(255, 213, 79, 0.4);
+}
+.poster-modal-header {
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #1F3F1F, #173217);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.poster-modal-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #FFD54F;
+}
+.poster-modal-close {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.poster-modal-close:hover {
+  background: rgba(239, 68, 68, 0.8);
+}
+.poster-modal-body {
+  padding: 16px;
+  overflow-y: auto;
+  text-align: center;
+  background: #0f172a;
+}
+.poster-modal-fullimg {
+  max-width: 100%;
+  max-height: 68vh;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+.poster-modal-footer {
+  padding: 12px 20px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.poster-modal-hint {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+}
+.poster-modal-actions {
+  display: flex;
+  gap: 10px;
+}
+.btn-poster-modal-dl {
+  background: #e2e8f0;
+  color: #1e293b !important;
+  text-decoration: none;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 50px;
+  transition: all 0.2s;
+}
+.btn-poster-modal-dl:hover {
+  background: #cbd5e1;
+}
+.btn-poster-modal-cta {
+  background: linear-gradient(135deg, #1fa84b, #15803d);
+  color: #fff !important;
+  border: none;
+  font-size: 12.5px;
+  font-weight: 800;
+  padding: 7px 16px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-poster-modal-cta:hover {
+  background: #14532d;
+}
+
 </style>
 </head>
 <body>
@@ -1030,479 +1477,1268 @@ body {
       </button>
     </div>
 
-    <!-- PANE 1: TRÀ SỮA GEN Z -->
+    
+    <!-- PANE 1: TRÀ SỮA GEN Z & MÓN MỚI 2025 - 2026 -->
     <div class="model-content-pane active" id="model-pane-1">
       <div class="model-summary-box">
         <div>
-          <h3 class="model-meta-title">Mô Hình Quán Trà Sữa Gen Z &amp; Topping Nhà Làm</h3>
-          <p class="model-meta-desc">Quy mô: 25–40m² hoặc xe đẩy cao cấp · Vốn đầu tư: 80–180 triệu · Khách hàng: Học sinh, sinh viên, giới trẻ</p>
+          <h3 class="model-meta-title">Mô Hình Quán Trà Sữa Gen Z, Kem Tuyết &amp; Topping Tự Làm</h3>
+          <p class="model-meta-desc">Quy mô: 25–45m² hoặc Kiosk cao cấp · Vốn đầu tư: 80–180 triệu · Khách hàng: Học sinh, sinh viên, giới trẻ Gen Z</p>
         </div>
         <div class="model-stats-pills">
-          <span class="stat-pill">📋 Tổng món: <strong>28 món</strong></span>
+          <span class="stat-pill">📋 Tổng món: <strong>32 món</strong></span>
           <span class="stat-pill">💎 Cost TB: <strong>19.8%</strong></span>
-          <span class="stat-pill">⏱ Ra món: <strong>45s - 60s</strong></span>
+          <span class="stat-pill">⏱ Ra món: <strong>40s - 55s</strong></span>
         </div>
       </div>
 
-      <!-- Nhóm 1 -->
-      <div class="menu-category-group">
-        <h4 class="category-group-title">🧋 Nhóm 1: Trà Sữa Cốt Đậm Vị Đài Loan (Best Seller)</h4>
-        <table class="drinks-table-card">
-          <thead>
-            <tr>
-              <th>Tên Món &amp; Định Vị</th>
-              <th>Size</th>
-              <th>Giá Bán</th>
-              <th>Giá Vốn (Cost)</th>
-              <th class="text-center">% Cost</th>
-              <th class="text-right">Thời Gian</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Trà Sữa Ô Long Nướng Khói</span>
-                  <span class="badge-drink-tag badge-signature">Signature</span>
-                </div>
-              </td>
-              <td data-label="Size">500ml (M)</td>
-              <td data-label="Giá Bán" class="cell-price">32.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">6.400đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">20.0%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">45s</td>
-            </tr>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Trà Sữa Truyền Thống Đài Loan 1980</span>
-                  <span class="badge-drink-tag badge-cashcow">Cash Cow</span>
-                </div>
-              </td>
-              <td data-label="Size">500ml (M)</td>
-              <td data-label="Giá Bán" class="cell-price">28.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">5.300đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">18.9%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">40s</td>
-            </tr>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Trà Sữa Thiết Quan Âm Vị Đậm</span>
-                  <span class="badge-drink-tag badge-trend">Hot Trend</span>
-                </div>
-              </td>
-              <td data-label="Size">500ml (M)</td>
-              <td data-label="Giá Bán" class="cell-price">35.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">7.100đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">20.2%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">50s</td>
-            </tr>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Trà Sữa Bá Tước Earl Grey Hoàng Gia</span>
-                  <span class="badge-drink-tag badge-cashcow">Cash Cow</span>
-                </div>
-              </td>
-              <td data-label="Size">500ml (M)</td>
-              <td data-label="Giá Bán" class="cell-price">32.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">6.200đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">19.3%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">45s</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- Banner Menu Quầy Bar Gốc Thiết Kế Sẵn -->
+      <div class="poster-showcase-box">
+        <div class="poster-preview-card" onclick="openPosterModal('images/posters/poster-kem-tuyet.jpg', 'Bảng Menu Quán Trà Sữa Kem Tuyết 2025 - 2026 (Passion Link)')">
+          <img src="images/posters/poster-kem-tuyet.jpg" alt="Bảng Menu Trà Sữa Kem Tuyết Quầy Bar" loading="lazy">
+          <div class="poster-preview-overlay">
+            <span>🔍 Phóng To Bảng Gốc</span>
+          </div>
+        </div>
+        <div class="poster-showcase-content">
+          <span class="poster-showcase-tag">Bảng Menu Thiết Kế Quầy Bar Thực Tế</span>
+          <h4 class="poster-showcase-title">Bảng Menu Mẫu In Sẵn Khoá Học Trà Sữa Kem Tuyết &amp; Topping</h4>
+          <p class="poster-showcase-desc">Bản thiết kế quầy bar thực tế chuẩn kích thước in ấn (Standee, menu đèn mica, menu để bàn) chuyển giao trực tiếp cho học viên Passion Link với đầy đủ định lượng và giá vốn.</p>
+          <div class="poster-showcase-btns">
+            <button type="button" class="btn-poster-zoom" onclick="openPosterModal('images/posters/poster-kem-tuyet.jpg', 'Bảng Menu Quán Trà Sữa Kem Tuyết 2025 - 2026 (Passion Link)')">
+              🔍 Xem Phóng To Bảng Gốc (Full HD)
+            </button>
+            <button type="button" class="btn-poster-lead" onclick="openLeadModal('Menu Trà Sữa Gen Z')">
+              📥 Tải File Thiết Kế (In Ấn / Canva)
+            </button>
+          </div>
+        </div>
       </div>
 
-      <!-- Nhóm 2 -->
-      <div class="menu-category-group">
-        <h4 class="category-group-title">🧀 Nhóm 2: Trà Sữa Kem Cheese &amp; Brulee Béo Ngậy</h4>
-        <table class="drinks-table-card">
-          <thead>
-            <tr>
-              <th>Tên Món &amp; Định Vị</th>
-              <th>Size</th>
-              <th>Giá Bán</th>
-              <th>Giá Vốn (Cost)</th>
-              <th class="text-center">% Cost</th>
-              <th class="text-right">Thời Gian</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Trà Ô Long Brulee Nướng Sủi Bọt</span>
-                  <span class="badge-drink-tag badge-signature">Signature</span>
-                </div>
-              </td>
-              <td data-label="Size">500ml (M)</td>
-              <td data-label="Giá Bán" class="cell-price">42.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">8.800đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">20.9%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">60s</td>
-            </tr>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Trà Xanh Lài Macchiato Kem Mặn</span>
-                  <span class="badge-drink-tag badge-cashcow">Cash Cow</span>
-                </div>
-              </td>
-              <td data-label="Size">500ml (M)</td>
-              <td data-label="Giá Bán" class="cell-price">36.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">7.200đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">20.0%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">50s</td>
-            </tr>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Sữa Tươi Trân Châu Đường Đen Kem Trứng</span>
-                  <span class="badge-drink-tag badge-trend">Hot Trend</span>
-                </div>
-              </td>
-              <td data-label="Size">500ml (M)</td>
-              <td data-label="Giá Bán" class="cell-price">38.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">8.200đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">21.5%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">55s</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- Thanh chuyển đổi chế độ xem -->
+      <div class="view-mode-bar">
+        <div class="view-mode-title">
+          <span>🍹 Menu Món Đồ Uống Tiêu Biểu</span>
+          <span style="font-size:12px; font-weight:600; color:var(--text-muted);">(Chụp thực tế tại quầy bar Passion Link)</span>
+        </div>
+        <div class="view-mode-switches">
+          <button type="button" class="view-mode-btn active" id="btn-vmode-cards-1" onclick="switchViewMode(1, 'cards')">🖼️ Menu Hình Ảnh</button>
+          <button type="button" class="view-mode-btn" id="btn-vmode-table-1" onclick="switchViewMode(1, 'table')">📊 Bảng Tính Giá Vốn</button>
+        </div>
+      </div>
+
+      <!-- VIEW 1: Lưới thẻ hình món thực tế -->
+      <div class="drinks-visual-grid" id="view-cards-1">
+        <!-- Món 1 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/tra-sua-nuong-brulee.jpg" alt="Trà Sữa Ô Long Nướng Brulee Sủi Bọt" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Signature</span>
+            <span class="drink-card-speed">⏱ 45s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Trà Sữa Ô Long Nướng Brulee</div>
+              <p class="drink-card-desc">Cốt trà Ô Long nướng Đài Loan ủ chậm, kem trứng béo ngậy khò đường caramel thơm nức giòn tan.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">38.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(M)</small></span>
+              <span class="drink-card-cost-pill">Cost: 7.600đ (20.0%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 2 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/tra-sua-kem-tuyet.jpg" alt="Trà Sữa Kem Tuyết Khổng Lồ 2025" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-trend">Hot Trend</span>
+            <span class="drink-card-speed">⏱ 50s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Trà Sữa Kem Tuyết Khổng Lồ 2025</div>
+              <p class="drink-card-desc">Món mới độc quyền: lớp kem tuyết mềm mịn xếp chóp khổng lồ rưới caramel, bùng nổ hương vị thơm béo.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">42.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(L)</small></span>
+              <span class="drink-card-cost-pill">Cost: 8.500đ (20.2%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 3 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/tra-sua-taro-cream.jpg" alt="Trà Sữa Oolong Taro Cream" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Best Seller</span>
+            <span class="drink-card-speed">⏱ 40s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Trà Sữa Oolong Taro Cream</div>
+              <p class="drink-card-desc">Hương khoai môn bùi dẻo tự nhiên kết hợp nền trà ô long thanh khiết và lớp kem taro nhung mượt tím biếc.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">39.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(M)</small></span>
+              <span class="drink-card-cost-pill">Cost: 7.800đ (20.0%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 4 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/sua-tuoi-tran-chau-duong-den-cup.jpg" alt="Sữa Tươi Trân Châu Đường Đen" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-cashcow">Cash Cow</span>
+            <span class="drink-card-speed">⏱ 35s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Sữa Tươi Trân Châu Đường Đen</div>
+              <p class="drink-card-desc">Trân châu đen nấu mật mía ấm dẻo, sữa tươi thanh trùng Dalat Milk béo ngậy và vân đường đen hổ phách.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">36.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(M)</small></span>
+              <span class="drink-card-cost-pill">Cost: 7.200đ (20.0%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 5 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/tra-sen-vang-macchiato.jpg" alt="Trà Sen Vàng Kem Macchiato Phô Mai" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Signature</span>
+            <span class="drink-card-speed">⏱ 45s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Trà Sen Vàng Kem Macchiato</div>
+              <p class="drink-card-desc">Hạt sen tươi ninh mềm ngọt dịu, cốt trà ô long sen thanh mát và lớp màng kem phô mai mặn béo ngậy.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">40.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(M)</small></span>
+              <span class="drink-card-cost-pill">Cost: 8.200đ (20.5%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 6 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/matcha-dau-do-kem-cheese.jpg" alt="Matcha Uji Đậu Đỏ Kem Cheese" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Best Seller</span>
+            <span class="drink-card-speed">⏱ 50s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Matcha Uji Đậu Đỏ Kem Cheese</div>
+              <p class="drink-card-desc">Bột Matcha Uji Kyoto Nhật Bản nguyên chất, đậu đỏ sên mềm ngọt ngào và kem cheese sánh mịn khó cưỡng.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">42.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(M)</small></span>
+              <span class="drink-card-cost-pill">Cost: 8.400đ (20.0%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 7 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/tra-sua-gao-rang-genmaicha.jpg" alt="Trà Sữa Gạo Rang Nhật Bản Genmaicha" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-trend">Hot Trend</span>
+            <span class="drink-card-speed">⏱ 40s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Trà Sữa Gạo Rang Genmaicha</div>
+              <p class="drink-card-desc">Hương gạo rang mộc mạc thơm lừng xứ Phù Tang, vị trà thanh thoát quyện sữa béo, ngọt hậu sâu lắng.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">38.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(M)</small></span>
+              <span class="drink-card-cost-pill">Cost: 7.500đ (19.7%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 8 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/tra-sua-kiwi-cream.jpg" alt="Trà Sữa Oolong Kiwi Cream" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-hook">Món Mới</span>
+            <span class="drink-card-speed">⏱ 45s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Trà Sữa Oolong Kiwi Cream</div>
+              <p class="drink-card-desc">Sự bùng nổ vị giác giữa mứt kiwi chua thanh tươi mát và nền trà sữa kem béo ngậy độc đáo.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">40.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(M)</small></span>
+              <span class="drink-card-cost-pill">Cost: 8.000đ (20.0%)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 2: Bảng chi tiết giá vốn & định lượng (ẩn mặc định, bật khi chuyển tab) -->
+      <div id="view-table-1" style="display:none;">
+        <div class="menu-category-group">
+          <h4 class="category-group-title">🧋 Nhóm 1: Trà Sữa Cốt Đậm Vị Đài Loan (Best Seller)</h4>
+          <table class="drinks-table-card">
+            <thead>
+              <tr>
+                <th>Tên Món &amp; Định Vị</th>
+                <th>Size</th>
+                <th>Giá Bán</th>
+                <th>Giá Vốn (Cost)</th>
+                <th class="text-center">% Cost</th>
+                <th class="text-right">Thời Gian</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Trà Sữa Ô Long Nướng Brulee</span><span class="badge-drink-tag badge-signature">Signature</span></div></td>
+                <td data-label="Size">500ml (M)</td>
+                <td data-label="Giá Bán" class="cell-price">38.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">7.600đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">20.0%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">45s</td>
+              </tr>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Trà Sữa Truyền Thống Đài Loan 1980</span><span class="badge-drink-tag badge-cashcow">Cash Cow</span></div></td>
+                <td data-label="Size">500ml (M)</td>
+                <td data-label="Giá Bán" class="cell-price">28.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">5.300đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">18.9%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">40s</td>
+              </tr>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Trà Sữa Kem Tuyết Khổng Lồ 2025</span><span class="badge-drink-tag badge-trend">Hot Trend</span></div></td>
+                <td data-label="Size">700ml (L)</td>
+                <td data-label="Giá Bán" class="cell-price">42.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">8.500đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">20.2%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">50s</td>
+              </tr>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Sữa Tươi Trân Châu Đường Đen</span><span class="badge-drink-tag badge-cashcow">Cash Cow</span></div></td>
+                <td data-label="Size">500ml (M)</td>
+                <td data-label="Giá Bán" class="cell-price">36.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">7.200đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">20.0%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">35s</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
-    <!-- PANE 2: CAFE HIỆN ĐẠI -->
+    <!-- PANE 2: CÀ PHÊ HIỆN ĐẠI SPECIALTY & BARISTA -->
     <div class="model-content-pane" id="model-pane-2">
       <div class="model-summary-box">
         <div>
-          <h3 class="model-meta-title">Mô Hình Quán Cà Phê Hiện Đại &amp; Specialty Barista</h3>
-          <p class="model-meta-desc">Quy mô: 40–80m² · Vốn đầu tư: 150–350 triệu · Khách hàng: Dân văn phòng, người đi làm, freelancer</p>
+          <h3 class="model-meta-title">Mô Hình Quán Cà Phê Pha Máy Barista &amp; Pha Phin Hiện Đại</h3>
+          <p class="model-meta-desc">Quy mô: 35–80m² · Vốn đầu tư: 150–350 triệu · Khách hàng: Dân văn phòng, người đi làm, freelancer, tín đồ cà phê</p>
         </div>
         <div class="model-stats-pills">
-          <span class="stat-pill">📋 Tổng món: <strong>24 món</strong></span>
-          <span class="stat-pill">💎 Cost TB: <strong>18.4%</strong></span>
-          <span class="stat-pill">⏱ Ra món: <strong>40s - 75s</strong></span>
+          <span class="stat-pill">📋 Tổng món: <strong>26 món</strong></span>
+          <span class="stat-pill">💎 Cost TB: <strong>17.8%</strong></span>
+          <span class="stat-pill">⏱ Ra món: <strong>35s - 65s</strong></span>
         </div>
       </div>
 
-      <div class="menu-category-group">
-        <h4 class="category-group-title">☕ Cà Phê Pha Máy &amp; Sáng Tạo Signature</h4>
-        <table class="drinks-table-card">
-          <thead>
-            <tr>
-              <th>Tên Món &amp; Định Vị</th>
-              <th>Size</th>
-              <th>Giá Bán</th>
-              <th>Giá Vốn (Cost)</th>
-              <th class="text-center">% Cost</th>
-              <th class="text-right">Thời Gian</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Cà Phê Muối Di Sản (Salted Cream Coffee)</span>
-                  <span class="badge-drink-tag badge-signature">Signature</span>
-                </div>
-              </td>
-              <td data-label="Size">Ly 350ml</td>
-              <td data-label="Giá Bán" class="cell-price">35.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">6.100đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">17.4%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">60s</td>
-            </tr>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Cà Phê Đen Pha Máy (Espresso Style)</span>
-                  <span class="badge-drink-tag badge-hook">Món Phễu</span>
-                </div>
-              </td>
-              <td data-label="Size">Ly 300ml</td>
-              <td data-label="Giá Bán" class="cell-price">22.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">3.800đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">17.2%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">35s</td>
-            </tr>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Bạc Xỉu 3 Tầng Cốt Dừa Thơm Béo</span>
-                  <span class="badge-drink-tag badge-cashcow">Cash Cow</span>
-                </div>
-              </td>
-              <td data-label="Size">Ly 350ml</td>
-              <td data-label="Giá Bán" class="cell-price">29.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">5.500đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">18.9%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">45s</td>
-            </tr>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Cold Brew Cam Vàng Ủ Lạnh 24H</span>
-                  <span class="badge-drink-tag badge-trend">Hot Trend</span>
-                </div>
-              </td>
-              <td data-label="Size">Ly 400ml</td>
-              <td data-label="Giá Bán" class="cell-price">42.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">8.100đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">19.2%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">30s</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- Banner Menu Quầy Bar Gốc Thiết Kế Sẵn -->
+      <div class="poster-showcase-box">
+        <div class="poster-preview-card" onclick="openPosterModal('images/posters/poster-barista.jpg', 'Bảng Menu Quán Cà Phê Pha Máy Barista (Passion Link)')">
+          <img src="images/posters/poster-barista.jpg" alt="Bảng Menu Cà Phê Pha Máy Quầy Bar" loading="lazy">
+          <div class="poster-preview-overlay">
+            <span>🔍 Phóng To Bảng Gốc</span>
+          </div>
+        </div>
+        <div class="poster-showcase-content">
+          <span class="poster-showcase-tag">Bảng Menu Thiết Kế Quầy Bar Thực Tế</span>
+          <h4 class="poster-showcase-title">Bảng Menu Mẫu In Sẵn Khoá Học Cà Phê Pha Máy Barista</h4>
+          <p class="poster-showcase-desc">Bản thiết kế quầy bar thực tế chuẩn kích thước in ấn cho quán cafe hiện đại: Cà phê muối di sản, Espresso, Latte, Capuchino nghệ thuật và Cà phê dừa.</p>
+          <div class="poster-showcase-btns">
+            <button type="button" class="btn-poster-zoom" onclick="openPosterModal('images/posters/poster-barista.jpg', 'Bảng Menu Quán Cà Phê Pha Máy Barista (Passion Link)')">
+              🔍 Xem Phóng To Bảng Gốc (Full HD)
+            </button>
+            <button type="button" class="btn-poster-lead" onclick="openLeadModal('Menu Cà Phê Barista')">
+              📥 Tải File Thiết Kế (In Ấn / Canva)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thanh chuyển đổi chế độ xem -->
+      <div class="view-mode-bar">
+        <div class="view-mode-title">
+          <span>☕ Menu Món Cà Phê Tiêu Biểu</span>
+          <span style="font-size:12px; font-weight:600; color:var(--text-muted);">(Chụp thực tế tại quầy bar Passion Link)</span>
+        </div>
+        <div class="view-mode-switches">
+          <button type="button" class="view-mode-btn active" id="btn-vmode-cards-2" onclick="switchViewMode(2, 'cards')">🖼️ Menu Hình Ảnh</button>
+          <button type="button" class="view-mode-btn" id="btn-vmode-table-2" onclick="switchViewMode(2, 'table')">📊 Bảng Tính Giá Vốn</button>
+        </div>
+      </div>
+
+      <!-- VIEW 1: Lưới thẻ hình món thực tế -->
+      <div class="drinks-visual-grid" id="view-cards-2">
+        <!-- Món 1 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/cafe-muoi.jpg" alt="Cà Phê Muối Di Sản" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Signature</span>
+            <span class="drink-card-speed">⏱ 50s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Cà Phê Muối Di Sản</div>
+              <p class="drink-card-desc">Robusta Đắk Lắk đậm đà hòa quyện lớp kem muối biển mặn béo sánh mịn, cân bằng hoàn hảo không hề gắt.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">35.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Ly 350ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 6.100đ (17.4%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 2 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/cafe-sua-pha-may.jpg" alt="Cà Phê Sữa Pha Máy Espresso Milk" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-cashcow">Cash Cow</span>
+            <span class="drink-card-speed">⏱ 35s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Cà Phê Sữa Pha Máy</div>
+              <p class="drink-card-desc">Chiết xuất Espresso kép áp suất 9 bar chuẩn Ý, bọt crema vàng óng quyện sữa đặc thơm béo nồng nàn.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">28.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Ly 300ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 4.800đ (17.1%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 3 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/bac-xiu-pha-may.jpg" alt="Bạc Xỉu Pha Máy 3 Tầng" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Best Seller</span>
+            <span class="drink-card-speed">⏱ 40s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Bạc Xỉu Pha Máy 3 Tầng</div>
+              <p class="drink-card-desc">Phân tầng đẹp mắt 3 lớp: sữa đặc ngọt dịu, sữa tươi béo thơm và tầng cà phê Espresso bồng bềnh.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">32.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Ly 350ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 5.600đ (17.5%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 4 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/latte-da.jpg" alt="Latte Cà Phê Đá Sữa Tươi" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Best Seller</span>
+            <span class="drink-card-speed">⏱ 40s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Latte Cà Phê Đá Sữa Tươi</div>
+              <p class="drink-card-desc">Cà phê Arabica Cầu Đất thơm hương hoa quả kết hợp sữa tươi thanh trùng béo thanh dịu nhẹ.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">38.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Ly 400ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 7.000đ (18.4%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 5 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/mocha-cafe.jpg" alt="Mocha Cà Phê Chocolate Béo" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-trend">Hot Trend</span>
+            <span class="drink-card-speed">⏱ 45s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Mocha Cà Phê Chocolate Béo</div>
+              <p class="drink-card-desc">Sự hòa quyện kinh điển giữa vị đắng đậm đà của Espresso và hương thơm ngọt ngào của socola đen hảo hạng.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">38.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Ly 350ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 7.200đ (18.9%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 6 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/cafe-dua.jpg" alt="Cà Phê Dừa Bọt Mịn Bến Tre" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Signature</span>
+            <span class="drink-card-speed">⏱ 50s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Cà Phê Dừa Bọt Mịn Bến Tre</div>
+              <p class="drink-card-desc">Cốt dừa Bến Tre xay tuyết bông xốp, đổ trên nền cà phê Espresso đậm đặc tạo hương vị thơm bùi khó quên.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">38.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Ly 380ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 6.800đ (17.8%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 7 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/capuchino-latte.jpg" alt="Capuchino Nghệ Thuật Latte Art" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-hook">Specialty</span>
+            <span class="drink-card-speed">⏱ 60s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Capuchino Nghệ Thuật Latte Art</div>
+              <p class="drink-card-desc">Bọt sữa đánh mịn màng đạt chuẩn nhiệt độ 65°C, tạo hình nghệ thuật tinh tế cùng hương thơm nồng nàn.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">40.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Tách 250ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 7.500đ (18.7%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 8 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/cafe-den-phin.jpg" alt="Cà Phê Đen Phin Đá Lắc Bọt" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-hook">Món Phễu</span>
+            <span class="drink-card-speed">⏱ 30s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Cà Phê Đen Phin Lắc Bọt</div>
+              <p class="drink-card-desc">Cà phê phin truyền thống ủ chậm, lắc đá tạo lớp bọt caramel dày dặn, vị đắng đậm ngọt hậu tự nhiên.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">22.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Ly 300ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 3.600đ (16.3%)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 2: Bảng chi tiết giá vốn & định lượng -->
+      <div id="view-table-2" style="display:none;">
+        <div class="menu-category-group">
+          <h4 class="category-group-title">☕ Bảng Chi Tiết Giá Vốn Cà Phê Pha Máy &amp; Phin</h4>
+          <table class="drinks-table-card">
+            <thead>
+              <tr>
+                <th>Tên Món &amp; Định Vị</th>
+                <th>Size</th>
+                <th>Giá Bán</th>
+                <th>Giá Vốn (Cost)</th>
+                <th class="text-center">% Cost</th>
+                <th class="text-right">Thời Gian</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Cà Phê Muối Di Sản</span><span class="badge-drink-tag badge-signature">Signature</span></div></td>
+                <td data-label="Size">Ly 350ml</td>
+                <td data-label="Giá Bán" class="cell-price">35.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">6.100đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">17.4%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">50s</td>
+              </tr>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Cà Phê Sữa Pha Máy</span><span class="badge-drink-tag badge-cashcow">Cash Cow</span></div></td>
+                <td data-label="Size">Ly 300ml</td>
+                <td data-label="Giá Bán" class="cell-price">28.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">4.800đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">17.1%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">35s</td>
+              </tr>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Bạc Xỉu 3 Tầng Pha Máy</span><span class="badge-drink-tag badge-signature">Best Seller</span></div></td>
+                <td data-label="Size">Ly 350ml</td>
+                <td data-label="Giá Bán" class="cell-price">32.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">5.600đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">17.5%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">40s</td>
+              </tr>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Cà Phê Đen Phin Đá Lắc Bọt</span><span class="badge-drink-tag badge-hook">Món Phễu</span></div></td>
+                <td data-label="Size">Ly 300ml</td>
+                <td data-label="Giá Bán" class="cell-price">22.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">3.600đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">16.3%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">30s</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
-    <!-- PANE 3: TRÀ TRÁI CÂY HEALTHY -->
+    <!-- PANE 3: TRÀ TRÁI CÂY NHIỆT ĐỚI & TRÀ CHANH HIỆN ĐẠI -->
     <div class="model-content-pane" id="model-pane-3">
       <div class="model-summary-box">
         <div>
-          <h3 class="model-meta-title">Mô Hình Quán Trà Trái Cây &amp; Healthy Detox</h3>
-          <p class="model-meta-desc">Quy mô: 30–60m² · Vốn đầu tư: 100–220 triệu · Khách hàng: Chị em phụ nữ, nhân viên văn phòng, giới trẻ chuộng sức khỏe</p>
+          <h3 class="model-meta-title">Mô Hình Quán Trà Trái Cây Tươi Nhiệt Đới &amp; Trà Chanh Hiện Đại</h3>
+          <p class="model-meta-desc">Quy mô: 30–60m² · Vốn đầu tư: 100–220 triệu · Khách hàng: Chị em phụ nữ, học sinh, nhân viên văn phòng yêu thích đồ uống healthy</p>
         </div>
         <div class="model-stats-pills">
-          <span class="stat-pill">📋 Tổng món: <strong>20 món</strong></span>
-          <span class="stat-pill">💎 Cost TB: <strong>21.5%</strong></span>
-          <span class="stat-pill">⏱ Ra món: <strong>50s - 70s</strong></span>
+          <span class="stat-pill">📋 Tổng món: <strong>24 món</strong></span>
+          <span class="stat-pill">💎 Cost TB: <strong>20.5%</strong></span>
+          <span class="stat-pill">⏱ Ra món: <strong>40s - 60s</strong></span>
         </div>
       </div>
 
-      <div class="menu-category-group">
-        <h4 class="category-group-title">🍹 Trà Hoa Quả Nhiệt Đới Tươi Nguyên Vị</h4>
-        <table class="drinks-table-card">
-          <thead>
-            <tr>
-              <th>Tên Món &amp; Định Vị</th>
-              <th>Size</th>
-              <th>Giá Bán</th>
-              <th>Giá Vốn (Cost)</th>
-              <th class="text-center">% Cost</th>
-              <th class="text-right">Thời Gian</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Trà Ổi Hồng Sen Vàng Thanh Mát</span>
-                  <span class="badge-drink-tag badge-signature">Signature</span>
-                </div>
-              </td>
-              <td data-label="Size">700ml (L)</td>
-              <td data-label="Giá Bán" class="cell-price">38.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">7.900đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">20.7%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">55s</td>
-            </tr>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Trà Mãng Cầu Xiêm Tươi Chua Ngọt</span>
-                  <span class="badge-drink-tag badge-trend">Hot Trend</span>
-                </div>
-              </td>
-              <td data-label="Size">700ml (L)</td>
-              <td data-label="Giá Bán" class="cell-price">38.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">8.400đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">22.1%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">60s</td>
-            </tr>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Trà Đào Cam Sả Cốt Đậm</span>
-                  <span class="badge-drink-tag badge-cashcow">Cash Cow</span>
-                </div>
-              </td>
-              <td data-label="Size">700ml (L)</td>
-              <td data-label="Giá Bán" class="cell-price">35.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">7.200đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">20.5%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">45s</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- Banner Menu Quầy Bar Gốc Thiết Kế Sẵn -->
+      <div class="poster-showcase-box">
+        <div class="poster-preview-card" onclick="openPosterModal('images/posters/poster-tra-trai-cay.jpg', 'Bảng Menu Quán Trà Trái Cây Nhiệt Đới (Passion Link)')">
+          <img src="images/posters/poster-tra-trai-cay.jpg" alt="Bảng Menu Trà Trái Cây Nhiệt Đới Quầy Bar" loading="lazy">
+          <div class="poster-preview-overlay">
+            <span>🔍 Phóng To Bảng Gốc</span>
+          </div>
+        </div>
+        <div class="poster-showcase-content">
+          <span class="poster-showcase-tag">Bảng Menu Thiết Kế Quầy Bar Thực Tế</span>
+          <h4 class="poster-showcase-title">Bảng Menu Mẫu In Sẵn Khoá Học Trà Trái Cây Nhiệt Đới</h4>
+          <p class="poster-showcase-desc">Bản thiết kế quầy bar thực tế chuẩn kích thước in ấn cho quán trà trái cây: Thanh trà quất đỏ, Xuân trà tím mộng, Lục trà cam vàng và bộ Trà chanh hiện đại 10 món.</p>
+          <div class="poster-showcase-btns">
+            <button type="button" class="btn-poster-zoom" onclick="openPosterModal('images/posters/poster-tra-trai-cay.jpg', 'Bảng Menu Quán Trà Trái Cây Nhiệt Đới (Passion Link)')">
+              🔍 Xem Phóng To Bảng Gốc (Full HD)
+            </button>
+            <button type="button" class="btn-poster-lead" onclick="openLeadModal('Menu Trà Trái Cây Nhiệt Đới')">
+              📥 Tải File Thiết Kế (In Ấn / Canva)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thanh chuyển đổi chế độ xem -->
+      <div class="view-mode-bar">
+        <div class="view-mode-title">
+          <span>🍹 Menu Món Trà Trái Cây Tiêu Biểu</span>
+          <span style="font-size:12px; font-weight:600; color:var(--text-muted);">(Chụp thực tế tại quầy bar Passion Link)</span>
+        </div>
+        <div class="view-mode-switches">
+          <button type="button" class="view-mode-btn active" id="btn-vmode-cards-3" onclick="switchViewMode(3, 'cards')">🖼️ Menu Hình Ảnh</button>
+          <button type="button" class="view-mode-btn" id="btn-vmode-table-3" onclick="switchViewMode(3, 'table')">📊 Bảng Tính Giá Vốn</button>
+        </div>
+      </div>
+
+      <!-- VIEW 1: Lưới thẻ hình món thực tế -->
+      <div class="drinks-visual-grid" id="view-cards-3">
+        <!-- Món 1 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/tra-quat-do.jpg" alt="Thanh Trà Quất Đỏ Hồng Hạc" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Signature</span>
+            <span class="drink-card-speed">⏱ 45s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Thanh Trà Quất Đỏ Hồng Hạc</div>
+              <p class="drink-card-desc">Cốt ô long thanh nhẹ kết hợp quất đỏ mọng nước và tép bưởi hồng tươi giòn, sắc đỏ ruby quyến rũ.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">38.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Size L 700ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 7.900đ (20.7%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 2 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/xuan-tra-tim.jpg" alt="Xuân Trà Tím Mộng Nhiệt Đới" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-trend">Hot Trend</span>
+            <span class="drink-card-speed">⏱ 50s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Xuân Trà Tím Mộng Nhiệt Đới</div>
+              <p class="drink-card-desc">Phân tầng ombre tím mộng mơ tự nhiên từ thanh long đỏ và trà xuân, kèm táo giòn thái lát sang trọng.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">40.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Size L 700ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 8.200đ (20.5%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 3 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/tra-cam-vang.jpg" alt="Lục Trà Cam Vàng Tươi Mát" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Best Seller</span>
+            <span class="drink-card-speed">⏱ 40s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Lục Trà Cam Vàng Tươi Mát</div>
+              <p class="drink-card-desc">Cam vàng Navel dầm cùng lục trà lài thanh thoát, vị ngọt thơm thanh lành xua tan mệt mỏi ngày nắng.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">36.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Size L 700ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 7.200đ (20.0%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 4 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/tra-chanh-truyen-thong.jpg" alt="Trà Chanh Truyền Thống Ly Khổng Lồ" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-hook">Món Phễu</span>
+            <span class="drink-card-speed">⏱ 30s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Trà Chanh Truyền Thống Khổng Lồ</div>
+              <p class="drink-card-desc">Chanh tươi thái lát lắc đá với cốt trà xanh hoa lài đậm vị, chua thanh ngọt mát giải nhiệt tức thì.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">20.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Size L 700ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 3.600đ (18.0%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 5 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/tra-chanh-dau-sa.jpg" alt="Trà Chanh Dâu Sả Tươi Mát" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Best Seller</span>
+            <span class="drink-card-speed">⏱ 40s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Trà Chanh Dâu Sả Tươi Mát</div>
+              <p class="drink-card-desc">Dâu tây tươi thái lát thơm nức kết hợp tinh dầu sả tươi ấm nồng và chanh giòn chua ngọt cực cuốn.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">28.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Size L 700ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 5.600đ (20.0%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 6 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/tra-chanh-chieu-tim.jpg" alt="Trà Chanh Chiều Tím Đậu Biếc" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-trend">Hot Trend</span>
+            <span class="drink-card-speed">⏱ 40s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Trà Chanh Chiều Tím Đậu Biếc</div>
+              <p class="drink-card-desc">Màu tím hoàng hôn ảo diệu từ hoa đậu biếc thiên nhiên kết hợp vị chanh tươi thanh lành sảng khoái.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">28.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Size L 700ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 5.500đ (19.6%)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 2: Bảng chi tiết giá vốn -->
+      <div id="view-table-3" style="display:none;">
+        <div class="menu-category-group">
+          <h4 class="category-group-title">🍹 Bảng Chi Tiết Giá Vốn Trà Trái Cây Nhiệt Đới &amp; Trà Chanh</h4>
+          <table class="drinks-table-card">
+            <thead>
+              <tr>
+                <th>Tên Món &amp; Định Vị</th>
+                <th>Size</th>
+                <th>Giá Bán</th>
+                <th>Giá Vốn (Cost)</th>
+                <th class="text-center">% Cost</th>
+                <th class="text-right">Thời Gian</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Thanh Trà Quất Đỏ Hồng Hạc</span><span class="badge-drink-tag badge-signature">Signature</span></div></td>
+                <td data-label="Size">700ml (L)</td>
+                <td data-label="Giá Bán" class="cell-price">38.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">7.900đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">20.7%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">45s</td>
+              </tr>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Xuân Trà Tím Mộng Nhiệt Đới</span><span class="badge-drink-tag badge-trend">Hot Trend</span></div></td>
+                <td data-label="Size">700ml (L)</td>
+                <td data-label="Giá Bán" class="cell-price">40.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">8.200đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">20.5%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">50s</td>
+              </tr>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Lục Trà Cam Vàng Tươi Mát</span><span class="badge-drink-tag badge-signature">Best Seller</span></div></td>
+                <td data-label="Size">700ml (L)</td>
+                <td data-label="Giá Bán" class="cell-price">36.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">7.200đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">20.0%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">40s</td>
+              </tr>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Trà Chanh Truyền Thống Khổng Lồ</span><span class="badge-drink-tag badge-hook">Món Phễu</span></div></td>
+                <td data-label="Size">700ml (L)</td>
+                <td data-label="Giá Bán" class="cell-price">20.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">3.600đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">18.0%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">30s</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
-    <!-- PANE 4: KIOSK TAKE AWAY -->
+    <!-- PANE 4: KIOSK & XE ĐẨY VỈA HÈ TAKE-AWAY -->
     <div class="model-content-pane" id="model-pane-4">
       <div class="model-summary-box">
         <div>
-          <h3 class="model-meta-title">Mô Hình Kiosk / Xe Đẩy Take-Away Tinh Gọn</h3>
-          <p class="model-meta-desc">Quy mô: 6–15m² · Vốn đầu tư: 45–85 triệu · Khách hàng: Người đi đường mua mang đi, học sinh, giao hàng nhanh</p>
+          <h3 class="model-meta-title">Mô Hình Kiosk / Xe Đẩy Take-Away Tinh Gọn Vốn Nhỏ</h3>
+          <p class="model-meta-desc">Quy mô: 6–18m² · Vốn đầu tư: 45–85 triệu · Khách hàng: Người đi đường mua mang đi, học sinh, giao hàng nhanh</p>
         </div>
         <div class="model-stats-pills">
           <span class="stat-pill">📋 Tổng món: <strong>15 món</strong></span>
-          <span class="stat-pill">💎 Cost TB: <strong>19.2%</strong></span>
-          <span class="stat-pill">⏱ Ra món: <strong>&lt; 40 giây</strong></span>
+          <span class="stat-pill">💎 Cost TB: <strong>18.5%</strong></span>
+          <span class="stat-pill">⏱ Ra món: <strong>&lt; 35 giây</strong></span>
         </div>
       </div>
 
-      <div class="menu-category-group">
-        <h4 class="category-group-title">⚡ Menu Tinh Gọn Tối Đa Tốc Độ &amp; Tiết Kiệm Kho</h4>
-        <table class="drinks-table-card">
-          <thead>
-            <tr>
-              <th>Tên Món &amp; Định Vị</th>
-              <th>Size</th>
-              <th>Giá Bán</th>
-              <th>Giá Vốn (Cost)</th>
-              <th class="text-center">% Cost</th>
-              <th class="text-right">Thời Gian</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Cà Phê Sữa Đá Sài Gòn Pha Máy</span>
-                  <span class="badge-drink-tag badge-cashcow">Cash Cow</span>
-                </div>
-              </td>
-              <td data-label="Size">Ly Mang Đi</td>
-              <td data-label="Giá Bán" class="cell-price">20.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">3.800đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">19.0%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">30s</td>
-            </tr>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Trà Sữa Trân Châu Tươi Mang Đi</span>
-                  <span class="badge-drink-tag badge-cashcow">Cash Cow</span>
-                </div>
-              </td>
-              <td data-label="Size">500ml (M)</td>
-              <td data-label="Giá Bán" class="cell-price">25.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">4.800đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">19.2%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">35s</td>
-            </tr>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Trà Tắc Xí Muội Khổng Lồ</span>
-                  <span class="badge-drink-tag badge-hook">Món Phễu</span>
-                </div>
-              </td>
-              <td data-label="Size">700ml (L)</td>
-              <td data-label="Giá Bán" class="cell-price">18.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">3.200đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">17.7%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">30s</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- Banner Menu Quầy Bar Gốc Thiết Kế Sẵn -->
+      <div class="poster-showcase-box">
+        <div class="poster-preview-card" onclick="openPosterModal('images/posters/poster-tra-chanh.jpg', 'Bảng Menu Xe Đẩy - Kiosk Vỉa Hè (Passion Link)')">
+          <img src="images/posters/poster-tra-chanh.jpg" alt="Bảng Menu Xe Đẩy Vỉa Hè Kiosk" loading="lazy">
+          <div class="poster-preview-overlay">
+            <span>🔍 Phóng To Bảng Gốc</span>
+          </div>
+        </div>
+        <div class="poster-showcase-content">
+          <span class="poster-showcase-tag">Bảng Menu Thiết Kế Quầy Bar Thực Tế</span>
+          <h4 class="poster-showcase-title">Bảng Menu Mẫu In Sẵn Khoá Học Xe Đẩy &amp; Kiosk Vỉa Hè</h4>
+          <p class="poster-showcase-desc">Bản thiết kế quầy bar thực tế chuẩn kích thước in ấn cho xe đẩy mang đi: Tối ưu 15 món cốt lõi, tốc độ ra món dưới 35 giây, tiết kiệm kho bãi nguyên liệu tối đa.</p>
+          <div class="poster-showcase-btns">
+            <button type="button" class="btn-poster-zoom" onclick="openPosterModal('images/posters/poster-tra-chanh.jpg', 'Bảng Menu Xe Đẩy - Kiosk Vỉa Hè (Passion Link)')">
+              🔍 Xem Phóng To Bảng Gốc (Full HD)
+            </button>
+            <button type="button" class="btn-poster-lead" onclick="openLeadModal('Menu Xe Đẩy Vỉa Hè')">
+              📥 Tải File Thiết Kế (In Ấn / Canva)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thanh chuyển đổi chế độ xem -->
+      <div class="view-mode-bar">
+        <div class="view-mode-title">
+          <span>⚡ Menu Món Mang Đi Tinh Gọn</span>
+          <span style="font-size:12px; font-weight:600; color:var(--text-muted);">(Chụp thực tế tại quầy bar Passion Link)</span>
+        </div>
+        <div class="view-mode-switches">
+          <button type="button" class="view-mode-btn active" id="btn-vmode-cards-4" onclick="switchViewMode(4, 'cards')">🖼️ Menu Hình Ảnh</button>
+          <button type="button" class="view-mode-btn" id="btn-vmode-table-4" onclick="switchViewMode(4, 'table')">📊 Bảng Tính Giá Vốn</button>
+        </div>
+      </div>
+
+      <!-- VIEW 1: Lưới thẻ hình món thực tế -->
+      <div class="drinks-visual-grid" id="view-cards-4">
+        <!-- Món 1 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/cafe-sua-pha-may.jpg" alt="Cà Phê Sữa Pha Máy Mang Đi" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-cashcow">Cash Cow</span>
+            <span class="drink-card-speed">⏱ 25s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Cà Phê Sữa Pha Máy Mang Đi</div>
+              <p class="drink-card-desc">Đậm gu người Việt, pha máy tốc độ cao, giữ trọn hương thơm nồng nàn trên đường đi làm buổi sáng.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">20.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Ly mang đi)</small></span>
+              <span class="drink-card-cost-pill">Cost: 3.600đ (18.0%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 2 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/cafe-muoi.jpg" alt="Cà Phê Muối Take-Away" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Signature</span>
+            <span class="drink-card-speed">⏱ 35s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Cà Phê Muối Take-Away</div>
+              <p class="drink-card-desc">Cà phê muối đóng ly mang đi siêu hút khách công sở, lớp kem muối mịn không bị tan nhanh trên đường.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">25.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Ly 350ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 4.800đ (19.2%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 3 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/tra-chanh-truyen-thong.jpg" alt="Trà Chanh Khổng Lồ 1 Lít Mang Đi" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-hook">Món Phễu</span>
+            <span class="drink-card-speed">⏱ 30s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Trà Chanh Khổng Lồ 1 Lít</div>
+              <p class="drink-card-desc">Chiếm lĩnh vỉa hè với ly 1 lít khổng lồ giải khát cực nhanh, tỷ suất lợi nhuận trên 80% vốn nhỏ.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">20.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Ly 1 Lít)</small></span>
+              <span class="drink-card-cost-pill">Cost: 3.600đ (18.0%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 4 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/tra-quat-do.jpg" alt="Trà Tắc Xí Muội Vỉa Hè" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-cashcow">Cash Cow</span>
+            <span class="drink-card-speed">⏱ 30s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Trà Tắc Xí Muội Vỉa Hè</div>
+              <p class="drink-card-desc">Tắc tươi nguyên quả dầm xí muội mặn ngọt chua cay, món quốc dân bán chạy số 1 của các xe đẩy đường phố.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">18.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Ly 700ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 3.100đ (17.2%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 5 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/sua-tuoi-tran-chau-duong-den-cup.jpg" alt="Sữa Tươi Trân Châu Đường Đen Ly Đứng" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Best Seller</span>
+            <span class="drink-card-speed">⏱ 35s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Sữa Tươi Trân Châu Take-Away</div>
+              <p class="drink-card-desc">Trân châu nấu sẵn ấm dẻo, sữa tươi béo thơm tiện lợi cầm tay mang đi học, đi làm nhanh chóng.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">25.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Ly 500ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 4.900đ (19.6%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 6 -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/tra-cam-vang.jpg" alt="Trà Đào Cam Sả Tươi Mang Đi" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Best Seller</span>
+            <span class="drink-card-speed">⏱ 35s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Trà Đào Cam Sả Mang Đi</div>
+              <p class="drink-card-desc">Miếng đào giòn sần sật, sả tươi thơm nồng kết hợp cam tươi, cực kỳ tiện lợi cho khách đi xe máy.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">25.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Ly 700ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 4.900đ (19.6%)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 2: Bảng chi tiết giá vốn -->
+      <div id="view-table-4" style="display:none;">
+        <div class="menu-category-group">
+          <h4 class="category-group-title">⚡ Bảng Chi Tiết Giá Vốn Kiosk &amp; Xe Đẩy Take-Away</h4>
+          <table class="drinks-table-card">
+            <thead>
+              <tr>
+                <th>Tên Món &amp; Định Vị</th>
+                <th>Size</th>
+                <th>Giá Bán</th>
+                <th>Giá Vốn (Cost)</th>
+                <th class="text-center">% Cost</th>
+                <th class="text-right">Thời Gian</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Cà Phê Sữa Đá Pha Máy</span><span class="badge-drink-tag badge-cashcow">Cash Cow</span></div></td>
+                <td data-label="Size">Ly Mang Đi</td>
+                <td data-label="Giá Bán" class="cell-price">20.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">3.600đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">18.0%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">25s</td>
+              </tr>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Cà Phê Muối Take-Away</span><span class="badge-drink-tag badge-signature">Signature</span></div></td>
+                <td data-label="Size">Ly 350ml</td>
+                <td data-label="Giá Bán" class="cell-price">25.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">4.800đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">19.2%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">35s</td>
+              </tr>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Trà Chanh Khổng Lồ 1 Lít</span><span class="badge-drink-tag badge-hook">Món Phễu</span></div></td>
+                <td data-label="Size">Ly 1000ml</td>
+                <td data-label="Giá Bán" class="cell-price">20.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">3.600đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">18.0%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">30s</td>
+              </tr>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Trà Tắc Xí Muội Vỉa Hè</span><span class="badge-drink-tag badge-cashcow">Cash Cow</span></div></td>
+                <td data-label="Size">Ly 700ml</td>
+                <td data-label="Giá Bán" class="cell-price">18.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">3.100đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">17.2%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">30s</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
-    <!-- PANE 5: TỔ HỢP FULL MENU -->
+    <!-- PANE 5: TỔ HỢP CAFE - TRÀ SỮA - ĂN VẶT - BINGSU -->
     <div class="model-content-pane" id="model-pane-5">
       <div class="model-summary-box">
         <div>
-          <h3 class="model-meta-title">Mô Hình Tổ Hợp Cafe - Trà Sữa - Ăn Vặt Toàn Diện</h3>
-          <p class="model-meta-desc">Quy mô: 80–200m² · Vốn đầu tư: 250–600 triệu · Khách hàng: Mọi lứa tuổi, gia đình, nhóm bạn trẻ, họp mặt</p>
+          <h3 class="model-meta-title">Mô Hình Tổ Hợp Cafe - Trà Sữa - Đá Xay - Bingsu - Ăn Vặt Toàn Diện</h3>
+          <p class="model-meta-desc">Quy mô: 60–200m² · Vốn đầu tư: 250–600 triệu · Khách hàng: Mọi lứa tuổi, gia đình, nhóm bạn trẻ, học sinh tụ tập</p>
         </div>
         <div class="model-stats-pills">
-          <span class="stat-pill">📋 Tổng món: <strong>45 món</strong></span>
-          <span class="stat-pill">💎 Cost TB: <strong>21.0%</strong></span>
-          <span class="stat-pill">⏱ AOV: <strong>75k - 110k/bàn</strong></span>
+          <span class="stat-pill">📋 Tổng món: <strong>80+ món</strong></span>
+          <span class="stat-pill">💎 Cost TB: <strong>21.2%</strong></span>
+          <span class="stat-pill">⏱ AOV: <strong>75k - 120k/bàn</strong></span>
         </div>
       </div>
 
-      <div class="menu-category-group">
-        <h4 class="category-group-title">👑 Đa Dạng Nhóm Món &amp; Kết Hợp Ăn Vặt Tăng Doanh Số</h4>
-        <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 14px;">
-          Bao gồm 5 trụ cột: Cà phê pha máy, Trà sữa Đài Loan, Trà trái cây nhiệt đới, Đá xay Smoothies và Nhóm đồ ăn vặt. Giúp tăng giá trị trung bình đơn hàng (AOV) lên 75k – 110k/bàn:
-        </p>
-        <table class="drinks-table-card">
-          <thead>
-            <tr>
-              <th>Tên Món &amp; Định Vị</th>
-              <th>Size</th>
-              <th>Giá Bán</th>
-              <th>Giá Vốn (Cost)</th>
-              <th class="text-center">% Cost</th>
-              <th class="text-right">Thời Gian</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Cà Phê Muối Di Sản</span>
-                  <span class="badge-drink-tag badge-signature">Signature</span>
-                </div>
-              </td>
-              <td data-label="Size">Ly 350ml</td>
-              <td data-label="Giá Bán" class="cell-price">35.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">6.100đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">17.4%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">50s</td>
-            </tr>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Trà Sữa Ô Long Nướng Trân Châu Dẻo</span>
-                  <span class="badge-drink-tag badge-cashcow">Cash Cow</span>
-                </div>
-              </td>
-              <td data-label="Size">500ml (M)</td>
-              <td data-label="Giá Bán" class="cell-price">35.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">7.200đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">20.5%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">45s</td>
-            </tr>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Trà Ổi Hồng Sen Vàng Thanh Mát</span>
-                  <span class="badge-drink-tag badge-trend">Hot Trend</span>
-                </div>
-              </td>
-              <td data-label="Size">700ml (L)</td>
-              <td data-label="Giá Bán" class="cell-price">38.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">7.900đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">20.7%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">55s</td>
-            </tr>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Matcha Đá Xay Kem Tuyết Nhật Bản</span>
-                  <span class="badge-drink-tag badge-signature">Signature</span>
-                </div>
-              </td>
-              <td data-label="Size">Ly 450ml</td>
-              <td data-label="Giá Bán" class="cell-price">45.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">9.500đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">21.1%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">75s</td>
-            </tr>
-            <tr class="drink-row">
-              <td data-label="Tên Món">
-                <div class="drink-name-cell">
-                  <span>Khoai Tây Chiên Lắc Phô Mai</span>
-                  <span class="badge-drink-tag badge-cashcow">Ăn Kèm</span>
-                </div>
-              </td>
-              <td data-label="Size">Đĩa Vừa</td>
-              <td data-label="Giá Bán" class="cell-price">30.000đ</td>
-              <td data-label="Giá Vốn" class="cell-cost">6.500đ</td>
-              <td data-label="% Cost" class="text-center cell-cost-percent">21.6%</td>
-              <td data-label="Thời Gian" class="text-right cell-speed">3-5p</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- Banner Menu Quầy Bar Gốc Thiết Kế Sẵn -->
+      <div class="poster-showcase-box">
+        <div class="poster-preview-card" onclick="openPosterModal('images/posters/poster-thcc.jpg', 'Bảng Menu Tổ Hợp Pha Chế Mở Quán Tổng Hợp Cao Cấp (Passion Link)')">
+          <img src="images/posters/poster-thcc.jpg" alt="Bảng Menu Tổ Hợp Tổng Hợp Cao Cấp Quầy Bar" loading="lazy">
+          <div class="poster-preview-overlay">
+            <span>🔍 Phóng To Bảng Gốc</span>
+          </div>
+        </div>
+        <div class="poster-showcase-content">
+          <span class="poster-showcase-tag">Bảng Menu Thiết Kế Quầy Bar Thực Tế</span>
+          <h4 class="poster-showcase-title">Bảng Menu Mẫu In Sẵn Khoá Học Tổng Hợp Cao Cấp Mới 2025</h4>
+          <p class="poster-showcase-desc">Bản thiết kế quầy bar thực tế chuẩn kích thước in ấn cho mô hình tổ hợp: Cafe pha máy, Trà sữa Đài Loan, Trà trái cây nhiệt đới, Bingsu Hàn Quốc, Đá xay kem tuyết và Ăn vặt hiện đại.</p>
+          <div class="poster-showcase-btns">
+            <button type="button" class="btn-poster-zoom" onclick="openPosterModal('images/posters/poster-thcc.jpg', 'Bảng Menu Tổ Hợp Pha Chế Mở Quán Tổng Hợp Cao Cấp (Passion Link)')">
+              🔍 Xem Phóng To Bảng Gốc (Full HD)
+            </button>
+            <button type="button" class="btn-poster-lead" onclick="openLeadModal('Menu Tổ Hợp Toàn Diện')">
+              📥 Tải File Thiết Kế (In Ấn / Canva)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thanh chuyển đổi chế độ xem -->
+      <div class="view-mode-bar">
+        <div class="view-mode-title">
+          <span>👑 Menu Món Tổ Hợp Đồ Uống &amp; Ăn Vặt Tiêu Biểu</span>
+          <span style="font-size:12px; font-weight:600; color:var(--text-muted);">(Chụp thực tế tại quầy bar Passion Link)</span>
+        </div>
+        <div class="view-mode-switches">
+          <button type="button" class="view-mode-btn active" id="btn-vmode-cards-5" onclick="switchViewMode(5, 'cards')">🖼️ Menu Hình Ảnh</button>
+          <button type="button" class="view-mode-btn" id="btn-vmode-table-5" onclick="switchViewMode(5, 'table')">📊 Bảng Tính Giá Vốn</button>
+        </div>
+      </div>
+
+      <!-- VIEW 1: Lưới thẻ hình món thực tế -->
+      <div class="drinks-visual-grid" id="view-cards-5">
+        <!-- Món 1: Bingsu Oreo -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/bingsu-oreo.jpg" alt="Bingsu Oreo Chocolate Hàn Quốc" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Signature Bingsu</span>
+            <span class="drink-card-speed">⏱ 90s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Bingsu Oreo Chocolate Hàn Quốc</div>
+              <p class="drink-card-desc">Tuyết sữa bào mịn tan trong miệng, phủ bột cacao nguyên chất, sốt chocolate đặc sánh và bánh Oreo giòn rụm.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">65.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Tô Lớn)</small></span>
+              <span class="drink-card-cost-pill">Cost: 13.500đ (20.7%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 2: Bingsu Dâu -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/bingsu-dau.jpg" alt="Bingsu Dâu Tây Tuyết Hoa" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Best Seller</span>
+            <span class="drink-card-speed">⏱ 90s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Bingsu Dâu Tây Tuyết Hoa</div>
+              <p class="drink-card-desc">Dâu tây tươi Đà Lạt mọng nước xếp tầng đẹp mắt, sốt dâu đỏ au và kem tươi whipping béo ngậy khó cưỡng.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">69.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Tô Lớn)</small></span>
+              <span class="drink-card-cost-pill">Cost: 14.800đ (21.4%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 3: Bingsu Xoài -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/bingsu-xoai.jpg" alt="Bingsu Xoài Cát Hoàng Kim" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-trend">Hot Trend</span>
+            <span class="drink-card-speed">⏱ 90s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Bingsu Xoài Cát Hoàng Kim</div>
+              <p class="drink-card-desc">Xoài cát chín vàng ươm ngọt thơm, tuyết sữa dầm sốt xoài tự nhiên thơm ngát, món ăn giải nhiệt đỉnh cao.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">69.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Tô Lớn)</small></span>
+              <span class="drink-card-cost-pill">Cost: 14.500đ (21.0%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 4: Matcha đá xay -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/matcha-da-xay.jpg" alt="Matcha Đá Xay Kem Béo Whipping" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Best Seller</span>
+            <span class="drink-card-speed">⏱ 50s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Matcha Đá Xay Kem Béo</div>
+              <p class="drink-card-desc">Bột Matcha Uji Nhật Bản xay nhuyễn với sữa tươi và đá, xịt bông kem béo ngậy phủ bột matcha thơm nức.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">45.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Ly 450ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 9.200đ (20.4%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 5: Dâu đá xay -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/dau-da-xay.jpg" alt="Dâu Đá Xay Phô Mai Kem Tuyết" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-trend">Hot Trend</span>
+            <span class="drink-card-speed">⏱ 50s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Dâu Đá Xay Phô Mai Kem Tuyết</div>
+              <p class="drink-card-desc">Sinh tố dâu tây đá xay 2 tầng phô mai mặn béo ngậy, sắc hồng ngọt ngào cực kỳ hút mắt phái nữ.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">45.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Ly 450ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 9.400đ (20.8%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 6: Cookies chocolate -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/cookies-chocolate.jpg" alt="Cookies Chocolate Đá Xay Giòn Rụm" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-cashcow">Cash Cow</span>
+            <span class="drink-card-speed">⏱ 45s</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Cookies Chocolate Đá Xay</div>
+              <p class="drink-card-desc">Bánh Oreo xay nhuyễn hòa quyện sữa và sốt socola đậm đặc, topping kem béo và vụn bánh giòn thơm.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">45.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Ly 450ml)</small></span>
+              <span class="drink-card-cost-pill">Cost: 9.100đ (20.2%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 7: Mì cay hải sản -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/mi-cay.jpg" alt="Mì Cay Hải Sản 7 Cấp Độ Hàn Quốc" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Món Ăn Signature</span>
+            <span class="drink-card-speed">⏱ 4-5p</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Mì Cay Hải Sản 7 Cấp Độ</div>
+              <p class="drink-card-desc">Nước dùng kim chi chua cay đậm đà, tôm mực tươi ngon, súp lơ và nấm kim châm sôi sùng sục trong thố đất.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">55.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Thố đất)</small></span>
+              <span class="drink-card-cost-pill">Cost: 14.500đ (26.3%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 8: Mì Ý sốt bò bằm -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/mi-y.jpg" alt="Mì Ý Sốt Bò Bằm Phô Mai (Spaghetti)" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-signature">Best Seller Ăn Vặt</span>
+            <span class="drink-card-speed">⏱ 3-4p</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Mì Ý Sốt Bò Bằm Phô Mai</div>
+              <p class="drink-card-desc">Sợi mì dai giòn chuẩn Ý, sốt cà chua thịt bò bằm đậm đà rắc phô mai Parmesan béo ngậy thơm lừng.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">49.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Dĩa)</small></span>
+              <span class="drink-card-cost-pill">Cost: 12.800đ (26.1%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 9: Hamburger bò phô mai -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/hamburger.jpg" alt="Hamburger Bò Phô Mai Nướng" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-cashcow">Cash Cow Ăn Vặt</span>
+            <span class="drink-card-speed">⏱ 3p</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Hamburger Bò Phô Mai Nướng</div>
+              <p class="drink-card-desc">Bánh mì nướng bơ vàng giòn, nhân thịt bò áp chảo đậm vị, phô mai cheddar tan chảy và xà lách tươi giòn.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">39.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Cái)</small></span>
+              <span class="drink-card-cost-pill">Cost: 10.500đ (26.9%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Món 10: Bánh waffle -->
+        <div class="drink-card">
+          <div class="drink-card-media">
+            <img src="images/drinks/banh-waffle.jpg" alt="Bánh Waffle Kẹp Kem Trái Cây" class="drink-card-img" loading="lazy">
+            <span class="drink-card-badge badge-trend">Hot Trend</span>
+            <span class="drink-card-speed">⏱ 3p</span>
+          </div>
+          <div class="drink-card-body">
+            <div>
+              <div class="drink-card-name">Bánh Waffle Kẹp Kem Trái Cây</div>
+              <p class="drink-card-desc">Vỏ bánh tổ ong nướng nóng giòn tan, kẹp viên kem vani mát lạnh và trái cây tươi rưới sốt ngọt ngào.</p>
+            </div>
+            <div class="drink-card-footer">
+              <span class="drink-card-price">39.000đ <small style="font-size:11px;font-weight:600;color:#64748b;">(Phần)</small></span>
+              <span class="drink-card-cost-pill">Cost: 9.800đ (25.1%)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 2: Bảng chi tiết giá vốn -->
+      <div id="view-table-5" style="display:none;">
+        <div class="menu-category-group">
+          <h4 class="category-group-title">👑 Bảng Chi Tiết Giá Vốn Tổ Hợp Đồ Uống &amp; Đồ Ăn Vặt</h4>
+          <table class="drinks-table-card">
+            <thead>
+              <tr>
+                <th>Tên Món &amp; Định Vị</th>
+                <th>Size</th>
+                <th>Giá Bán</th>
+                <th>Giá Vốn (Cost)</th>
+                <th class="text-center">% Cost</th>
+                <th class="text-right">Thời Gian</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Bingsu Oreo Chocolate Hàn Quốc</span><span class="badge-drink-tag badge-signature">Signature Bingsu</span></div></td>
+                <td data-label="Size">Tô Lớn</td>
+                <td data-label="Giá Bán" class="cell-price">65.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">13.500đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">20.7%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">90s</td>
+              </tr>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Bingsu Dâu Tây Tuyết Hoa</span><span class="badge-drink-tag badge-signature">Best Seller</span></div></td>
+                <td data-label="Size">Tô Lớn</td>
+                <td data-label="Giá Bán" class="cell-price">69.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">14.800đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">21.4%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">90s</td>
+              </tr>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Matcha Đá Xay Kem Béo</span><span class="badge-drink-tag badge-signature">Best Seller</span></div></td>
+                <td data-label="Size">Ly 450ml</td>
+                <td data-label="Giá Bán" class="cell-price">45.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">9.200đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">20.4%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">50s</td>
+              </tr>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Mì Cay Hải Sản 7 Cấp Độ</span><span class="badge-drink-tag badge-signature">Món Ăn Signature</span></div></td>
+                <td data-label="Size">Thố đất</td>
+                <td data-label="Giá Bán" class="cell-price">55.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">14.500đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">26.3%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">4-5p</td>
+              </tr>
+              <tr class="drink-row">
+                <td data-label="Tên Món"><div class="drink-name-cell"><span>Mì Ý Sốt Bò Bằm Phô Mai</span><span class="badge-drink-tag badge-signature">Best Seller Ăn Vặt</span></div></td>
+                <td data-label="Size">Dĩa</td>
+                <td data-label="Giá Bán" class="cell-price">49.000đ</td>
+                <td data-label="Giá Vốn" class="cell-cost">12.800đ</td>
+                <td data-label="% Cost" class="text-center cell-cost-percent">26.1%</td>
+                <td data-label="Thời Gian" class="text-right cell-speed">3-4p</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
+
+  
 
   </div>
 </section>
@@ -1961,7 +3197,101 @@ function handleLeadSubmit(e) {
 
   return false;
 }
+
+
+// 7. Chuyển đổi chế độ xem Thẻ Hình Món / Bảng Giá Vốn
+function switchViewMode(paneId, mode) {
+  var cardsEl = document.getElementById('view-cards-' + paneId);
+  var tableEl = document.getElementById('view-table-' + paneId);
+  var btnCards = document.getElementById('btn-vmode-cards-' + paneId);
+  var btnTable = document.getElementById('btn-vmode-table-' + paneId);
+
+  if (mode === 'cards') {
+    if (cardsEl) cardsEl.style.display = 'grid';
+    if (tableEl) tableEl.style.display = 'none';
+    if (btnCards) btnCards.classList.add('active');
+    if (btnTable) btnTable.classList.remove('active');
+  } else {
+    if (cardsEl) cardsEl.style.display = 'none';
+    if (tableEl) tableEl.style.display = 'block';
+    if (btnCards) btnCards.classList.remove('active');
+    if (btnTable) btnTable.classList.add('active');
+  }
+}
+
+// 8. Quản lý Modal Lightbox Xem Bảng Menu Gốc
+function openPosterModal(imgSrc, title) {
+  var modal = document.getElementById('posterLightboxModal');
+  var modalImg = document.getElementById('posterModalImg');
+  var modalTitle = document.getElementById('posterModalTitle');
+  var dlLink = document.getElementById('posterModalDownloadLink');
+
+  if (modal && modalImg) {
+    modalImg.src = imgSrc;
+    if (modalTitle) modalTitle.textContent = title || 'Bảng Menu Quán Thực Tế - Passion Link';
+    if (dlLink) dlLink.href = imgSrc;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closePosterModal(e) {
+  if (e) e.stopPropagation();
+  var modal = document.getElementById('posterLightboxModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+// Lắng nghe phím ESC để đóng Modal
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closePosterModal();
+  }
+});
+
+// 9. Mở form Lead với thông tin khoá học
+function openLeadModal(courseName) {
+  var leadSection = document.getElementById('tai-kit');
+  if (leadSection) {
+    leadSection.scrollIntoView({ behavior: 'smooth' });
+    var modelSelect = document.getElementById('lead_model');
+    if (modelSelect && courseName) {
+      for (var i = 0; i < modelSelect.options.length; i++) {
+        if (modelSelect.options[i].text.toLowerCase().includes(courseName.toLowerCase())) {
+          modelSelect.selectedIndex = i;
+          break;
+        }
+      }
+    }
+    var nameInput = document.getElementById('lead_name');
+    if (nameInput) setTimeout(function(){ nameInput.focus(); }, 600);
+  }
+}
+
 </script>
+
+
+<!-- MODAL LIGHTBOX XEM BẢNG MENU GỐC QUẦY BAR (FULL SIZE) -->
+<div id="posterLightboxModal" class="poster-modal-overlay" onclick="closePosterModal(event)">
+  <div class="poster-modal-container" onclick="event.stopPropagation()">
+    <div class="poster-modal-header">
+      <div class="poster-modal-title" id="posterModalTitle">Bảng Menu Quán Thực Tế - Passion Link</div>
+      <button type="button" class="poster-modal-close" onclick="closePosterModal(event)" aria-label="Đóng">&times;</button>
+    </div>
+    <div class="poster-modal-body">
+      <img id="posterModalImg" src="" alt="Menu Quán Mẫu Gốc" class="poster-modal-fullimg">
+    </div>
+    <div class="poster-modal-footer">
+      <span class="poster-modal-hint">🔍 Kéo hoặc zoom để xem chi tiết danh mục món và giá vốn thực chiến</span>
+      <div class="poster-modal-actions">
+        <a id="posterModalDownloadLink" href="" download class="btn-poster-modal-dl">📥 Tải Ảnh Gốc HD</a>
+        <button type="button" class="btn-poster-modal-cta" onclick="closePosterModal(event); openLeadModal('Tải File Thiết Kế Menu Mẫu');">📋 Nhận Bản Thiết Kế In Ấn</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

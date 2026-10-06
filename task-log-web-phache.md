@@ -566,3 +566,22 @@ Khi bắt đầu phiên làm việc tiếp theo, kỹ thuật viên hoặc agent
 
 
 
+
+---
+
+### [2026-10-06 11:05] HOÀN TẤT NÂNG CẤP MENU QUÁN MẪU THỰC CHIẾN CÓ HÌNH MÓN & TÊN MÓN TỪ GOOGLE DRIVE PASSION LINK
+- **Yêu cầu thực thi (CEO Directive):**
+  - Kết nối mục `https://phache.com.vn/menu-quan/#menu-board` như một menu thật của một quán kinh doanh thực tế: có hình món trực quan (chụp từ quầy bar thật) và tên món chuẩn xác từ các menu khoá học của Passion Link trong thư mục Google Drive: `https://drive.google.com/drive/u/0/folders/1BwCTrcDvF67q1pafgMmiTABbk3w8CR50`.
+- **Thực thi kỹ thuật (C12 Senior Developer):**
+  1. **Khai thác & Trích xuất Tài nguyên:**
+     - Phân tích và tải trọn bộ các menu khóa học thực chiến từ Google Drive (Barista, Trà sữa & Trà trái cây mới 2025, Kem tuyết, Bingsu Hàn Quốc, Cà phê pha phin, Đá xay & Soda, Đồ ăn vặt hiện đại, Kiosk xe đẩy).
+     - Chuẩn hóa, nén tối ưu Web và đóng gói 38 hình ảnh đồ uống/món ăn thực tế vào thư mục `menu-quan/images/drinks/` và 11 bảng poster thiết kế quầy bar in ấn vào `menu-quan/images/posters/` (giảm dung lượng từ 19MB xuống còn 4.0MB để tối ưu Core Web Vitals).
+  2. **Tái Cấu Trúc Toàn Diện Section `#menu-board`:**
+     - **Lưới Thẻ Món Đồ Uống Thực Tế (`.drinks-visual-grid` & `.drink-card`):** Mỗi món được trình bày trực quan như bảng menu tablet/quầy bar cao cấp với hình ảnh sắc nét, huy hiệu phân loại (Signature, Best Seller, Hot Trend, Cash Cow), tên món chuẩn công thức, thời gian ra món (30s - 60s), giá bán đề xuất, giá vốn (Cost & % Cost) và ghi chú cốt liệu vị giác.
+     - **Bảng Menu Quán In Sẵn Quầy Bar (`.poster-showcase-box`):** Hiển thị thumbnail bảng menu thiết kế gốc theo từng mô hình khoá học kèm nút "Xem Phóng To Bảng Gốc (Full HD)" và "Tải File Thiết Kế (In Ấn / Canva)".
+     - **Modal Lightbox Xem Poster Full HD (`#posterLightboxModal`):** Cho phép chủ quán tương tác phóng to xem chi tiết toàn bộ bảng thiết kế menu quầy bar, tải ảnh gốc HD hoặc đăng ký nhận bộ file thiết kế.
+     - **Bộ Chuyển Đổi Kép (View Mode Switcher):** Cho phép người xem chuyển đổi linh hoạt giữa `[🖼️ Menu Hình Ảnh]` (Trực quan, sinh động) và `[📊 Bảng Tính Giá Vốn]` (Bảng chi phí chi tiết).
+  3. **Đồng Bộ Mã Nguồn & Triển Khai Production:**
+     - Files nâng cấp: `menu-quan/index.html` và `menu-quan/index.php` (đồng bộ 100% kích thước 154KB).
+     - Triển khai an toàn qua FTP: Tự động tạo thư mục từ xa `/menu-quan/images/drinks` và `/menu-quan/images/posters`, upload thành công 55/55 files với 100% byte verification.
+     - Kiểm thử tự động trên Chrome Headless: Chụp màn hình Desktop (1400px) và Mobile (390px) xác nhận giao diện hiển thị xuất sắc, không lỗi layout, không tràn ngang, HTTP 200 OK.
