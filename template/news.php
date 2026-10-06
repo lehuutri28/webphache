@@ -83,7 +83,7 @@
     font-weight: 800 !important;
 }
 
-/* Danh sách tin tức (Archive List) */
+/* Danh sách tin tức (Archive List) & Header */
 #wrap-list-news .h1-title {
     font-size: 26px;
     color: #1F3F1F;
@@ -91,37 +91,151 @@
     margin-bottom: 25px;
     border-bottom: 2px solid #2E7D32;
     padding-bottom: 12px;
+    display: block !important;
+    line-height: 1.4 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
 }
+
+.news_page .news_item {
+    margin-bottom: 30px;
+}
+
 .news_page .news_item .box-effect {
-    border-radius: 12px;
+    border-radius: 14px;
     overflow: hidden;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     background: #fff;
-    margin-bottom: 25px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    margin-bottom: 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
+
 .news_page .news_item .box-effect:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(31,168,75,0.15);
+    box-shadow: 0 8px 24px rgba(31,168,75,0.18);
 }
-.news_page .news_title a {
-    font-size: 17px;
+
+.news_page .news_img {
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+}
+
+.news_page .news_img img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+.news_page .news_item .box-effect:hover .news_img img {
+    transform: scale(1.03);
+}
+
+.news_page .news_info {
+    margin-top: 14px !important;
+    line-height: 1.5 !important;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* ==========================================================================
+   KHẮC PHỤC TRIỆT ĐỂ: TIÊU ĐỀ XUỐNG DÒNG KHÔNG BỊ CHE KHUẤT
+   ========================================================================== */
+.news_page .news_info .news_title,
+.news_page .news_title,
+.news_item .news_info .news_title,
+#list_news .news_info .news_title {
+    height: auto !important;
+    min-height: 52px !important;
+    max-height: none !important;
+    overflow: visible !important;
+    margin: 0 0 10px 0 !important;
+    padding: 0 !important;
+    line-height: 1.45 !important;
+}
+
+.news_page .news_title a,
+.news_item .news_title a,
+#list_news .news_title a {
+    font-size: 16px !important;
     font-weight: 800 !important;
-    color: #1F3F1F;
-    text-decoration: none;
-    line-height: 1.45;
-    display: inline-block;
-    margin-top: 10px;
+    color: #1F3F1F !important;
+    text-decoration: none !important;
+    line-height: 1.42 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    margin: 0 !important;
+    padding: 0 !important;
     transition: color 0.2s ease;
+    word-break: break-word;
+    text-transform: uppercase !important;
 }
-.news_page .news_title a:hover {
-    color: #2E7D32;
+
+.news_page .news_title a:hover,
+.news_item .news_title a:hover,
+#list_news .news_title a:hover {
+    color: #2E7D32 !important;
 }
-.news_page .description {
-    font-size: 14.5px;
-    color: #4b5563;
-    line-height: 1.65;
-    margin-top: 8px;
+
+.news_page .news_info .description,
+.news_page .description,
+.news_item .news_info .description,
+#list_news .news_info .description {
+    font-size: 14px !important;
+    color: #4b5563 !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: 68px !important;
+    max-height: none !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* Responsive mobile: Tự co giãn linh hoạt khi màn hình nhỏ */
+@media (max-width: 767px) {
+    #wrap-list-news .h1-title,
+    .news_page .h1-title,
+    .news_page .course-main-title {
+        font-size: 20px !important;
+        line-height: 1.4 !important;
+        margin-bottom: 18px !important;
+        padding-bottom: 8px !important;
+    }
+    .news_page .news_info .news_title,
+    .news_page .news_title,
+    .news_item .news_info .news_title,
+    #list_news .news_info .news_title {
+        min-height: auto !important;
+        margin-bottom: 8px !important;
+    }
+    .news_page .news_title a,
+    .news_item .news_title a,
+    #list_news .news_title a {
+        font-size: 15px !important;
+        -webkit-line-clamp: 3 !important;
+    }
+    .news_page .news_info .description,
+    .news_page .description,
+    .news_item .news_info .description,
+    #list_news .news_info .description {
+        min-height: auto !important;
+        font-size: 13.5px !important;
+        -webkit-line-clamp: 3 !important;
+    }
 }
 
 /* Khối tin tức liên quan */
@@ -1837,7 +1951,7 @@ position: absolute;
                                 <div class="news_info">
                                     <div class="news_title">
                                         <a href="<?php echo $n['news_url']?>" title="<?php echo $n['news_title']?>">
-                                            <?php echo limitCharsUnicode($n['title'], 50) ?>
+                                            <?php echo limitCharsUnicode($n['title'], 75) ?>
                                         </a>
                                     </div>
                                     <div class="description"><?php echo $n_desc ?></div>
