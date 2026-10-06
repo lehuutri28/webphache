@@ -164,67 +164,108 @@ body {
 .container { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
 
 /* ==========================================================================
-   STICKY SITE HEADER (CHUẨN THƯƠNG HIỆU PASSION LINK)
+   STICKY SITE HEADER (CHUẨN THƯƠNG HIỆU PASSION LINK - TỐI ƯU DESKTOP)
    ========================================================================== */
 .site-header {
   position: sticky; top: 0; z-index: 990;
-  background: linear-gradient(135deg, rgba(31, 63, 31, 0.94) 0%, rgba(46, 92, 46, 0.90) 50%, rgba(31, 63, 31, 0.96) 100%);
+  background: linear-gradient(135deg, rgba(26, 54, 26, 0.96) 0%, rgba(38, 77, 38, 0.93) 50%, rgba(26, 54, 26, 0.97) 100%);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1.5px solid rgba(255, 213, 79, 0.45);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
-  padding: 10px 20px;
+  border-bottom: 1.5px solid rgba(255, 213, 79, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.16);
+  padding: 8px 24px;
 }
 .header-inner {
-  max-width: 1240px; margin: 0 auto;
+  max-width: 1280px; margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
 }
 .logo-wrap {
-  display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff;
+  display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff;
+  flex-shrink: 0;
 }
 .logo-img {
-  width: 50px; height: 50px; border-radius: 50%; padding: 6px;
-  background: #fff; box-shadow: 0 0 0 2px var(--gold-light), 0 4px 12px rgba(0,0,0,0.2);
+  width: 44px; height: 44px; border-radius: 50%; padding: 4px;
+  background: #fff; box-shadow: 0 0 0 2px var(--gold-light), 0 4px 10px rgba(0,0,0,0.18);
   object-fit: contain; flex-shrink: 0;
 }
 .logo-text { display: flex; flex-direction: column; }
-.logo-title { font-size: 20px; font-weight: 800; color: #fff; line-height: 1.1; letter-spacing: -0.3px; }
-.logo-sub { font-size: 11.5px; color: var(--gold-light); font-weight: 700; font-style: italic; }
+.logo-title { font-size: 19px; font-weight: 800; color: #fff; line-height: 1.1; letter-spacing: -0.3px; white-space: nowrap; }
+.logo-sub { font-size: 11px; color: var(--gold-light); font-weight: 700; font-style: italic; white-space: nowrap; }
 
-.nav-links { display: flex; align-items: center; gap: 8px; }
+.nav-links { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 .nav-link {
-  color: #fff; text-decoration: none; font-size: 13.5px; font-weight: 700;
-  padding: 8px 16px; border-radius: 50px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 13.5px; font-weight: 700;
+  padding: 7px 13px; border-radius: 12px;
+  background: transparent;
+  border: 1px solid transparent;
   transition: all 0.2s ease;
+  white-space: nowrap !important;
+  display: inline-flex; align-items: center; justify-content: center;
+  line-height: 1.2;
 }
-.nav-link:hover, .nav-link.active {
-  background: rgba(255, 213, 79, 0.28); color: #FFF3C4;
-  border-color: var(--gold-light); transform: translateY(-1px);
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.12); color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25); transform: translateY(-1px);
 }
-.header-cta-group { display: flex; align-items: center; gap: 10px; }
+.nav-link.active {
+  background: linear-gradient(135deg, rgba(255, 213, 79, 0.25) 0%, rgba(255, 167, 38, 0.3) 100%);
+  color: #FFF3C4 !important; font-weight: 800;
+  border: 1.5px solid rgba(255, 213, 79, 0.65);
+  border-radius: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+.header-cta-group { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .btn-hotline-header {
-  color: #fff; text-decoration: none; font-size: 13px; font-weight: 800;
+  color: #fff !important; text-decoration: none; font-size: 13px; font-weight: 800;
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 8px 14px; border-radius: 50px; background: rgba(239, 68, 68, 0.25);
+  padding: 7px 14px; border-radius: 50px; background: rgba(220, 38, 38, 0.25);
   border: 1px solid rgba(248, 113, 113, 0.5);
+  transition: all 0.2s ease;
+  white-space: nowrap !important;
+  line-height: 1.2;
+}
+.btn-hotline-header:hover {
+  background: #dc2626; border-color: #ef4444; color: #fff;
+  transform: translateY(-1px); box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
 }
 .btn-tuvan-header {
   background: linear-gradient(135deg, #FFD54F 0%, #FFA726 100%);
   color: #1F2419 !important; font-size: 13px; font-weight: 800;
-  text-decoration: none; padding: 9px 18px; border-radius: 50px;
+  text-decoration: none; padding: 8px 16px; border-radius: 50px;
   box-shadow: 0 4px 15px rgba(255, 167, 38, 0.4);
   transition: transform 0.2s, box-shadow 0.2s;
-  white-space: nowrap;
+  white-space: nowrap !important;
+  display: inline-flex; align-items: center; gap: 6px;
+  line-height: 1.2;
 }
 .btn-tuvan-header:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 167, 38, 0.55); }
 
+@media (min-width: 961px) and (max-width: 1200px) {
+  .site-header { padding: 8px 16px; }
+  .header-inner { gap: 8px; }
+  .logo-img { width: 38px; height: 38px; }
+  .logo-title { font-size: 17px; }
+  .logo-sub { font-size: 10px; }
+  .nav-links { gap: 4px; }
+  .nav-link { font-size: 12px; padding: 6px 8px; }
+  .btn-hotline-header { font-size: 12px; padding: 6px 10px; }
+  .btn-tuvan-header { font-size: 12px; padding: 7px 12px; }
+}
+
+@media (min-width: 961px) and (max-width: 1060px) {
+  .logo-sub { display: none; }
+  .nav-link { font-size: 11.5px; padding: 5px 7px; }
+  .btn-hotline-header { padding: 6px 8px; }
+}
+
 @media (max-width: 960px) {
+  .site-header { padding: 8px 16px; }
   .nav-links { display: none; }
   .btn-hotline-header { display: none; }
   .logo-title { font-size: 17px; }
-  .logo-img { width: 42px; height: 42px; }
+  .logo-sub { font-size: 10.5px; }
+  .logo-img { width: 38px; height: 38px; }
+  .btn-tuvan-header { font-size: 12px; padding: 7px 13px; }
 }
 
 /* ==========================================================================
@@ -384,7 +425,7 @@ body {
   margin-top: 10px;
 }
 
-/* Nav Tabs mô hình quán */
+/* Nav Tabs mô hình quán (Responsive Desktop Grid & Mobile Swipe) */
 .model-tabs-nav {
   display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px;
   scrollbar-width: none; -webkit-overflow-scrolling: touch; margin-bottom: 24px;
@@ -393,7 +434,7 @@ body {
 .model-tabs-nav::-webkit-scrollbar { display: none; }
 
 .model-tab-btn {
-  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px;
+  flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   padding: 12px 20px; border-radius: 50px;
   background: rgba(255, 255, 255, 0.7);
   border: 1.5px solid rgba(31, 168, 75, 0.25);
@@ -407,6 +448,30 @@ body {
   background: linear-gradient(135deg, #1FA84B 0%, #15803d 100%);
   color: #fff; border-color: #15803d;
   box-shadow: 0 6px 18px rgba(31, 168, 75, 0.35);
+}
+
+@media (min-width: 992px) {
+  .model-tabs-nav {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    overflow-x: visible;
+  }
+  .model-tab-btn {
+    width: 100%;
+    padding: 12px 6px;
+    font-size: 13px;
+    text-align: center;
+  }
+}
+@media (min-width: 1200px) {
+  .model-tabs-nav {
+    gap: 10px;
+  }
+  .model-tab-btn {
+    font-size: 13.5px;
+    padding: 13px 12px;
+  }
 }
 
 /* Header tổng quan mô hình */
@@ -1461,19 +1526,19 @@ body {
     <!-- Tab Navigation -->
     <div class="model-tabs-nav" role="tablist">
       <button class="model-tab-btn active" onclick="switchModelTab(1)" id="tab-btn-1">
-        🧋 1. Quán Trà Sữa Gen Z Trend
+        🧋 1. Trà Sữa Gen Z Trend
       </button>
       <button class="model-tab-btn" onclick="switchModelTab(2)" id="tab-btn-2">
-        ☕ 2. Quán Cà Phê Hiện Đại Specialty
+        ☕ 2. Cà Phê Hiện Đại Specialty
       </button>
       <button class="model-tab-btn" onclick="switchModelTab(3)" id="tab-btn-3">
-        🍹 3. Quán Trà Trái Cây &amp; Healthy
+        🍹 3. Trà Trái Cây &amp; Healthy
       </button>
       <button class="model-tab-btn" onclick="switchModelTab(4)" id="tab-btn-4">
         🚀 4. Kiosk / Take-Away Vốn Nhỏ
       </button>
       <button class="model-tab-btn" onclick="switchModelTab(5)" id="tab-btn-5">
-        👑 5. Tổ Hợp Cafe - Trà Sữa - Ăn Vặt
+        👑 5. Tổ Hợp Cafe - Trà Sữa
       </button>
     </div>
 

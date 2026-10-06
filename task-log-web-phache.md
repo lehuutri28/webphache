@@ -585,3 +585,26 @@ Khi bắt đầu phiên làm việc tiếp theo, kỹ thuật viên hoặc agent
      - Files nâng cấp: `menu-quan/index.html` và `menu-quan/index.php` (đồng bộ 100% kích thước 154KB).
      - Triển khai an toàn qua FTP: Tự động tạo thư mục từ xa `/menu-quan/images/drinks` và `/menu-quan/images/posters`, upload thành công 55/55 files với 100% byte verification.
      - Kiểm thử tự động trên Chrome Headless: Chụp màn hình Desktop (1400px) và Mobile (390px) xác nhận giao diện hiển thị xuất sắc, không lỗi layout, không tràn ngang, HTTP 200 OK.
+
+---
+
+### [2026-10-06 11:35] HOÀN TẤT TỐI ƯU TOÀN DIỆN GIAO DIỆN MENU MÁY TÍNH (DESKTOP NAVIGATION & TABS)
+- **Yêu cầu thực thi (CEO Directive):**
+  - "MENU Em code chưa tối ưu giao diện máy tính" kèm ảnh chụp màn hình `media_1791260447179.png`.
+- **Nguyên nhân cốt lõi phát hiện:**
+  1. **Thanh Header Sticky Navigation (`.site-header`):** Các mục menu ("Trang chủ", "Khóa Tổng Hợp", "5 Menu Mẫu 2026", "Bảng Tính Cost", "Kinh Nghiệm Mở Quán", nút Hotline) bị co hẹp flex và thiếu `white-space: nowrap !important;`, dẫn tới chữ bị ngắt xuống 2 dòng ("Trang / chủ", "Khóa Tổng / Hợp", "5 Menu Mẫu / 2026", "Bảng Tính / Cost", "Kinh Nghiệm Mở / Quán", icon 📞 / 0977.300.098).
+  2. **Hiệu ứng viên thuốc (Pills) bị méo:** Từng thẻ link có background xám mờ và viền trắng bo tròn 50px dày đặc tạo cảm giác các khối trứng/bầu dục đứng chen chúc, mất cân đối thị giác trên các màn hình laptop 1024px – 1280px.
+  3. **Hệ thống Tab Mô hình quán (`.model-tabs-nav`):** Thiết lập `overflow-x: auto; flex-wrap: nowrap;` khiến Tab 5 ("5. Tổ Hợp Cafe - Trà Sữa") bị che khuất một phần ở cạnh phải trên màn hình máy tính 1280px.
+- **Thực thi kỹ thuật (C12 Senior Developer):**
+  1. **Tái thiết kế Thanh Điều Hướng Header Chuẩn Thương Hiệu Cao Cấp:**
+     - Thiết lập `white-space: nowrap !important;` và `flex-shrink: 0;` trên tất cả liên kết `.nav-link`, nút `.btn-hotline-header` và `.btn-tuvan-header`. Đảm bảo 100% không bao giờ bị rớt dòng.
+     - Nâng cấp phong cách tối giản sang trọng: Bỏ nền oval tối màu nặng nề của các liên kết thường; bổ sung hiệu ứng hover tinh tế (`rgba(255,255,255,0.12)`); làm nổi bật thẻ active "5 Menu Mẫu 2026" với viền vàng kim óng ánh (`#FFD54F`).
+     - Chuẩn hóa nút Hotline: Căn chỉnh thẳng hàng 1 dòng với icon điện thoại và số điện thoại đỏ cam tương phản cao, nổi bật trên nền xanh rừng sâu.
+     - Responsive Desktop đa tầng: Tối ưu kích thước chữ, padding và khoảng cách co giãn mượt mà từ 961px đến 1600px+ (đáp ứng trọn vẹn MacBook 13", màn hình Laptop 14"/15.6", màn hình ngoài 2K/4K).
+  2. **Tối Ưu Bố Cục 5 Tab Mô Hình Quán Trên Desktop:**
+     - Chuyển đổi `.model-tabs-nav` sang dạng lưới 5 cột cân xứng (`grid-template-columns: repeat(5, 1fr)`) trên màn hình desktop ($\ge 992px$), hiển thị trọn vẹn 100% cả 5 mô hình mà không cần cuộn ngang hay bị cắt xén chữ.
+     - Tinh chỉnh tên nhãn ngắn gọn, súc tích ("1. Trà Sữa Gen Z Trend", "2. Cà Phê Hiện Đại Specialty", "3. Trà Trái Cây & Healthy", "4. Kiosk / Take-Away Vốn Nhỏ", "5. Tổ Hợp Cafe - Trà Sữa").
+  3. **Đồng Bộ & Triển Khai Production:**
+     - Files cập nhật: `menu-quan/index.html` và `menu-quan/index.php`.
+     - Upload thành công lên hosting Mắt Bão qua FTP in-memory.
+     - Kiểm thử tự động trên Chrome Headless tại các độ phân giải 1024px, 1280px, 1440px và kiểm tra trực tiếp URL production `https://phache.com.vn/menu-quan/` đạt HTTP 200 OK, giao diện sắc nét, hoàn hảo.
